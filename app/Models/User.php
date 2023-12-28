@@ -29,6 +29,7 @@ class User extends Authenticatable
         'timezone',
         'language',
         'image',
+        'tags',
         'last_login',
         'deleted_at'
     ];
@@ -50,6 +51,7 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'tags' => 'array',
     ];
 
     /**

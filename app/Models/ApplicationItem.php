@@ -5,20 +5,24 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\HasOne;
 
-class MenuItem extends Model
+class ApplicationItem extends Model
 {
     use HasFactory;
 
+    protected $casts = [
+        'inside' => 'array'
+    ];
+
     protected $fillable = [
         'id',
-        'menu_section_id',
-        'menu_item_id',
+        'application_section_id',
+        'application_item_id',
         'name',
         'description',
         'link',
         'icon',
+        'inside',
         'order',
         'actions',
         'status',
@@ -26,6 +30,6 @@ class MenuItem extends Model
 
     public function subItems(): HasMany
     {
-        return $this->hasMany(MenuItem::class);
+        return $this->hasMany(ApplicationItem::class);
     }
 }

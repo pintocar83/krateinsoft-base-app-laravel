@@ -5,7 +5,7 @@ $route_path = Route::current()->uri;
 @endphp
 
 
-@foreach (App\Models\MenuSection::orderBy('order')->get() as $section)
+@foreach (App\Models\ApplicationSection::orderBy('order')->get() as $section)
   @continue ($section->items->count() === 0)
 
   <div class="menu-item {{ $loop->first ? 'pt-0' : 'pt-5' }}">
@@ -15,7 +15,7 @@ $route_path = Route::current()->uri;
   </div>
 
   @foreach ($section->items()->orderBy('order')->get() as $item)
-    @continue ($item->menu_item_id)
+    @continue ($item->application_item_id)
 
     @if ($item->link)
       <div class="menu-item {{ $route_path == $item->link ? 'hover' : '' }}">

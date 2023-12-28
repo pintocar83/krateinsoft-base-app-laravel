@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-use App\Models\MenuItem;
+use App\Models\ApplicationItem;
 
 return new class extends Migration
 {
@@ -15,60 +15,65 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('menu_items', function (Blueprint $table) {
+        Schema::create('application_items', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('menu_item_id')->nullable();
-            $table->unsignedBigInteger('menu_section_id')->nullable();
+            $table->unsignedBigInteger('application_item_id')->nullable();
+            $table->unsignedBigInteger('application_section_id')->nullable();
             $table->string('name',50);
             $table->string('description',500)->nullable();
             $table->string('link',500)->nullable();
             $table->string("icon",50)->nullable();
+            $table->json("inside")->nullable();
             $table->tinyInteger("order")->default(999);
             $table->string("actions",1000)->default("")->nullable();
             $table->tinyInteger('status')->default('1');
             $table->timestamps();
 
-            $table->foreign('menu_item_id')->references('id')->on('menu_items');
-            $table->foreign('menu_section_id')->references('id')->on('menu_sections');
+            $table->foreign('application_item_id')->references('id')->on('application_items');
+            $table->foreign('application_section_id')->references('id')->on('application_sections');
         });
 
-        MenuItem::create([
+        ApplicationItem::create([
             'id' => 1,
-            'menu_section_id' => 1,
-            'menu_item_id' => NULL,
+            'application_section_id' => 1,
+            'application_item_id' => NULL,
             'name' => "Users",
             'link' => "admin/users",
             'icon' => '<i class="ki-duotone ki-people fs-2"><span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span><span class="path5"></span></i>',
+            'inside' => ['menu'],
             'order' => 1,
             'actions' => "list,view,save,edit,delete",
             'status' => 1,
         ]);
 
-        MenuItem::create([
+        ApplicationItem::create([
             'id' => 2,
-            'menu_section_id' => 1,
-            'menu_item_id'=> NULL,
-            'name' => "Menus",
+            'application_section_id' => 1,
+            'application_item_id'=> NULL,
+            'name' => "Applications",
             'icon' => '<i class="ki-duotone ki-abstract-14 fs-2"><span class="path1"></span><span class="path2"></span></i>',
+            'inside' => ['menu'],
             'order' => 1,
             'status' => 1,
         ]);
 
-        MenuItem::create([
+        ApplicationItem::create([
             'id' => 3,
-            'menu_item_id'=> 2,
+            'application_item_id'=> 2,
             'name' => "Sections",
-            'link' => 'admin/menu_sections',
+            'link' => 'admin/application_sections',
+            'inside' => ['menu'],
             'order' => 1,
             'actions' => "list,view,save,edit,delete",
             'status' => 1,
         ]);
 
-        MenuItem::create([
+        ApplicationItem::create([
             'id' => 4,
-            'menu_item_id'=> 2,
+            'application_item_id'=> 2,
             'name' => "Items",
-            'link' => 'admin/menu_items',
+            'link' => 'admin/application_items',
+            'inside' => ['menu'],
             'order' => 1,
             'actions' => "list,view,save,edit,delete",
             'status' => 1,
@@ -82,6 +87,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('menu_items');
+        Schema::dropIfExists('application_items');
     }
 };

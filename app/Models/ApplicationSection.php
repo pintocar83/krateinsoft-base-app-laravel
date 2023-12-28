@@ -4,17 +4,20 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class MenuLinkAction extends Model
+class ApplicationSection extends Model
 {
     use HasFactory;
 
-    public $timestamps = false;
-
     protected $fillable = [
         'id',
-        'action',
         'name',
+        'status',
     ];
 
+    public function items(): HasMany
+    {
+        return $this->hasMany(ApplicationItem::class);
+    }
 }
