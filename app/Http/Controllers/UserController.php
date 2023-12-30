@@ -147,7 +147,6 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id){
-
         $validate=[
             'first_name'=> 'required|string',
             //'last_name'=> 'required|string',
@@ -200,6 +199,21 @@ class UserController extends Controller
         return [
             'success' => true,
             'message' => "User modified successfully",
+            'data'    => $user
+        ];
+    }
+
+    public function update_permissions(Request $request, $id){
+        $permissions = $request['permissions'];
+
+        $user = User::find($id);
+        $user->update([
+            "access_permissions" => $permissions
+        ]);
+
+        return [
+            'success' => true,
+            'message' => "Permissions modified successfully",
             'data'    => $user
         ];
     }

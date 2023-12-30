@@ -15,6 +15,8 @@ class ApplicationAction extends Model
         'id',
         'action',
         'name',
+        'order',
+        'status',
     ];
 
 }

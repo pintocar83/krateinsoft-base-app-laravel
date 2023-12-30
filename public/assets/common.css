@@ -1,3 +1,68 @@
 .toastr {
 	opacity: 1 !important;
 }
+
+
+.modal.modal-c1 .modal-header {
+	background-color: #502b65;
+	color: white;
+	position: relative;
+}
+
+.modal.modal-c1 .modal-header > * {
+	color: white;
+}
+
+.modal.modal-c1 .modal-header > [data-bs-dismiss="modal"] {
+	position: absolute;
+  right: 0;
+  width: 70px;
+  height: 100%;
+  border-radius: 0;
+  border-top-right-radius: 5px;
+}
+
+[data-kt-app-layout=dark-sidebar] .app-sidebar {
+	background-color: #26112b;
+}
+
+[data-kt-app-layout=dark-sidebar] .app-sidebar .menu .menu-item .menu-link,
+[data-kt-app-layout=dark-sidebar] .app-sidebar .menu .menu-item .menu-link .menu-title,
+[data-kt-app-layout=dark-sidebar] .app-sidebar .menu .menu-item .menu-link .menu-icon,
+[data-kt-app-layout=dark-sidebar] .app-sidebar .menu .menu-item .menu-link .menu-icon .svg-icon,
+[data-kt-app-layout=dark-sidebar] .app-sidebar .menu .menu-item .menu-link .menu-icon i {
+    color: #ffffff96;
+}
+
+[data-kt-app-layout=dark-sidebar] .app-sidebar .menu .menu-item .menu-link .menu-arrow:after,
+[data-kt-app-layout=dark-sidebar] .app-sidebar .menu .menu-item .menu-link .menu-bullet .bullet {
+    background-color: #ffffff96;
+}
+
+[data-kt-app-layout=dark-sidebar] .app-sidebar .menu .menu-item .menu-heading {
+    color: #FFF !important;
+}
+
+[data-kt-app-layout=dark-sidebar] .app-sidebar .app-sidebar-logo {
+    border-bottom: none !important;
+}
+
+.btn-check:active+.btn.btn-active-color-primary .svg-icon,
+.btn-check:active+.btn.btn-active-color-primary i,
+.btn-check:checked+.btn.btn-active-color-primary .svg-icon,
+.btn-check:checked+.btn.btn-active-color-primary i,
+.btn.btn-active-color-primary.active .svg-icon,
+.btn.btn-active-color-primary.active i,
+.btn.btn-active-color-primary.show .svg-icon,
+.btn.btn-active-color-primary.show i,
+.btn.btn-active-color-primary:active:not(.btn-active) .svg-icon,
+.btn.btn-active-color-primary:active:not(.btn-active) i,
+.btn.btn-active-color-primary:focus:not(.btn-active) .svg-icon,
+.btn.btn-active-color-primary:focus:not(.btn-active) i,
+.btn.btn-active-color-primary:hover:not(.btn-active) .svg-icon,
+.btn.btn-active-color-primary:hover:not(.btn-active) i,
+.show>.btn.btn-active-color-primary .svg-icon,
+.show>.btn.btn-active-color-primary i {
+    color: #673AB7;
+}
+

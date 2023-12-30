@@ -301,6 +301,8 @@ Cache::rememberForever( 'translations', function () {
                 </div>
 
                 <div class="card-footer d-flex justify-content-end py-6 px-9">
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_permissions">{{ _("Permissions") }}</button>
+                    <div style="flex: 1;"></div>
                     <a class="btn btn-danger btn-active-light-primary me-2" href="#" onclick="Users.list()">{{ __("Cancel") }}</a>
                     <button type="button" class="btn btn-success" onclick="Users.save()" id="save_users">
                         <span class="indicator-label">{{ __("Save") }}</span>
@@ -316,6 +318,127 @@ Cache::rememberForever( 'translations', function () {
     </div>
 
 </div>
+
+<div class="modal modal-c1 fade" id="kt_modal_permissions" tabindex="-1" aria-hidden="true">
+    <!--begin::Modal dialog-->
+    <div class="modal-dialog modal-dialog-centered" style="max-width: 900px; width: fit-content;">
+        <!--begin::Modal content-->
+        <div class="modal-content">
+            <!--begin::Modal header-->
+            <div class="modal-header">
+                <!--begin::Modal title-->
+                <h2 class="fw-bold m-0">{{ _("Permissions") }}</h2>
+                <!--end::Modal title-->
+                <!--begin::Close-->
+                <div class="btn btn-icon btn-active-danger" data-bs-dismiss="modal">
+                    <i class="mdi mdi-close-thick fs-2x"></i>
+                </div>
+                <!--end::Close-->
+            </div>
+            <!--end::Modal header-->
+            <!--begin::Modal body-->
+            <div class="modal-body scroll-y mx-5 mb-7">
+                <!--begin::Form-->
+                <form id="kt_modal_permissions_form" class="form" action="#">
+                    <!--begin::Scroll-->
+                    <div class="d-flex flex-column scroll-y me-n7 pe-7" id="kt_modal_permissions_scroll" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_modal_permissions_header" data-kt-scroll-wrappers="#kt_modal_permissions_scroll" data-kt-scroll-offset="300px">
+                        <!--begin::Permissions-->
+                        <div class="fv-row">
+                            <!--begin::Table wrapper-->
+                            <div class="table-responsive">
+                                <!--begin::Table-->
+                                <table class="table align-middle table-row-dashed fs-5 gy-5" style="white-space: nowrap;">
+                                    <!--begin::Table body-->
+                                    <tbody class="text-gray-600 fw-semibold">
+                                        <!--begin::Table row-->
+                                        <tr>
+                                            <td class="text-gray-800">Full Access
+                                            <span class="ms-1" data-bs-toggle="tooltip" title="Allows a full access to the applications">
+                                                <i class="ki-duotone ki-information-5 text-gray-500 fs-6">
+                                                    <span class="path1"></span>
+                                                    <span class="path2"></span>
+                                                    <span class="path3"></span>
+                                                </i>
+                                            </span></td>
+                                            <td>
+                                                <!--begin::Checkbox-->
+                                                <label class="form-check form-check-sm form-check-custom form-check-solid me-9">
+                                                    <input class="form-check-input" type="checkbox" value="" id="kt_roles_select_all" />
+                                                    <span class="form-check-label" for="kt_roles_select_all">Select all</span>
+                                                </label>
+                                                <!--end::Checkbox-->
+                                            </td>
+                                        </tr>
+                                        <!--end::Table row-->
+
+                                        @php
+                                            $actions = App\Models\ApplicationAction::where('status',1)->orderBy('order')->get();
+                                            $parent = null;
+                                            $icon_default = '<span class="bullet bullet-dot"></span>';
+                                            $parent_icon_default = '<i class="ki-duotone ki-abstract-29 fs-2"><span class="path1"></span><span class="path2"></span></i>';
+                                        @endphp
+                                        @foreach (App\Models\ApplicationItem::orderBy('order')->get() as $item)
+                                            @continue (!$item->link)
+
+                                            @if ($parent != $item->parent?->name)
+                                                @php
+                                                    $parent = $item->parent?->name;
+                                                    $parent_icon = $item->parent?->icon;
+                                                @endphp
+                                                @if ($parent)
+                                                    <tr>
+                                                        <td class="pb-0 pt-5"><label class="hstack text-gray-800 mb-2">{!! ($parent_icon ? $parent_icon : $parent_icon_default) !!} <span class="ps-3 pe-10">{{ $parent }}</span></label></td>
+                                                    </tr>
+                                                @endif
+                                            @endif
+
+                                            <tr>
+                                                <td class="hstack text-gray-800 {{ $parent ? 'ps-8' : '' }}">{!! ($item->icon ? $item->icon : ($parent ? $icon_default : $parent_icon_default)) !!} <span class="ps-3 pe-10">{{ $item->name }}</span></td>
+                                                <td>
+                                                    <div class="d-flex">
+                                                        @foreach ($actions as $action)
+                                                            @php
+                                                                $disabled = !in_array( $action->action, $item->actions);
+                                                            @endphp
+                                                            <label class="form-check form-check-sm form-check-custom form-check-solid me-5 {{ $disabled ? 'invisible opacity-0' : '' }}">
+                                                                <input class="form-check-input check-permissions" data-item-id="{{ $item->id }}" data-action="{{ $action->action }}" type="checkbox" value="" name="permission[{{ $item->id }}][{{ $action->action }}]" {{ $disabled ? 'disabled' : '' }} />
+                                                                <span class="form-check-label">{{ $action->name }}</span>
+                                                            </label>
+                                                        @endforeach
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+
+                                    </tbody>
+                                    <!--end::Table body-->
+                                </table>
+                                <!--end::Table-->
+                            </div>
+                            <!--end::Table wrapper-->
+                        </div>
+                        <!--end::Permissions-->
+                    </div>
+                    <!--end::Scroll-->
+                    <!--begin::Actions-->
+                    <div class="text-center pt-15">
+                        <button type="reset" class="btn btn-light me-3" data-kt-roles-modal-action="cancel">Close</button>
+                        <button type="button" class="btn btn-primary" data-kt-roles-modal-action="submit" onclick="Users.savePermissions()">
+                            <span class="indicator-label">Apply</span>
+                            <span class="indicator-progress">Please wait... 
+                            <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                        </button>
+                    </div>
+                    <!--end::Actions-->
+                </form>
+                <!--end::Form-->
+            </div>
+            <!--end::Modal body-->
+        </div>
+        <!--end::Modal content-->
+    </div>
+    <!--end::Modal dialog-->
+    </div>
 @endsection
 
 @section('stylesheet')
@@ -346,6 +469,7 @@ Cache::rememberForever( 'translations', function () {
         });
 
         me.form=$("#form_users");
+        me.modal_permissions=$("#kt_modal_permissions");
         me.btn_save=$("#save_users");
 
         me.validator = FormValidation.formValidation(
@@ -671,6 +795,8 @@ Cache::rememberForever( 'translations', function () {
         me.form.find("#checkbox-organization-"+organizations[i]["id"]).prop("checked",true);
       }
 
+      me.permissions(data['access_permissions']);
+
         //$(".module-form-subtitle").html("{{ __('Edit') }}");
 
       $(".module-list").css("display","none");
@@ -789,11 +915,93 @@ Cache::rememberForever( 'translations', function () {
 
     },
 
+    permissions: function(value){
+      var me=this;
 
-    };
+      if(value){
+        me.modal_permissions.find(".check-permissions").prop("checked", false);
+        const permissions = JSON.parse(value);
+        for(const key in permissions) {
+          for(var i=0;i<permissions[key].length;i++){
+            me.modal_permissions.find('[name="permission['+key+']['+permissions[key][i]+']"]').prop("checked",true);
+          }
+        }
+        return;
+      }
 
-    $(function() {
-      Users.init();
-    });
+      var permissions={};
+      var checkbox=me.modal_permissions.find(".check-permissions:checked");
+
+      for(var i=0; i<checkbox.length; i++){
+        var mod=$(checkbox[i]).data("item-id");
+        var acc=$(checkbox[i]).data("action");
+        if(!permissions[mod]) permissions[mod]=[];
+        permissions[mod].push(acc);
+      }
+      return permissions;
+    },
+
+    savePermissions: function(){
+      var me=this;
+
+      if(!me.current_id){
+        return;
+      }
+
+      var _token      = $("[name='_token']").val();
+      var permissions = me.permissions()
+
+      var data={
+        _token:      _token,
+        permissions: permissions
+      };
+
+      $.ajax({
+        method: "PATCH",
+        url: "{{ url('api/users') }}/"+me.current_id+"/permissions",
+        data: data,
+        dataType: "json",
+        cache: false,
+      }).done(function(data){
+        console.log(data);
+
+       /*                   // Hide loading indication
+        me.btn_save.removeAttr('data-kt-indicator');
+                          // Enable button
+        me.btn_save.prop('disabled',false);
+
+        if(data["success"]){
+          if(data["message"]){
+            toastr.success(data["message"], "Users - Save");
+          }
+          me.search();
+          me.list();
+          return;
+        }
+
+
+        toastr.error(data["message"], "Users");
+*/
+      }).fail(function(data){
+    /*                      // Hide loading indication
+        me.btn_save.removeAttr('data-kt-indicator');
+                          // Enable button
+        me.btn_save.prop('disabled',false);
+
+        if(data && data.responseJSON && data.responseJSON.message){
+          toastr.error(data.responseJSON.message, "Users - Save");
+        }
+        else{
+          toastr.error("Fail Request", "Users - Save");
+        }*/
+      });
+    },
+
+
+  };
+
+  $(function() {
+    Users.init();
+  });
 </script>
 @endsection

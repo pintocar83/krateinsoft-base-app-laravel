@@ -30,7 +30,7 @@ return new class extends Migration
             $table->string("timezone",50)->default("$timezone")->nullable();
             $table->string("language",2)->default("$locale")->nullable();
             $table->string("image",100)->default("")->nullable();
-            $table->json("tags")->nullable();
+            $table->json("roles")->nullable();
             $table->string("access_policy",10)->default("allow")->nullable();
             $table->text("access_permissions")->default("")->nullable();
             $table->timestamp('last_login')->nullable();
@@ -42,7 +42,7 @@ return new class extends Migration
             'first_name' => "Administrador",
             'email' => "krateinsoft@gmail.com",
             'password' => Hash::make("admin"),
-            'tags' => ['admin', 'developer']
+            'roles' => ['admin', 'developer']
         ]); 
     }
 

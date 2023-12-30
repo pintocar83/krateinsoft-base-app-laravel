@@ -25,7 +25,7 @@ return new class extends Migration
             $table->string("icon",50)->nullable();
             $table->json("inside")->nullable();
             $table->tinyInteger("order")->default(999);
-            $table->string("actions",1000)->default("")->nullable();
+            $table->json("actions")->default("")->nullable();
             $table->tinyInteger('status')->default('1');
             $table->timestamps();
 
@@ -42,7 +42,7 @@ return new class extends Migration
             'icon' => '<i class="ki-duotone ki-people fs-2"><span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span><span class="path5"></span></i>',
             'inside' => ['menu'],
             'order' => 1,
-            'actions' => "list,view,save,edit,delete",
+            'actions' => ['list','create','view','edit','delete','export'],
             'status' => 1,
         ]);
 
@@ -64,7 +64,7 @@ return new class extends Migration
             'link' => 'admin/application_sections',
             'inside' => ['menu'],
             'order' => 1,
-            'actions' => "list,view,save,edit,delete",
+            'actions' => ['list','create','view','edit','delete'],
             'status' => 1,
         ]);
 
@@ -75,7 +75,7 @@ return new class extends Migration
             'link' => 'admin/application_items',
             'inside' => ['menu'],
             'order' => 1,
-            'actions' => "list,view,save,edit,delete",
+            'actions' => ['list','create','view','edit','delete'],
             'status' => 1,
         ]);
     }

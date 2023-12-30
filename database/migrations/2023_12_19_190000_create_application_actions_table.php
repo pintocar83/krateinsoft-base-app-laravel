@@ -19,27 +19,27 @@ return new class extends Migration
             $table->id();
             $table->string('action',50);
             $table->string('name',50);
+            $table->tinyInteger("order")->default(999);
+            $table->tinyInteger('status')->default(1);
         });
 
-        ApplicationAction::create(['action' => "view",            'name' => "View"]);
-        ApplicationAction::create(['action' => "print",           'name' => "Print"]);
-        ApplicationAction::create(['action' => "add",             'name' => "Add"]);
-        ApplicationAction::create(['action' => "remove",          'name' => "Remove"]);
-        ApplicationAction::create(['action' => "delete",          'name' => "Delete"]);
-        ApplicationAction::create(['action' => "save",            'name' => "Save"]);
-        ApplicationAction::create(['action' => "list",            'name' => "List"]);
-        ApplicationAction::create(['action' => "edit",            'name' => "Edit"]);
-        ApplicationAction::create(['action' => "send_email",      'name' => "Send Email"]);
-        ApplicationAction::create(['action' => "send_whatsapp",   'name' => "Send WhatsApp"]);
-        ApplicationAction::create(['action' => "send_sms",        'name' => "Send SMS"]);
-        ApplicationAction::create(['action' => "file_download",   'name' => "File - Download"]);
-        ApplicationAction::create(['action' => "file_upload",     'name' => "File - Upload"]);
-        ApplicationAction::create(['action' => "file_delete",     'name' => "File - Delete"]);
-        ApplicationAction::create(['action' => "file_preview",    'name' => "File - Preview"]);
-        ApplicationAction::create(['action' => "file_rename",     'name' => "File - Rename"]);
-        ApplicationAction::create(['action' => "file_move",       'name' => "File - Move"]);
-        ApplicationAction::create(['action' => "start",           'name' => "Start"]);
-        ApplicationAction::create(['action' => "finish",          'name' => "Finish"]);
+        ApplicationAction::create([ 'action' => "list",          'name' => "List",            'order'=> 1,  'status' => 1 ]);
+        ApplicationAction::create([ 'action' => "create",        'name' => "Create",          'order'=> 2,  'status' => 1 ]);
+        ApplicationAction::create([ 'action' => "view",          'name' => "View",            'order'=> 3,  'status' => 1 ]);
+        ApplicationAction::create([ 'action' => "edit",          'name' => "Edit",            'order'=> 4,  'status' => 1 ]);
+        ApplicationAction::create([ 'action' => "delete",        'name' => "Delete",          'order'=> 5,  'status' => 1 ]);
+        ApplicationAction::create([ 'action' => "export",        'name' => "Export",          'order'=> 6,  'status' => 1 ]);
+        ApplicationAction::create([ 'action' => "send_email",    'name' => "Send Email",      'order'=> 10, 'status' => 0 ]);
+        ApplicationAction::create([ 'action' => "send_whatsapp", 'name' => "Send WhatsApp",   'order'=> 11, 'status' => 0 ]);
+        ApplicationAction::create([ 'action' => "send_sms",      'name' => "Send SMS",        'order'=> 12, 'status' => 0 ]);
+        ApplicationAction::create([ 'action' => "file_download", 'name' => "File - Download", 'order'=> 13, 'status' => 0 ]);
+        ApplicationAction::create([ 'action' => "file_upload",   'name' => "File - Upload",   'order'=> 14, 'status' => 0 ]);
+        ApplicationAction::create([ 'action' => "file_delete",   'name' => "File - Delete",   'order'=> 15, 'status' => 0 ]);
+        ApplicationAction::create([ 'action' => "file_preview",  'name' => "File - Preview",  'order'=> 16, 'status' => 0 ]);
+        ApplicationAction::create([ 'action' => "file_rename",   'name' => "File - Rename",   'order'=> 17, 'status' => 0 ]);
+        ApplicationAction::create([ 'action' => "file_move",     'name' => "File - Move",     'order'=> 18, 'status' => 0 ]);
+        ApplicationAction::create([ 'action' => "start",         'name' => "Start",           'order'=> 19, 'status' => 0 ]);
+        ApplicationAction::create([ 'action' => "finish",        'name' => "Finish",          'order'=> 20, 'status' => 0 ]);
     }
 
     /**

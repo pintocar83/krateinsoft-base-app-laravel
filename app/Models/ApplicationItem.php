@@ -5,13 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\belongsTo;
 
 class ApplicationItem extends Model
 {
     use HasFactory;
 
     protected $casts = [
-        'inside' => 'array'
+        'inside' => 'array',
+        'actions' => 'array',
     ];
 
     protected $fillable = [
@@ -30,6 +32,11 @@ class ApplicationItem extends Model
 
     public function subItems(): HasMany
     {
-        return $this->hasMany(ApplicationItem::class);
+        return $this->hasMany(self::class);
+    }
+
+    public function parent(): belongsTo
+    {
+        return $this->belongsTo(self::class, 'application_item_id');
     }
 }

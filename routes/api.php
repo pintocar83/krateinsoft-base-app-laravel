@@ -20,9 +20,10 @@ use App\Http\Controllers\UserController;
 
 
 Route::group(['middleware' => ['initialization', 'auth']], function() {
-    Route::get('/users',          [UserController::class,'index']);
-    Route::post('/users',         [UserController::class,'store']);
-    Route::patch('/users/{id}',   [UserController::class,'update']);
+    Route::get('/users',                         [UserController::class,'index']);
+    Route::post('/users',                        [UserController::class,'store']);
+    Route::patch('/users/{id}',                  [UserController::class,'update']);
+    Route::patch('/users/{id}/permissions',      [UserController::class,'update_permissions']);
 
 
 });
