@@ -282,6 +282,7 @@ Cache::rememberForever( 'translations', function () {
                         </div>
                     </div>
 
+                    @if (count($organizations)>1)
                     <div class="row mb-6">
                         <label class="col-lg-3 col-form-label fw-bold fs-6 text-lg-end">{{ __("Organizations") }}</label>
                         <div class="col-lg-9 fv-row  text-gray-700">
@@ -297,11 +298,12 @@ Cache::rememberForever( 'translations', function () {
 
                         </div>
                     </div>
+                    @endif;
 
                 </div>
 
                 <div class="card-footer d-flex justify-content-end py-6 px-9">
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_permissions">{{ _("Permissions") }}</button>
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_permissions" onClick="Users.showPermissions()">{{ _("Permissions") }}</button>
                     <div style="flex: 1;"></div>
                     <a class="btn btn-danger btn-active-light-primary me-2" href="#" onclick="Users.list()">{{ __("Cancel") }}</a>
                     <button type="button" class="btn btn-success" onclick="Users.save()" id="save_users">
@@ -352,7 +354,7 @@ Cache::rememberForever( 'translations', function () {
                                     <tbody class="text-gray-600 fw-semibold">
                                         <!--begin::Table row-->
                                         <tr>
-                                            <td class="text-gray-800">Full Access
+                                            <td class="row-app">Full Access
                                             <span class="ms-1" data-bs-toggle="tooltip" title="Allows a full access to the applications">
                                                 <i class="ki-duotone ki-information-5 text-gray-500 fs-6">
                                                     <span class="path1"></span>
@@ -363,8 +365,8 @@ Cache::rememberForever( 'translations', function () {
                                             <td>
                                                 <!--begin::Checkbox-->
                                                 <label class="form-check form-check-sm form-check-custom form-check-solid me-9">
-                                                    <input class="form-check-input" type="checkbox" value="" id="kt_roles_select_all" />
-                                                    <span class="form-check-label" for="kt_roles_select_all">Select all</span>
+                                                    <input class="form-check-input check-all-permissions" type="checkbox" value="" id="check_all_permissions" onchange="Users.checkAllPermissions()" />
+                                                    <span class="form-check-label" for="check_all_permissions">Select all</span>
                                                 </label>
                                                 <!--end::Checkbox-->
                                             </td>
@@ -387,13 +389,13 @@ Cache::rememberForever( 'translations', function () {
                                                 @endphp
                                                 @if ($parent)
                                                     <tr>
-                                                        <td class="pb-0 pt-5"><label class="hstack text-gray-800 mb-2">{!! ($parent_icon ? $parent_icon : $parent_icon_default) !!} <span class="ps-3 pe-10">{{ $parent }}</span></label></td>
+                                                        <td class="pb-0 pt-5"><label class="row-app hstack text-primary fw-bold mb-2">{!! ($parent_icon ? $parent_icon : $parent_icon_default) !!} <span class="ps-3 pe-10">{{ $parent }}</span></label></td>
                                                     </tr>
                                                 @endif
                                             @endif
 
                                             <tr>
-                                                <td class="hstack text-gray-800 {{ $parent ? 'ps-8' : '' }}">{!! ($item->icon ? $item->icon : ($parent ? $icon_default : $parent_icon_default)) !!} <span class="ps-3 pe-10">{{ $item->name }}</span></td>
+                                                <td class="row-app hstack text-primary fw-bold {{ $parent ? 'ps-8' : '' }}">{!! ($item->icon ? $item->icon : ($parent ? $icon_default : $parent_icon_default)) !!} <span class="ps-3 pe-10">{{ $item->name }}</span></td>
                                                 <td>
                                                     <div class="d-flex">
                                                         @foreach ($actions as $action)
@@ -422,8 +424,8 @@ Cache::rememberForever( 'translations', function () {
                     <!--end::Scroll-->
                     <!--begin::Actions-->
                     <div class="text-center pt-15">
-                        <button type="reset" class="btn btn-light me-3" data-kt-roles-modal-action="cancel">Close</button>
-                        <button type="button" class="btn btn-primary" data-kt-roles-modal-action="submit" onclick="Users.savePermissions()">
+                        <button type="button" class="btn btn-light me-3" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" onclick="Users.savePermissions()">
                             <span class="indicator-label">Apply</span>
                             <span class="indicator-progress">Please wait... 
                             <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
@@ -442,7 +444,19 @@ Cache::rememberForever( 'translations', function () {
 @endsection
 
 @section('stylesheet')
+<style type="text/css">
 
+    .row-app,
+    .row-app * {
+      color: #502b65 !important;
+    }
+
+    .check-all-permissions:checked+.form-check-label,
+    .check-permissions:checked+.form-check-label {
+      color: var(--bs-text-primary) !important;
+    }
+
+</style>
 @endsection
 
 @section('scripts')
@@ -452,6 +466,7 @@ Cache::rememberForever( 'translations', function () {
       default_timezome: '{{ $timezone }}',
       default_language: '{{ $language }}',
       current_id: null,
+      current_organization_id: '{{ session('Auth::organization')?->id }}',
       validator: null,
       form: null,
 
@@ -795,7 +810,8 @@ Cache::rememberForever( 'translations', function () {
         me.form.find("#checkbox-organization-"+organizations[i]["id"]).prop("checked",true);
       }
 
-      me.permissions(data['access_permissions']);
+      me.current_permissions = data['access_permissions'] ? JSON.parse(data['access_permissions']) : null;
+      me.permissions(me.current_permissions);
 
         //$(".module-form-subtitle").html("{{ __('Edit') }}");
 
@@ -826,11 +842,12 @@ Cache::rememberForever( 'translations', function () {
           var password_confirmation   = me.form.find("[name='password_confirmation']").val();
           var language                = me.form.find("[name='language']").val();
           var timezone                = me.form.find("[name='timezone']").val();
-          var organizations = [];
+          var organizations = [me.current_organization_id];
           var tmp=$("[name='organizations']:checked");
           for(var i=0; i<tmp.length; i++){
             var value=$(tmp[i]).val();
-            organizations.push(value);
+            if($.inArray(value, organizations)==-1)
+                organizations.push(value);
           }
 
           var method="POST";
@@ -920,7 +937,7 @@ Cache::rememberForever( 'translations', function () {
 
       if(value){
         me.modal_permissions.find(".check-permissions").prop("checked", false);
-        const permissions = JSON.parse(value);
+        const permissions = value;
         for(const key in permissions) {
           for(var i=0;i<permissions[key].length;i++){
             me.modal_permissions.find('[name="permission['+key+']['+permissions[key][i]+']"]').prop("checked",true);
@@ -950,6 +967,7 @@ Cache::rememberForever( 'translations', function () {
 
       var _token      = $("[name='_token']").val();
       var permissions = me.permissions()
+      me.current_permissions = permissions;
 
       var data={
         _token:      _token,
@@ -964,6 +982,14 @@ Cache::rememberForever( 'translations', function () {
         cache: false,
       }).done(function(data){
         console.log(data);
+        if(data["success"]){
+            me.current_permissions = data["data"]["access_permissions"];
+            toastr.success(data["message"], "User Permissions");
+            $("#kt_modal_permissions").modal("hide")
+            return;
+        }
+
+        toastr.error(data["message"], "Users Permissions");
 
        /*                   // Hide loading indication
         me.btn_save.removeAttr('data-kt-indicator');
@@ -995,6 +1021,18 @@ Cache::rememberForever( 'translations', function () {
           toastr.error("Fail Request", "Users - Save");
         }*/
       });
+    },
+
+    checkAllPermissions: function() {
+      var me=this;
+
+      var checked = me.modal_permissions.find("#check_all_permissions").is(":checked");
+      me.modal_permissions.find(".check-permissions").prop("checked", checked);
+    },
+
+    showPermissions: function() {
+      var me=this;
+      me.permissions(me.current_permissions);
     },
 
 

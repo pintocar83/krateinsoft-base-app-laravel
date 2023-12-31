@@ -58,6 +58,7 @@ class UserController extends Controller
             'phone' => $request['phone'],
             'language' => $request['language'],
             'timezone' => $request['timezone'],
+            'access_permissions' => $request['permissions']
         ];
 
         if(isset($request['password']) and $request['password']){

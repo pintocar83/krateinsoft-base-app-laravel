@@ -23,7 +23,8 @@
 }
 
 [data-kt-app-layout=dark-sidebar] .app-sidebar {
-	background-color: #26112b;
+	/*background-color: #26112b;*/
+	background-color: #502b65;
 }
 
 [data-kt-app-layout=dark-sidebar] .app-sidebar .menu .menu-item .menu-link,
@@ -47,22 +48,9 @@
     border-bottom: none !important;
 }
 
-.btn-check:active+.btn.btn-active-color-primary .svg-icon,
-.btn-check:active+.btn.btn-active-color-primary i,
-.btn-check:checked+.btn.btn-active-color-primary .svg-icon,
-.btn-check:checked+.btn.btn-active-color-primary i,
-.btn.btn-active-color-primary.active .svg-icon,
-.btn.btn-active-color-primary.active i,
-.btn.btn-active-color-primary.show .svg-icon,
-.btn.btn-active-color-primary.show i,
-.btn.btn-active-color-primary:active:not(.btn-active) .svg-icon,
-.btn.btn-active-color-primary:active:not(.btn-active) i,
-.btn.btn-active-color-primary:focus:not(.btn-active) .svg-icon,
-.btn.btn-active-color-primary:focus:not(.btn-active) i,
-.btn.btn-active-color-primary:hover:not(.btn-active) .svg-icon,
-.btn.btn-active-color-primary:hover:not(.btn-active) i,
-.show>.btn.btn-active-color-primary .svg-icon,
-.show>.btn.btn-active-color-primary i {
+[data-kt-app-layout=dark-sidebar] .app-sidebar .app-sidebar-toggle.btn.btn-active-color-primary.active i,
+[data-kt-app-layout=dark-sidebar] .app-sidebar .app-sidebar-toggle.btn.btn-active-color-primary:hover:not(.btn-active) i {
     color: #673AB7;
+	}
 }
 
