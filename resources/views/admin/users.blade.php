@@ -8,7 +8,7 @@
 <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
 	<!--begin::Item-->
 	<li class="breadcrumb-item text-muted">
-		<a href="{{ url('/') }}" class="text-muted text-hover-primary">Home</a>
+		<a href="{{ url('/') }}" class="text-muted text-hover-primary">{{ __('Home') }}</a>
 	</li>
 	<!--end::Item-->
 	<!--begin::Item-->
@@ -17,7 +17,7 @@
 	</li>
 	<!--end::Item-->
 	<!--begin::Item-->
-	<li class="breadcrumb-item text-muted">Management</li>
+	<li class="breadcrumb-item text-muted">{{ __('Management') }}</li>
 	<!--end::Item-->
 	<!--begin::Item-->
 	<li class="breadcrumb-item">
@@ -25,7 +25,7 @@
 	</li>
 	<!--end::Item-->
 	<!--begin::Item-->
-	<li class="breadcrumb-item text-muted">Users</li>
+	<li class="breadcrumb-item text-muted">{{ __('Users') }}</li>
 	<!--end::Item-->
 </ul>
 @endsection
@@ -71,7 +71,7 @@ Cache::rememberForever( 'translations', function () {
             <!--begin::Toolbar-->
             <div class="d-flex justify-content-end" data-kt-user-table-toolbar="base">
               <!--begin::Filter-->
-              <button type="button" class="btn btn-light-primary me-3" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
+              <button type="button" class="btn btn-light-primary me-3" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end" style="display: none;">
               <i class="ki-duotone ki-filter fs-2">
                 <span class="path1"></span>
                 <span class="path2"></span>
@@ -282,6 +282,18 @@ Cache::rememberForever( 'translations', function () {
                         </div>
                     </div>
 
+                    <div class="row mb-6">
+                        <label class="col-lg-3 col-form-label fw-bold fs-6 text-lg-end">{{ __("Roles") }}</label>
+                        <div class="col-lg-9 fv-row">
+                            <select multiple name="roles" aria-label="Select Roles" data-control="select2" data-placeholder="{{ __('Select Roles...') }}" class="form-select form-select-solid form-select-lg">
+                                <option value="standard">{{ __('Standard User') }}</option>
+                                <option value="developer">{{ __('Developer') }}</option><!-- Debugging -->
+                                <option value="admin">{{ __('Administrator') }}</option><!-- Manage information related to the current organization -->
+                                <option value="root">{{ __('Super User') }}</option><!-- All accesses and configurations -->
+                            </select>
+                        </div>
+                    </div>
+
                     @if (count($organizations)>1)
                     <div class="row mb-6">
                         <label class="col-lg-3 col-form-label fw-bold fs-6 text-lg-end">{{ __("Organizations") }}</label>
@@ -425,7 +437,7 @@ Cache::rememberForever( 'translations', function () {
                     <!--begin::Actions-->
                     <div class="text-center pt-15">
                         <button type="button" class="btn btn-light me-3" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary" onclick="Users.savePermissions()">
+                        <button type="button" class="btn btn-primary" onclick="Users.savePermissions()" id="save_permissions">
                             <span class="indicator-label">Apply</span>
                             <span class="indicator-progress">Please wait... 
                             <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
@@ -486,6 +498,7 @@ Cache::rememberForever( 'translations', function () {
         me.form=$("#form_users");
         me.modal_permissions=$("#kt_modal_permissions");
         me.btn_save=$("#save_users");
+        me.btn_save_permissions=$("#save_permissions");
 
         me.validator = FormValidation.formValidation(
           me.form.get(0),
@@ -529,7 +542,7 @@ Cache::rememberForever( 'translations', function () {
                   callback: {
                     callback: function(input) {
                                           if(!me.current_id && !me.form.find("[name='password']").val()) //if (is new) password is required
-                                            return {valid: false, message: 'The password is required'};
+                                            return {valid: false, message: "{{ __('The password is required') }}" };
                                           return true;
                                         }
                                       }
@@ -540,11 +553,11 @@ Cache::rememberForever( 'translations', function () {
                                       callback: {
                                         callback: function(input) {
                                           if(!me.current_id && !me.form.find("[name='password_confirmation']").val())
-                                            return {valid: false, message: 'The password confirmation is required'};
+                                            return {valid: false, message: "{{ __('The password confirmation is required') }}" };
                                           if(me.form.find("[name='password']").val() && !me.form.find("[name='password_confirmation']").val())
-                                            return {valid: false, message: 'The password confirmation is required'};
+                                            return {valid: false, message: "{{ __('The password confirmation is required') }}" };
                                           if(me.form.find("[name='password']").val() != me.form.find("[name='password_confirmation']").val())
-                                            return {valid: false, message: 'The password and its confirm are not the same'};
+                                            return {valid: false, message: "{{ __('The password and its confirm are not the same') }}" };
                                           return true;
                                         }
                                       }
@@ -772,6 +785,8 @@ Cache::rememberForever( 'translations', function () {
       me.form.find("[name='language']").trigger('change.select2');
       me.form.find("[name='timezone']").val(me.default_timezome);
       me.form.find("[name='timezone']").trigger('change.select2');
+      me.form.find("[name='roles']").val(['standard']);
+      me.form.find("[name='roles']").trigger('change.select2');
       me.form.find("[name='organizations']").prop("checked",false);
     },
 
@@ -790,7 +805,7 @@ Cache::rememberForever( 'translations', function () {
       me.reset();
       me.current_id=id;
 
-      var data = $("#datatable_users").dataTable().api().data()[index];
+      const data = $("#datatable_users").dataTable().api().data()[index];
 
       me.form.find("[name='first_name']").val(data['first_name']);
       me.form.find("[name='last_name']").val(data['last_name']);
@@ -802,6 +817,10 @@ Cache::rememberForever( 'translations', function () {
       me.form.find("[name='language']").trigger('change.select2');
       me.form.find("[name='timezone']").val(data['timezone']);
       me.form.find("[name='timezone']").trigger('change.select2');
+
+      const roles = data['roles'] ? data['roles'] : [''];
+      me.form.find("[name='roles']").val(roles);
+      me.form.find("[name='roles']").trigger('change.select2');
 
       var organizations=data['organizations'];
       for(var i=0; i<organizations.length; i++){
@@ -827,10 +846,10 @@ Cache::rememberForever( 'translations', function () {
 
       me.validator.validate().then(function(status) {
         if(status == 'Valid') {
-                      // Show loading indication
+          // Show loading indication
           me.btn_save.attr('data-kt-indicator', 'on');
 
-                      // Disable button to avoid multiple click
+          // Disable button to avoid multiple click
           me.btn_save.prop('disabled',true);
 
           var _token                  = me.form.find("[name='_token']").val();
@@ -842,6 +861,7 @@ Cache::rememberForever( 'translations', function () {
           var password_confirmation   = me.form.find("[name='password_confirmation']").val();
           var language                = me.form.find("[name='language']").val();
           var timezone                = me.form.find("[name='timezone']").val();
+          var roles                   = me.form.find("[name='roles']").val();
           var organizations = [me.current_organization_id];
           var tmp=$("[name='organizations']:checked");
           for(var i=0; i<tmp.length; i++){
@@ -865,6 +885,7 @@ Cache::rememberForever( 'translations', function () {
             phone:                  phone,
             language:               language,
             timezone:               timezone,
+            roles:                  roles,
             organizations:          organizations,
           };
 
@@ -883,14 +904,14 @@ Cache::rememberForever( 'translations', function () {
           }).done(function(data){
             console.log(data);
 
-                              // Hide loading indication
+            // Hide loading indication
             me.btn_save.removeAttr('data-kt-indicator');
-                              // Enable button
+            // Enable button
             me.btn_save.prop('disabled',false);
 
             if(data["success"]){
               if(data["message"]){
-                toastr.success(data["message"], "Users - Save");
+                toastr.success(data["message"], "{{ __('Users - Save') }}");
               }
               me.search();
               me.list();
@@ -901,21 +922,21 @@ Cache::rememberForever( 'translations', function () {
             toastr.error(data["message"], "Users");
 
           }).fail(function(data){
-                              // Hide loading indication
+            // Hide loading indication
             me.btn_save.removeAttr('data-kt-indicator');
-                              // Enable button
+            // Enable button
             me.btn_save.prop('disabled',false);
 
             if(data && data.responseJSON && data.responseJSON.message){
-              toastr.error(data.responseJSON.message, "Users - Save");
+              toastr.error(data.responseJSON.message, "{{ __('Users - Save') }}");
             }
             else{
-              toastr.error("Fail Request", "Users - Save");
+              toastr.error("{{ __('Fail Request') }}", "{{ __('Users - Save') }}" );
             }
           });
 
         } else {
-          toastr.error("Sorry, looks like there are some errors detected, please try again.", "Users - Save");
+          toastr.error("{{ __('Sorry, looks like there are some errors detected, please try again.') }}", "{{ __('Users - Save') }}");
         }
       });
 
@@ -974,6 +995,12 @@ Cache::rememberForever( 'translations', function () {
         permissions: permissions
       };
 
+      // Show loading indication
+      me.btn_save_permissions.attr('data-kt-indicator', 'on');
+
+      // Disable button to avoid multiple click
+      me.btn_save_permissions.prop('disabled',true);
+
       $.ajax({
         method: "PATCH",
         url: "{{ url('api/users') }}/"+me.current_id+"/permissions",
@@ -981,38 +1008,27 @@ Cache::rememberForever( 'translations', function () {
         dataType: "json",
         cache: false,
       }).done(function(data){
-        console.log(data);
+        // Hide loading indication
+        me.btn_save_permissions.removeAttr('data-kt-indicator');
+        // Enable button
+        me.btn_save_permissions.prop('disabled',false);
+
         if(data["success"]){
             me.current_permissions = data["data"]["access_permissions"];
-            toastr.success(data["message"], "User Permissions");
+            toastr.success(data["message"], "{{ __('User Permissions') }}");
             $("#kt_modal_permissions").modal("hide")
             return;
         }
 
-        toastr.error(data["message"], "Users Permissions");
+        toastr.error(data["message"], "{{ __('Users Permissions') }}");
 
-       /*                   // Hide loading indication
-        me.btn_save.removeAttr('data-kt-indicator');
-                          // Enable button
-        me.btn_save.prop('disabled',false);
-
-        if(data["success"]){
-          if(data["message"]){
-            toastr.success(data["message"], "Users - Save");
-          }
-          me.search();
-          me.list();
-          return;
-        }
-
-
-        toastr.error(data["message"], "Users");
-*/
       }).fail(function(data){
-    /*                      // Hide loading indication
-        me.btn_save.removeAttr('data-kt-indicator');
-                          // Enable button
-        me.btn_save.prop('disabled',false);
+        // Hide loading indication
+        me.btn_save_permissions.removeAttr('data-kt-indicator');
+        // Enable button
+        me.btn_save_permissions.prop('disabled',false);
+
+        /*
 
         if(data && data.responseJSON && data.responseJSON.message){
           toastr.error(data.responseJSON.message, "Users - Save");

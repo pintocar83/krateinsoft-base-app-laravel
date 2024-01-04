@@ -58,6 +58,7 @@ class UserController extends Controller
             'phone' => $request['phone'],
             'language' => $request['language'],
             'timezone' => $request['timezone'],
+            'roles' => $request['roles'],
             'access_permissions' => $request['permissions']
         ];
 
@@ -173,6 +174,7 @@ class UserController extends Controller
             'phone' => $request['phone'],
             'language' => $request['language'],
             'timezone' => $request['timezone'],
+            'roles' => $request['roles'],
         ];
 
 
