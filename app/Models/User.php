@@ -86,4 +86,19 @@ class User extends Authenticatable
     {
         return session('Auth::organization');
     }
+
+    public function fullname()
+    {
+        return $this->first_name . " " . $this->last_name;
+    }
+
+    public function letters()
+    {
+        return ($this->first_name[0] ?? '') . ($this->last_name[0] ?? '');
+    }
+
+    public function isRoot()
+    {
+        return in_array("root", $this->roles);
+    }
 }

@@ -7,7 +7,8 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Password;
-use Intervention\Image\Facades\Image;
+use Intervention\Image\ImageManager;
+use Intervention\Image\Drivers\Gd\Driver;
 use App\Models\User;
 use App\Models\UserOrganization;
 
@@ -149,6 +150,7 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id){
+        //dd($request);
         $validate=[
             'first_name'=> 'required|string',
             //'last_name'=> 'required|string',
@@ -165,7 +167,7 @@ class UserController extends Controller
         }
 
         $user = User::find($id);
-        //$image_name=$this->saveImage($request);
+        $image_name=$this->saveImage($request);
 
         $data=[
             'first_name' => $request['first_name'],
@@ -176,6 +178,23 @@ class UserController extends Controller
             'timezone' => $request['timezone'],
             'roles' => $request['roles'],
         ];
+
+        if($image_name){
+            $data["image"] = $image_name;
+
+            if($user->image){
+                $destinationPath = public_path('/storage/user');
+                $image_old = "{$destinationPath}/{$user->image}";
+                if(file_exists($image_old)){
+                    unlink($image_old);
+                }
+
+                $image_old = "{$destinationPath}/thumbnail/{$user->image}";
+                if(file_exists($image_old)){
+                    unlink($image_old);
+                }
+            }
+        }
 
 
         if($request["password"]){
@@ -262,27 +281,26 @@ class UserController extends Controller
         if($image){
             $image_uid=(String)Str::uuid();
             $image_name=$image_uid.".".$image->extension();
-            //$image_name=$image_uid.".jpg";
 
             //Original Image max: 800x800
             $destinationPath = public_path('/storage/user');
             if(!file_exists($destinationPath)){
                 mkdir($destinationPath,0777,TRUE);
             }
-            $img = Image::make($image->path());
-            $img->resize(800, 800, function ($constraint) {
-                $constraint->aspectRatio();
-            })->save($destinationPath.'/'.$image_name);
+
+            $manager = new ImageManager(new Driver());
+            $image = $manager->read($image->path());
+            $image->scaleDown(width: 800, height: 800);
+            $image->save($destinationPath.'/'.$image_name);
 
             //Thumbnail image max: 100x100
             $destinationPath = public_path('/storage/user/thumbnail');
             if(!file_exists($destinationPath)){
                 mkdir($destinationPath,0777,TRUE);
             }
-            $img = Image::make($image->path());
-            $img->resize(100, 100, function ($constraint) {
-                $constraint->aspectRatio();
-            })->save($destinationPath.'/'.$image_name);
+
+            $image->scaleDown(width: 100, height: 100);
+            $image->save($destinationPath.'/'.$image_name);
         }
         return $image_name;
     }

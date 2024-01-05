@@ -152,7 +152,8 @@ Cache::rememberForever( 'translations', function () {
 							</div>
 						</th>
 						<th class="min-w-125px">User</th>
-						<th class="min-w-125px">Phone</th>
+                        <th class="min-w-125px">Phone</th>
+						<th class="min-w-125px">Roles</th>
 						<th class="min-w-125px">Last login</th>
 						<th class="min-w-125px">Joined Date</th>
 						<th class="text-end min-w-100px">Actions</th>
@@ -174,21 +175,14 @@ Cache::rememberForever( 'translations', function () {
 	<div class="card module-form" style="display: none;">
         <div class="card-header border-0 cursor-pointer" role="button">
             <div class="card-title m-0">
-                <h2 class="fw-bolder m-0 d-flex align-items-center flex-wrap">
-                	{{ __("Add User") }}
-                	<span class="h-20px border-gray-200 border-start mx-4"></span>
-
-                	<ul class="breadcrumb breadcrumb-separatorless fw-bold fs-7 my-1">
-						<li class="breadcrumb-item text-muted module-form-subtitle">
-						</li>
-					</ul>
-
+                <h2 class="fw-bolder m-0 d-flex align-items-center flex-wrap module-title">
+                	&nbsp;
                 </h2>
             </div>
         </div>
         <div id="kt_account_profile_details" class="show">
             <!--begin::Form-->
-            <form id="form_users" class="form" action="" method="POST" enctype="multipart/form-data">
+            <form id="form_users" class="form" action="" method="POST" enctype="multipart/form-data" autocomplete="off">
                 @csrf
 
                 <div class="card-body border-top p-9">
@@ -250,7 +244,7 @@ Cache::rememberForever( 'translations', function () {
                         <div class="col-lg-9">
                             <div class="row">
                                 <div class="col-lg-6 fv-row">
-                                    <input type="password" name="password" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="{{ __('Password') }}" value="" />
+                                    <input type="password" name="password" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="{{ __('Password') }}" value="" autocomplete="off" />
                                 </div>
                                 <div class="col-lg-6 fv-row">
                                     <input type="password" name="password_confirmation" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="{{ __('Password Confirmation') }}" value="" />
@@ -286,10 +280,13 @@ Cache::rememberForever( 'translations', function () {
                         <label class="col-lg-3 col-form-label fw-bold fs-6 text-lg-end">{{ __("Roles") }}</label>
                         <div class="col-lg-9 fv-row">
                             <select multiple name="roles" aria-label="Select Roles" data-control="select2" data-placeholder="{{ __('Select Roles...') }}" class="form-select form-select-solid form-select-lg">
-                                <option value="standard">{{ __('Standard User') }}</option>
-                                <option value="developer">{{ __('Developer') }}</option><!-- Debugging -->
-                                <option value="admin">{{ __('Administrator') }}</option><!-- Manage information related to the current organization -->
-                                <option value="root">{{ __('Super User') }}</option><!-- All accesses and configurations -->
+                                @php
+                                    $roles = App\Models\Role::where('status',1)->orderBy('order')->get();
+                                @endphp
+                                @foreach ($roles as $role)
+                                    @continue ($role->id === "root" and !Auth()->user()->isRoot())
+                                    <option value="{{ $role->id }}">{{ __($role->name) }}</option>
+                                @endforeach
                             </select>
                         </div>
                     </div>
@@ -310,7 +307,7 @@ Cache::rememberForever( 'translations', function () {
 
                         </div>
                     </div>
-                    @endif;
+                    @endif
 
                 </div>
 
@@ -477,6 +474,7 @@ Cache::rememberForever( 'translations', function () {
       default_image: '/assets/v8.1.5/media/avatars/blank.png',
       default_timezome: '{{ $timezone }}',
       default_language: '{{ $language }}',
+      path_image: "{{ asset('storage/user') }}",
       current_id: null,
       current_organization_id: '{{ session('Auth::organization')?->id }}',
       validator: null,
@@ -612,6 +610,7 @@ Cache::rememberForever( 'translations', function () {
             {data: 'id'},
             {data: 'first_name'},
             {data: 'phone'},
+            {data: 'roles'},
             {data: 'last_login'},
             {data: 'created_at'},
             {data: null}
@@ -625,9 +624,10 @@ Cache::rememberForever( 'translations', function () {
             className: 'col-w1',
             render: function (data) {
               return `
-              <div class="form-check form-check-sm form-check-custom form-check-solid">
-              <input class="form-check-input" type="checkbox" value="${data}" />
-              </div>`;
+                <div class="form-check form-check-sm form-check-custom form-check-solid">
+                  <input class="form-check-input" type="checkbox" value="${data}" />
+                </div>
+              `;
             }
           },
           {
@@ -649,27 +649,27 @@ Cache::rememberForever( 'translations', function () {
               fullname=$.trim(fullname);
 
               var avatar=`
-              <div class="symbol-label fs-3 bg-light-danger text-danger">`+letters+`</div>
+                <div class="symbol-label fs-3 bg-light-danger text-danger">`+letters+`</div>
               `;
 
               if(row['image']){
                 var avatar=`
-                <div class="symbol-label">
-                <img src="/assets/v8.1.5/media/avatars/300-6.jpg" alt="`+fullname+`" class="w-100" />
-                </div>
+                  <div class="symbol-label">
+                    <img src="`+me.path_image+"/thumbnail/"+row['image']+`" alt="`+fullname+`" class="w-100" />
+                  </div>
                 `;
               }
 
               return `
-              <div class="symbol symbol-circle symbol-50px overflow-hidden me-3">
-              <a href="#">
-              `+avatar+`
-              </a>
-              </div>
-              <div class="d-flex flex-column">
-              <a href="#" class="text-gray-800 text-hover-primary mb-1">`+fullname+`</a>
-              <span>`+email+`</span>
-              </div>
+                <div class="symbol symbol-circle symbol-50px overflow-hidden me-3">
+                  <a href="#">
+                    `+avatar+`
+                  </a>
+                </div>
+                <div class="d-flex flex-column">
+                 <a href="#" class="text-gray-800 text-hover-primary mb-1">`+fullname+`</a>
+                 <span>`+email+`</span>
+                </div>
               `;
             }
           },
@@ -689,6 +689,19 @@ Cache::rememberForever( 'translations', function () {
             orderable: false,
             searchable: false,
             render: function (data, type, row) {
+              var tmp="";
+              for(var i=0; i<row["roles"].length; i++){
+                tmp+=`<div class="badge badge-danger fw-bolder cursor-pointer me-1 mb-1">`+row["roles"][i]+`</div>`;
+              }
+
+              return tmp;
+            }
+          },
+          {
+            targets: 4,
+            orderable: false,
+            searchable: false,
+            render: function (data, type, row) {
               var last_login="";
               var tooltip   ="";
 
@@ -698,16 +711,17 @@ Cache::rememberForever( 'translations', function () {
               }
 
               return `
-              <div class="badge badge-light fw-bolder cursor-pointer"
-              data-bs-toggle="tooltip"
-              data-bs-placement="top"
-              data-bs-custom-class="tooltip-dark"
-              title="`+tooltip+`"
-              >`+last_login+`</div>`;
+                <div class="badge badge-success fw-bolder cursor-pointer"
+                  data-bs-toggle="tooltip"
+                  data-bs-placement="top"
+                  data-bs-custom-class="tooltip-dark"
+                  title="`+tooltip+`"
+                  >`+last_login+`
+                </div>`;
             }
           },
           {
-            targets: 4,
+            targets: 5,
             orderable: false,
             searchable: false,
             render: function (data, type, row) {
@@ -795,7 +809,7 @@ Cache::rememberForever( 'translations', function () {
 
       $(".module-list").css("display","none");
       $(".module-form").css("display","");
-      //$(".module-form-subtitle").html("{{ __('New') }}");
+      $(".module-title").html("{{ __('Add User') }}");
 
       me.reset();
     },
@@ -806,6 +820,10 @@ Cache::rememberForever( 'translations', function () {
       me.current_id=id;
 
       const data = $("#datatable_users").dataTable().api().data()[index];
+
+      if(data['image']){
+        $(".user-image .image-input-wrapper").css('background-image',"url("+me.path_image+"/"+data['image']+")");
+      }
 
       me.form.find("[name='first_name']").val(data['first_name']);
       me.form.find("[name='last_name']").val(data['last_name']);
@@ -832,7 +850,7 @@ Cache::rememberForever( 'translations', function () {
       me.current_permissions = data['access_permissions'] ? JSON.parse(data['access_permissions']) : null;
       me.permissions(me.current_permissions);
 
-        //$(".module-form-subtitle").html("{{ __('Edit') }}");
+      $(".module-title").html("{{ __('Edit User') }}");
 
       $(".module-list").css("display","none");
       $(".module-form").css("display","");
@@ -848,7 +866,6 @@ Cache::rememberForever( 'translations', function () {
         if(status == 'Valid') {
           // Show loading indication
           me.btn_save.attr('data-kt-indicator', 'on');
-
           // Disable button to avoid multiple click
           me.btn_save.prop('disabled',true);
 
@@ -862,6 +879,7 @@ Cache::rememberForever( 'translations', function () {
           var language                = me.form.find("[name='language']").val();
           var timezone                = me.form.find("[name='timezone']").val();
           var roles                   = me.form.find("[name='roles']").val();
+          var image                   = me.form.find("[name='image']").val() ? me.form.find("[name='image']")[0].files[0] : null;
           var organizations = [me.current_organization_id];
           var tmp=$("[name='organizations']:checked");
           for(var i=0; i<tmp.length; i++){
@@ -870,36 +888,53 @@ Cache::rememberForever( 'translations', function () {
                 organizations.push(value);
           }
 
-          var method="POST";
+          var _method="POST";
           var url="{{ url('api/users') }}";
           if(me.current_id){
-            method="PATCH";
+            _method="PATCH";
             url+="/"+me.current_id;
           }
 
-          var data={
-            _token:                 _token,
-            first_name:             first_name,
-            last_name:              last_name,
-            email:                  email,
-            phone:                  phone,
-            language:               language,
-            timezone:               timezone,
-            roles:                  roles,
-            organizations:          organizations,
-          };
-
-          if(password){
-            data.password               = password;
-            data.password_confirmation  = password_confirmation;
+          var data = new FormData();
+          data.append('_token',        _token);
+          data.append('_method',       _method);
+          data.append('first_name',    first_name);
+          data.append('last_name',     last_name);
+          data.append('email',         email);
+          data.append('phone',         phone);
+          data.append('language',      language);
+          data.append('timezone',      timezone);
+          for(let i=0; roles && i<roles.length; i++)
+            data.append('roles[]',       roles[i]);
+          for(let i=0; organizations && i<organizations.length; i++)
+            data.append('organizations[]', organizations[i]);
+          if(image){
+            data.append('image',         image);
           }
 
+          if(password){
+            data.append('password',              password);
+            data.append('password_confirmation', password_confirmation);
+          }
+
+          // When is new, send permissions
+          if(!me.current_id){
+            var permissions = me.permissions();
+            for(const key in permissions) {
+              for(var i=0;i<permissions[key].length;i++){
+                data.append('permissions['+key+'][]', permissions[key][i]);
+              }
+            }
+          }
 
           $.ajax({
-            method: method,
+            method: "POST",
             url: url,
+            enctype: 'multipart/form-data',
             data: data,
             dataType: "json",
+            processData: false,
+            contentType: false,
             cache: false,
           }).done(function(data){
             console.log(data);

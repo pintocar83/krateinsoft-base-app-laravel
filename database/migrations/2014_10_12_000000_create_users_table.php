@@ -39,11 +39,11 @@ return new class extends Migration
         });
 
         User::create([
-            'first_name' => "Administrador",
+            'first_name' => "Super User",
             'email' => "krateinsoft@gmail.com",
-            'password' => Hash::make("admin"),
-            'roles' => ['admin', 'developer']
-        ]); 
+            'password' => Hash::make("root"),
+            'roles' => ['root']
+        ]);
     }
 
     /**

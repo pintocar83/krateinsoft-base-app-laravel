@@ -84,6 +84,11 @@ Route::group(['middleware' => ['initialization','auth']], function() {
     Route::get('/',                                    [DashboardControllerView::class,         'index']);
     Route::get('/account/settings',                    [AccountSettingsControllerView::class,   'index']);
 
+
+    //ADMIN ROUTES
+    Route::get('/admin',                               [DashboardAdminControllerView::class,           'index']);
+    Route::get('/admin/users',                         [UserControllerView::class,                     'index']);
+
 });
 
 /*
@@ -108,12 +113,4 @@ Route::get('/auth-user', function () {
 });
 
 
-//ADMIN ROUTES
-Route::get('/admin',                                       [DashboardAdminControllerView::class,           'index']);
-Route::get('/admin/users',                                 [UserControllerView::class,                     'index']);
-//Route::get('/users',                                       [UserController::class,                         'index']);
-//Route::post('/users',                                      [UserController::class,                         'store']);
-//Route::patch('/users/{id}',                                [UserController::class,                         'update']);
-
-Route::get('/products',                                    [ProductsControllerView::class,                 'index']);
 

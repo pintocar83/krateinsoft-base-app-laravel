@@ -3999,8 +3999,14 @@
                                 <!--begin::User menu-->
                                 <div class="app-navbar-item ms-1 ms-md-4" id="kt_header_user_menu_toggle">
                                     <!--begin::Menu wrapper-->
-                                    <div class="cursor-pointer symbol symbol-35px" data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end">
-                                        <img src="{{asset('assets/v8.2.1/media/avatars/300-3.jpg')}}" class="rounded-3" alt="user" />
+                                    <div class="cursor-pointer symbol symbol-35px overflow-hidden" data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end">
+                                        @if (Auth()->user()->image)
+                                        <div class="symbol-label">
+                                            <img src="{{asset('storage/user/thumbnail/'.Auth()->user()->image)}}" class="rounded-3 w-100" alt="user" />
+                                        </div>
+                                        @else
+                                            <div class="symbol-label fs-3 bg-light-primary text-primary">{{ Auth()->user()->letters() }}</div>
+                                        @endif
                                     </div>
                                     <!--begin::User account menu-->
                                     <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg menu-state-color fw-semibold py-4 fs-6 w-275px" data-kt-menu="true">
@@ -4008,15 +4014,21 @@
                                         <div class="menu-item px-3">
                                             <div class="menu-content d-flex align-items-center px-3">
                                                 <!--begin::Avatar-->
-                                                <div class="symbol symbol-50px me-5">
-                                                    <img alt="Logo" src="{{asset('assets/v8.2.1/media/avatars/300-3.jpg')}}" />
+                                                <div class="symbol symbol-50px overflow-hidden me-5">
+                                                    @if (Auth()->user()->image)
+                                                    <div class="symbol-label">
+                                                        <img alt="Logo" src="{{asset('storage/user/thumbnail/'.Auth()->user()->image)}}" class="w-100" />
+                                                    </div>
+                                                    @else
+                                                        <div class="symbol-label fs-3 bg-light-primary text-primary">{{ Auth()->user()->letters() }}</div>
+                                                    @endif
                                                 </div>
                                                 <!--end::Avatar-->
                                                 <!--begin::Username-->
                                                 <div class="d-flex flex-column">
-                                                    <div class="fw-bold d-flex align-items-center fs-5">Robert Fox 
-                                                    <span class="badge badge-light-success fw-bold fs-8 px-2 py-1 ms-2">Pro</span></div>
-                                                    <a href="#" class="fw-semibold text-muted text-hover-primary fs-7">robert@kt.com</a>
+                                                    <div class="fw-bold d-flex align-items-center fs-5">{{ Auth()->user()->fullname() }}
+                                                    <!--<span class="badge badge-light-success fw-bold fs-8 px-2 py-1 ms-2">Pro</span>--></div>
+                                                    <a href="#" class="fw-semibold text-muted text-hover-primary fs-7">{{ Auth()->user()->email }}</a>
                                                 </div>
                                                 <!--end::Username-->
                                             </div>
@@ -4359,26 +4371,13 @@
                         <!--begin::Footer-->
                         <div id="kt_app_footer" class="app-footer">
                             <!--begin::Footer container-->
-                            <div class="app-container container-fluid d-flex flex-column flex-md-row flex-center flex-md-stack py-3">
+                            <div class="app-container container-fluid d-flex flex-column flex-md-row flex-center py-3">
                                 <!--begin::Copyright-->
                                 <div class="text-gray-900 order-2 order-md-1">
-                                    <span class="text-muted fw-semibold me-1">2023&copy;</span>
-                                    <a href="https://keenthemes.com" target="_blank" class="text-gray-800 text-hover-primary">Keenthemes</a>
+                                    <span class="text-muted fw-semibold me-1">2024&copy;</span>
+                                    <a href="#" target="_blank" class="text-gray-800 text-hover-primary">KrateinSoft</a>
                                 </div>
                                 <!--end::Copyright-->
-                                <!--begin::Menu-->
-                                <ul class="menu menu-gray-600 menu-hover-primary fw-semibold order-1">
-                                    <li class="menu-item">
-                                        <a href="https://keenthemes.com" target="_blank" class="menu-link px-2">About</a>
-                                    </li>
-                                    <li class="menu-item">
-                                        <a href="https://devs.keenthemes.com" target="_blank" class="menu-link px-2">Support</a>
-                                    </li>
-                                    <li class="menu-item">
-                                        <a href="https://1.envato.market/EA4JP" target="_blank" class="menu-link px-2">Purchase</a>
-                                    </li>
-                                </ul>
-                                <!--end::Menu-->
                             </div>
                             <!--end::Footer container-->
                         </div>
