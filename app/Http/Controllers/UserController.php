@@ -20,10 +20,27 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(){
+    public function index(Request $request){
+        $text = isset($request['search']['value']) ? $request['search']['value'] : "";
+/*\Event::listen('Illuminate\Database\Events\QueryExecuted', function ($query) {
+      
+           $sql = $query->sql; 
+           $time = $query->time;
+           $connection = $query->connection->getName();
+
+          dd('query : '.$sql);
+           \Log::debug('query : '.$sql);
+           \Log::debug('time '.$time);
+           \Log::debug('connection '.$connection);
+       });
+\Log::debug('time ');*/
         return datatables()->of(
             User::query()
             ->whereNull('delete_at')
+            ->where([
+                ['first_name','like',"%$text%"],
+                ['last_name','like',"%$text%"]
+            ])
             ->with('organizations:organizations.id,organizations.name,user_organization.status')
         )->escapeColumns([])->toJson();
     }
@@ -50,8 +67,7 @@ class UserController extends Controller
             'password'=> 'required|string|confirmed',
         ]);
 
-        //$image_name=$this->saveImage($request);
-
+        $image_name=$this->saveImage($request);
         $data=[
             'first_name' => $request['first_name'],
             'last_name' => $request['last_name'],
@@ -60,13 +76,16 @@ class UserController extends Controller
             'language' => $request['language'],
             'timezone' => $request['timezone'],
             'roles' => $request['roles'],
-            'access_permissions' => $request['permissions']
+            'access_permissions' => $request['permissions'],
         ];
 
         if(isset($request['password']) and $request['password']){
             $data['password'] = Hash::make($request['password']);
         }
 
+        if($image_name){
+            $data["image"] = $image_name;
+        }
 
         //Create User
         $user = User::create($data);

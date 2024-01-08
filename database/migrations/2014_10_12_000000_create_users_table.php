@@ -32,14 +32,15 @@ return new class extends Migration
             $table->string("image",100)->default("")->nullable();
             $table->json("roles")->nullable();
             $table->string("access_policy",10)->default("allow")->nullable();
-            $table->text("access_permissions")->default("")->nullable();
+            $table->json("access_permissions")->nullable();
             $table->timestamp('last_login')->nullable();
             $table->timestamps();
             $table->timestamp('delete_at')->nullable();
         });
 
         User::create([
-            'first_name' => "Super User",
+            'first_name' => "Super",
+            'last_name' => "User",
             'email' => "krateinsoft@gmail.com",
             'password' => Hash::make("root"),
             'roles' => ['root']

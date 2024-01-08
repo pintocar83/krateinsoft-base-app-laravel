@@ -24,6 +24,7 @@ Route::group(['middleware' => ['initialization', 'auth']], function() {
     Route::post('/users',                        [UserController::class,'store']);
     Route::patch('/users/{id}',                  [UserController::class,'update']);
     Route::patch('/users/{id}/permissions',      [UserController::class,'update_permissions']);
+    Route::delete('/users/{id}',                 [UserController::class,'destroy']);
 
 
 });

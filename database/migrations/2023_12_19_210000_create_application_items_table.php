@@ -50,10 +50,10 @@ return new class extends Migration
             'id' => 2,
             'application_section_id' => 1,
             'application_item_id'=> NULL,
-            'name' => "Applications",
+            'name' => "Application Menus",
             'icon' => '<i class="ki-duotone ki-abstract-14 fs-2"><span class="path1"></span><span class="path2"></span></i>',
             'inside' => ['menu'],
-            'order' => 1,
+            'order' => 3,
             'status' => 1,
         ]);
 
@@ -74,7 +74,20 @@ return new class extends Migration
             'name' => "Items",
             'link' => 'admin/application_items',
             'inside' => ['menu'],
-            'order' => 1,
+            'order' => 2,
+            'actions' => ['list','create','view','edit','delete'],
+            'status' => 1,
+        ]);
+
+        ApplicationItem::create([
+            'id' => 5,
+            'application_section_id' => 1,
+            'application_item_id' => NULL,
+            'name' => "Organizations",
+            'link' => "admin/organizations",
+            'icon' => '<i class="ki-duotone ki-office-bag fs-2"><span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span></i>',
+            'inside' => ['menu'],
+            'order' => 2,
             'actions' => ['list','create','view','edit','delete'],
             'status' => 1,
         ]);

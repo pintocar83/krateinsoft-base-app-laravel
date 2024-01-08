@@ -68,30 +68,6 @@ $locale=app()->getLocale();
 										</span>Spanish</a>
 									</div>
 									<!--end::Menu item-->
-									<!--begin::Menu item-->
-									<div class="menu-item px-3">
-										<a href="#" class="menu-link d-flex px-5" onclick="locale_selection('')">
-										<span class="symbol symbol-20px me-4">
-											<img class="rounded-1" src="{{asset('assets/v8.2.1/media/flags/germany.svg')}}" alt="" />
-										</span>German</a>
-									</div>
-									<!--end::Menu item-->
-									<!--begin::Menu item-->
-									<div class="menu-item px-3">
-										<a href="#" class="menu-link d-flex px-5">
-										<span class="symbol symbol-20px me-4">
-											<img class="rounded-1" src="{{asset('assets/v8.2.1/media/flags/japan.svg')}}" alt="" />
-										</span>Japanese</a>
-									</div>
-									<!--end::Menu item-->
-									<!--begin::Menu item-->
-									<div class="menu-item px-3">
-										<a href="#" class="menu-link d-flex px-5">
-										<span class="symbol symbol-20px me-4">
-											<img class="rounded-1" src="{{asset('assets/v8.2.1/media/flags/france.svg')}}" alt="" />
-										</span>French</a>
-									</div>
-									<!--end::Menu item-->
 								</div>
 								<!--end::Menu sub-->
 							</div>
