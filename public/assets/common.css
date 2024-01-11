@@ -1,10 +1,21 @@
+:root {
+    --main-app-color: #001739;
+    --main-app-color-focus: #2972dd;
+
+    --main-app-color: #502b65;
+    --main-app-color-focus: #673AB7;
+
+    --main-app-color: #292929;
+    --main-app-color-focus: var(--bs-text-primary);
+}
+
 .toastr {
 	opacity: 1 !important;
 }
 
 
 .modal.modal-c1 .modal-header {
-	background-color: #502b65;
+	background-color: var(--main-app-color);
 	color: white;
 	position: relative;
 }
@@ -24,7 +35,7 @@
 
 [data-kt-app-layout=dark-sidebar] .app-sidebar {
 	/*background-color: #26112b;*/
-	background-color: #502b65;
+	background-color: var(--main-app-color);
 }
 
 [data-kt-app-layout=dark-sidebar] .app-sidebar .menu .menu-item .menu-link,
@@ -50,7 +61,7 @@
 
 [data-kt-app-layout=dark-sidebar] .app-sidebar .app-sidebar-toggle.btn.btn-active-color-primary.active i,
 [data-kt-app-layout=dark-sidebar] .app-sidebar .app-sidebar-toggle.btn.btn-active-color-primary:hover:not(.btn-active) i {
-    color: #673AB7;
+    color:var(--main-app-color-focus);
 	}
 }
 

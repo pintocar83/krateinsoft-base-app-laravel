@@ -4287,8 +4287,8 @@
                         <div class="app-sidebar-logo px-6" id="kt_app_sidebar_logo">
                             <!--begin::Logo image-->
                             <a href="index.html">
-                                <img alt="Logo" src="{{asset('assets/v8.2.1/media/logos/default-dark.svg')}}" class="h-25px app-sidebar-logo-default" />
-                                <img alt="Logo" src="{{asset('assets/v8.2.1/media/logos/default-small.svg')}}" class="h-20px app-sidebar-logo-minimize" />
+                                <img alt="Logo" src="{{asset('storage/organizations/path2216.png')}}" class="h-50px mt-5 ms-2 app-sidebar-logo-default" />
+                                <img alt="Logo" src="{{asset('storage/organizations/path22162.png')}}" class="h-35px app-sidebar-logo-minimize" />
                             </a>
                             <!--end::Logo image-->
                             <!--begin::Sidebar toggle-->

@@ -1,45 +1,45 @@
 @extends('layout')
 
 @section('title')
-{{ __('Users') }}
+{{ __('Workgroups') }}
 @endsection
 
 @section('breadcrumb')
 <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
-	<!--begin::Item-->
-	<li class="breadcrumb-item text-muted">
-		<a href="{{ url('/') }}" class="text-muted text-hover-primary">{{ __('Home') }}</a>
-	</li>
-	<!--end::Item-->
-	<!--begin::Item-->
-	<li class="breadcrumb-item">
-		<span class="bullet bg-gray-500 w-5px h-2px"></span>
-	</li>
-	<!--end::Item-->
-	<!--begin::Item-->
-	<li class="breadcrumb-item text-muted">{{ __('Management') }}</li>
-	<!--end::Item-->
-	<!--begin::Item-->
-	<li class="breadcrumb-item">
-		<span class="bullet bg-gray-500 w-5px h-2px"></span>
-	</li>
-	<!--end::Item-->
-	<!--begin::Item-->
-	<li class="breadcrumb-item text-muted">{{ __('Users') }}</li>
-	<!--end::Item-->
+  <!--begin::Item-->
+  <li class="breadcrumb-item text-muted">
+    <a href="{{ url('/') }}" class="text-muted text-hover-primary">{{ __('Home') }}</a>
+  </li>
+  <!--end::Item-->
+  <!--begin::Item-->
+  <li class="breadcrumb-item">
+    <span class="bullet bg-gray-500 w-5px h-2px"></span>
+  </li>
+  <!--end::Item-->
+  <!--begin::Item-->
+  <li class="breadcrumb-item text-muted">{{ __('Management') }}</li>
+  <!--end::Item-->
+  <!--begin::Item-->
+  <li class="breadcrumb-item">
+    <span class="bullet bg-gray-500 w-5px h-2px"></span>
+  </li>
+  <!--end::Item-->
+  <!--begin::Item-->
+  <li class="breadcrumb-item text-muted">{{ __('Workgroups') }}</li>
+  <!--end::Item-->
 </ul>
 @endsection
 
 @section('actions')
-	<!--<a href="#" class="btn btn-sm fw-bold btn-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_create_app">Create</a>-->
+  <!--<a href="#" class="btn btn-sm fw-bold btn-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_create_app">Create</a>-->
 @endsection
 
 @section('content')
 <div id="kt_app_content_container" class="app-container container-xxl">
-	<!--begin::Card List-->
-	<div class="card module-list">
-		<!--begin::Card header-->
-		<div class="card-header border-0 pt-6">
+  <!--begin::Card List-->
+  <div class="card module-list">
+    <!--begin::Card header-->
+    <div class="card-header border-0 pt-6">
           <!--begin::Card title-->
           <div class="card-title">
             <!--begin::Search-->
@@ -109,7 +109,7 @@
               <!--end::Menu 1-->
               <!--end::Filter-->
               <!--begin::Add user-->
-              <button type="button" class="btn btn-primary" onclick="Users.add()">
+              <button type="button" class="btn btn-primary" onclick="Workgroups.add()">
               <i class="ki-duotone ki-plus fs-2"></i>Add User</button>
               <!--end::Add user-->
             </div>
@@ -124,46 +124,46 @@
           </div>
           <!--end::Card toolbar-->
         </div>
-		<!--end::Card header-->
-		<!--begin::Card body-->
-		<div class="card-body py-4">
-			<!--begin::Table-->
-			<table class="table align-middle table-row-dashed fs-6 gy-5" id="datatable_users">
-				<!--begin::Table head-->
-				<thead>
-					<!--begin::Table row-->
-					<tr class="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
-						<th class="w-10px pe-2">
-							<div class="form-check form-check-sm form-check-custom form-check-solid me-3">
-								<input class="form-check-input" type="checkbox" data-kt-check="true" data-kt-check-target="#datatable_users .form-check-input" value="1" />
-							</div>
-						</th>
-						<th class="min-w-125px">User</th>
+    <!--end::Card header-->
+    <!--begin::Card body-->
+    <div class="card-body py-4">
+      <!--begin::Table-->
+      <table class="table align-middle table-row-dashed fs-6 gy-5" id="datatable_users">
+        <!--begin::Table head-->
+        <thead>
+          <!--begin::Table row-->
+          <tr class="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
+            <th class="w-10px pe-2">
+              <div class="form-check form-check-sm form-check-custom form-check-solid me-3">
+                <input class="form-check-input" type="checkbox" data-kt-check="true" data-kt-check-target="#datatable_users .form-check-input" value="1" />
+              </div>
+            </th>
+            <th class="min-w-125px">User</th>
                         <th class="min-w-125px">Phone</th>
-						<th class="min-w-125px">Roles</th>
-						<th class="min-w-125px">Last login</th>
-						<th class="min-w-125px">Joined Date</th>
-						<th class="text-end min-w-100px">Actions</th>
-					</tr>
-					<!--end::Table row-->
-				</thead>
-				<!--end::Table head-->
-				<!--begin::Table body-->
-				<tbody class="text-gray-600 fw-bold">
-				</tbody>
-				<!--end::Table body-->
-			</table>
-			<!--end::Table-->
-		</div>
-		<!--end::Card body-->
-	</div>
-	<!--end::Card List-->
+            <th class="min-w-125px">Roles</th>
+            <th class="min-w-125px">Last login</th>
+            <th class="min-w-125px">Joined Date</th>
+            <th class="text-end min-w-100px">Actions</th>
+          </tr>
+          <!--end::Table row-->
+        </thead>
+        <!--end::Table head-->
+        <!--begin::Table body-->
+        <tbody class="text-gray-600 fw-bold">
+        </tbody>
+        <!--end::Table body-->
+      </table>
+      <!--end::Table-->
+    </div>
+    <!--end::Card body-->
+  </div>
+  <!--end::Card List-->
 
-	<div class="card module-form" style="display: none;">
+  <div class="card module-form" style="display: none;">
         <div class="card-header border-0 cursor-pointer" role="button">
             <div class="card-title m-0">
                 <h2 class="fw-bolder m-0 d-flex align-items-center flex-wrap module-title">
-                	&nbsp;
+                  &nbsp;
                 </h2>
             </div>
         </div>
@@ -254,9 +254,6 @@
                         <div class="col-lg-9 fv-row">
                             <select name="timezone" aria-label="Select a Timezone" data-control="select2" data-placeholder="{{ __('Select a timezone...') }}" class="form-select form-select-solid form-select-lg">
                                 <option value="">{{ __('Select a Timezone...') }}</option>
-                                <?php foreach($timezones as $key => $value): ?>
-                                    <option value="{{ $key }}">{{ $value }}</option>
-                                <?php endforeach;?>
                             </select>
                         </div>
                     </div>
@@ -276,31 +273,15 @@
                         </div>
                     </div>
 
-                    @if (count($organizations)>1)
-                    <div class="row mb-6">
-                        <label class="col-lg-3 col-form-label fw-bold fs-6 text-lg-end">{{ __("Organizations") }}</label>
-                        <div class="col-lg-9 fv-row  text-gray-700">
-
-                            @foreach ($organizations as $key => $organization)
-                        	<div class="form-check form-check-custom form-check-solid form-check-sm pt-4">
-							    <input class="form-check-input" type="checkbox" value="{{ $organization->id }}" name='organizations' id="checkbox-organization-{{ $organization->id }}"/>
-							    <label class="form-check-label" for="checkbox-organization-{{ $organization->id }}">
-							        {{ $organization->name }}
-							    </label>
-							</div>
-							@endforeach
-
-                        </div>
-                    </div>
-                    @endif
+                    
 
                 </div>
 
                 <div class="card-footer d-flex justify-content-end py-6 px-9">
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_permissions" onClick="Users.showPermissions()">{{ _("Permissions") }}</button>
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_permissions" onClick="Workgroups.showPermissions()">{{ _("Permissions") }}</button>
                     <div style="flex: 1;"></div>
-                    <a class="btn btn-danger btn-active-light-primary me-2" href="#" onclick="Users.list()">{{ __("Cancel") }}</a>
-                    <button type="button" class="btn btn-success" onclick="Users.save()" id="save_users">
+                    <a class="btn btn-danger btn-active-light-primary me-2" href="#" onclick="Workgroups.list()">{{ __("Cancel") }}</a>
+                    <button type="button" class="btn btn-success" onclick="Workgroups.save()" id="save_users">
                         <span class="indicator-label">{{ __("Save") }}</span>
                         <span class="indicator-progress">Please wait...
                         <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
@@ -359,7 +340,7 @@
                                             <td>
                                                 <!--begin::Checkbox-->
                                                 <label class="form-check form-check-sm form-check-custom form-check-solid me-9">
-                                                    <input class="form-check-input check-all-permissions" type="checkbox" value="" id="check_all_permissions" onchange="Users.checkAllPermissions()" />
+                                                    <input class="form-check-input check-all-permissions" type="checkbox" value="" id="check_all_permissions" onchange="Workgroups.checkAllPermissions()" />
                                                     <span class="form-check-label" for="check_all_permissions">Select all</span>
                                                 </label>
                                                 <!--end::Checkbox-->
@@ -419,7 +400,7 @@
                     <!--begin::Actions-->
                     <div class="text-center pt-15">
                         <button type="button" class="btn btn-light me-3" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary" onclick="Users.savePermissions()" id="save_permissions">
+                        <button type="button" class="btn btn-primary" onclick="Workgroups.savePermissions()" id="save_permissions">
                             <span class="indicator-label">Apply</span>
                             <span class="indicator-progress">Please wait... 
                             <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
@@ -455,11 +436,11 @@
 
 @section('scripts')
 <script type="text/javascript">
-    var Users={
+    var Workgroups={
       token: $("[name='_token']").val(),
       default_image: '/assets/v8.1.5/media/avatars/blank.png',
-      default_timezome: '{{ $timezone }}',
-      default_language: '{{ $language }}',
+      default_timezome: '',
+      default_language: '',
       path_image: "{{ asset('storage/user') }}",
       current_id: null,
       current_organization_id: '{{ session('Auth::organization')?->id }}',
@@ -728,13 +709,13 @@
             render: function (data, type, row, meta) {
                             //console.log(meta);
               return `
-                <a href="#" class="btn btn-icon btn-bg-light btn-active-color-primary me-1" onclick="Users.edit('`+row["id"]+`','`+meta["row"]+`')">
+                <a href="#" class="btn btn-icon btn-bg-light btn-active-color-primary me-1" onclick="Workgroups.edit('`+row["id"]+`','`+meta["row"]+`')">
                   <i class="ki-duotone ki-pencil fs-1">
                    <span class="path1"></span>
                    <span class="path2"></span>
                   </i>
                 </a>
-                <a href="#" class="btn btn-icon btn-bg-light btn-active-color-danger" onclick="Users.delete('`+row["id"]+`','`+meta["row"]+`')">
+                <a href="#" class="btn btn-icon btn-bg-light btn-active-color-danger" onclick="Workgroups.delete('`+row["id"]+`','`+meta["row"]+`')">
                   <i class="ki-duotone ki-trash fs-1">
                    <span class="path1"></span>
                    <span class="path2"></span>
@@ -939,7 +920,7 @@
 
             if(data["success"]){
               if(data["message"]){
-                toastr.success(data["message"], "{{ __('Users - Save') }}");
+                toastr.success(data["message"], "{{ __('Workgroups - Save') }}");
               }
               me.search();
               me.list();
@@ -947,7 +928,7 @@
             }
 
 
-            toastr.error(data["message"], "Users");
+            toastr.error(data["message"], "Workgroups");
 
           }).fail(function(data){
             // Hide loading indication
@@ -956,15 +937,15 @@
             me.btn_save.prop('disabled',false);
 
             if(data && data.responseJSON && data.responseJSON.message){
-              toastr.error(data.responseJSON.message, "{{ __('Users - Save') }}");
+              toastr.error(data.responseJSON.message, "{{ __('Workgroups - Save') }}");
             }
             else{
-              toastr.error("{{ __('Fail Request') }}", "{{ __('Users - Save') }}" );
+              toastr.error("{{ __('Fail Request') }}", "{{ __('Workgroups - Save') }}" );
             }
           });
 
         } else {
-          toastr.error("{{ __('Sorry, looks like there are some errors detected, please try again.') }}", "{{ __('Users - Save') }}");
+          toastr.error("{{ __('Sorry, looks like there are some errors detected, please try again.') }}", "{{ __('Workgroups - Save') }}");
         }
       });
 
@@ -1068,7 +1049,7 @@
             return;
         }
 
-        toastr.error(data["message"], "{{ __('Users Permissions') }}");
+        toastr.error(data["message"], "{{ __('Workgroups Permissions') }}");
 
       }).fail(function(data){
         // Hide loading indication
@@ -1079,10 +1060,10 @@
         /*
 
         if(data && data.responseJSON && data.responseJSON.message){
-          toastr.error(data.responseJSON.message, "Users - Save");
+          toastr.error(data.responseJSON.message, "Workgroups - Save");
         }
         else{
-          toastr.error("Fail Request", "Users - Save");
+          toastr.error("Fail Request", "Workgroups - Save");
         }*/
       });
     },
@@ -1103,7 +1084,7 @@
   };
 
   $(function() {
-    Users.init();
+    Workgroups.init();
   });
 </script>
 @endsection

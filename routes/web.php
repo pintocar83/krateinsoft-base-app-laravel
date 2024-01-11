@@ -18,6 +18,10 @@ use App\Http\Controllers\Views\Admin\DashboardAdminControllerView;
 use App\Http\Controllers\Views\Products\ProductsControllerView;
 use App\Http\Controllers\Views\DashboardControllerView;
 
+//CONSTRUVIAS
+use App\Http\Controllers\Construvias\Views\WorkgroupMainBoxesControllerView;
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -81,13 +85,16 @@ Route::group(['middleware' => ['initialization','auth']], function() {
             return "";
         }
     });*/
-    Route::get('/',                                    [DashboardControllerView::class,         'index']);
-    Route::get('/account/settings',                    [AccountSettingsControllerView::class,   'index']);
+    Route::get('/',                                    [DashboardControllerView::class,          'index']);
+    Route::get('/account/settings',                    [AccountSettingsControllerView::class,    'index']);
 
 
     //ADMIN ROUTES
-    Route::get('/admin',                               [DashboardAdminControllerView::class,           'index']);
-    Route::get('/admin/users',                         [UserControllerView::class,                     'index']);
+    Route::get('/admin',                               [DashboardAdminControllerView::class,     'index']);
+    Route::get('/admin/users',                         [UserControllerView::class,               'index']);
+
+    //CONSTRUVIAS ROUTES
+    Route::get('/admin/workgroups',                    [WorkgroupMainBoxesControllerView::class, 'index']);
 
 });
 

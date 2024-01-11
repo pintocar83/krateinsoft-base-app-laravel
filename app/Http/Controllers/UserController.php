@@ -22,25 +22,15 @@ class UserController extends Controller
      */
     public function index(Request $request){
         $text = isset($request['search']['value']) ? $request['search']['value'] : "";
-/*\Event::listen('Illuminate\Database\Events\QueryExecuted', function ($query) {
-      
-           $sql = $query->sql; 
-           $time = $query->time;
-           $connection = $query->connection->getName();
 
-          dd('query : '.$sql);
-           \Log::debug('query : '.$sql);
-           \Log::debug('time '.$time);
-           \Log::debug('connection '.$connection);
-       });
-\Log::debug('time ');*/
         return datatables()->of(
             User::query()
             ->whereNull('delete_at')
-            ->where([
-                ['first_name','like',"%$text%"],
-                ['last_name','like',"%$text%"]
-            ])
+            ->where(function($query) use($text) {
+                $query->where('first_name', 'like', "%$text%")
+                      ->orWhere('last_name', 'like', "%$text%")
+                      ->orWhere('email', 'like', "%$text%");
+            })
             ->with('organizations:organizations.id,organizations.name,user_organization.status')
         )->escapeColumns([])->toJson();
     }

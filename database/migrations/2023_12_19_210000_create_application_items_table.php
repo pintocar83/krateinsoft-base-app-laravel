@@ -47,6 +47,19 @@ return new class extends Migration
         ]);
 
         ApplicationItem::create([
+            'id' => 5,
+            'application_section_id' => 1,
+            'application_item_id' => NULL,
+            'name' => "Organizations",
+            'link' => "admin/organizations",
+            'icon' => '<i class="ki-duotone ki-office-bag fs-2"><span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span></i>',
+            'inside' => ['menu'],
+            'order' => 2,
+            'actions' => ['list','create','view','edit','delete'],
+            'status' => 1,
+        ]);
+
+        ApplicationItem::create([
             'id' => 2,
             'application_section_id' => 1,
             'application_item_id'=> NULL,
@@ -80,14 +93,27 @@ return new class extends Migration
         ]);
 
         ApplicationItem::create([
-            'id' => 5,
+            'id' => 6,
             'application_section_id' => 1,
             'application_item_id' => NULL,
-            'name' => "Organizations",
-            'link' => "admin/organizations",
-            'icon' => '<i class="ki-duotone ki-office-bag fs-2"><span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span></i>',
+            'name' => "Workgroups",
+            'link' => "admin/workgroups",
+            'icon' => '<i class="ki-duotone ki-abstract-26 fs-2"><span class="path1"></span><span class="path2"></span></i>',
             'inside' => ['menu'],
-            'order' => 2,
+            'order' => 4,
+            'actions' => ['list','create','view','edit','delete'],
+            'status' => 1,
+        ]);
+
+        ApplicationItem::create([
+            'id' => 7,
+            'application_section_id' => 1,
+            'application_item_id' => NULL,
+            'name' => "Boxes",
+            'link' => "admin/boxes",
+            'icon' => '<i class="ki-duotone ki-cube-2 fs-2"><span class="path1"></span><span class="path2"></span><span class="path3"></span></i>',
+            'inside' => ['menu'],
+            'order' => 5,
             'actions' => ['list','create','view','edit','delete'],
             'status' => 1,
         ]);
