@@ -87,6 +87,23 @@ function dragElement(elmnt) {
     }
 }
 
+var selectOptionFlag = function(item) {
+    if ( !item.id ) {
+        return item.text;
+    }
+
+    var span = document.createElement('span');
+    var imgUrl = item.element.getAttribute('data-kt-flag');
+    var template = '';
+
+    template += '<img src="' + imgUrl + '" class="rounded-circle h-20px me-2" alt="image"/>';
+    template += item.text;
+
+    span.innerHTML = template;
+
+    return $(span);
+}
+
 
 $(()=>{
     document.querySelectorAll(".modal").forEach((el) => dragElement(el));

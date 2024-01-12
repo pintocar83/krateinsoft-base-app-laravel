@@ -93,7 +93,7 @@ class UserController extends Controller
 
         $response = [
             'success'=> true,
-            'message'=> "User created successfully",
+            'message'=> __("User created successfully"),
             'data' => $user
         ];
 
@@ -124,7 +124,7 @@ class UserController extends Controller
 
         $response = [
             'success' => true,
-            'message' => "User created successfully",
+            'message' => __("User created successfully"),
             'data'    => $user
         ];
 
@@ -229,7 +229,7 @@ class UserController extends Controller
 
         return [
             'success' => true,
-            'message' => "User modified successfully",
+            'message' => __("User modified successfully"),
             'data'    => $user
         ];
     }
@@ -244,7 +244,7 @@ class UserController extends Controller
 
         return [
             'success' => true,
-            'message' => "Permissions modified successfully",
+            'message' => __("User permissions modified successfully"),
             'data'    => $user
         ];
     }
@@ -255,8 +255,17 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id){
-        return User::destroy($id);
+    public function delete(Request $request){
+        $id=$request["id"];
+        if(!is_array($id)){
+            return ["success"=>false];
+        }
+        User::whereIn('id', $id)->update(['delete_at'=>date('Y-m-d H:i:s')]);
+
+        return [
+            'success' => true,
+            'message' => count($id) === 1 ? __("User deleted successfully") : __("Users deleted successfully"),
+        ];
     }
 
     public function destroy_array(Request $request){
@@ -321,16 +330,21 @@ class UserController extends Controller
         return ["available"=>false];
     }
 
-    public function valid($email, Request $request){
+    public function valid(Request $request){
+        $email=$request['email'];
+        if(!$email) return [];
+
         $id=$request['id'];
-        if(!$id){
-            $data = User::where('email','like',"{$email}")->get();
+
+        $conditions = [
+            ['email','like',"{$email}"]
+        ];
+        if($id){
+            $conditions[]=['id','<>',"{$id}"];
         }
-        else{
-            $data = User::where('email','like',"{$email}")
-                ->where('id','<>',"{$id}")
-                ->get();
-        }
+
+        $data = User::whereNull('delete_at')->where($conditions)->get();
+
         if(count($data)==0)
             return ["valid"=> true];
         return ["valid"=> false];
@@ -360,7 +374,7 @@ class UserController extends Controller
         }
 
         Auth::logout();
-        return ["success"=>false, "message"=>"Bad credencials"];
+        return ["success"=>false, "message"=> __("Invalid credentials")];
     }
 
     /**
@@ -378,7 +392,7 @@ class UserController extends Controller
         $user=self::getByEmail($email);
 
         if(!$user){
-            return ['success'=>false, 'message'=>'Email not found.'];
+            return ['success'=>false, 'message'=> __('Email not found')];
         }
 
         $status = Password::sendResetLink(

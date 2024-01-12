@@ -1,6 +1,10 @@
 
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<?php
+$locale = app()->getLocale();
+$locale_base = substr($locale,0,2);
+?>
+<html lang="{{ str_replace('_', '-', $locale) }}">
     <!--begin::Head-->
     <head>
         <title>{{ env('APP_NAME') }}</title>
@@ -3920,83 +3924,6 @@
                                     <!--end::Menu wrapper-->
                                 </div>
                                 <!--end::My apps links-->
-                                <!--begin::Theme mode-->
-                                <div class="app-navbar-item ms-1 ms-md-4">
-                                    <!--begin::Menu toggle-->
-                                    <a href="#" class="btn btn-icon btn-custom btn-icon-muted btn-active-light btn-active-color-primary w-35px h-35px" data-kt-menu-trigger="{default:'click', lg: 'hover'}" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end">
-                                        <i class="ki-duotone ki-night-day theme-light-show fs-1">
-                                            <span class="path1"></span>
-                                            <span class="path2"></span>
-                                            <span class="path3"></span>
-                                            <span class="path4"></span>
-                                            <span class="path5"></span>
-                                            <span class="path6"></span>
-                                            <span class="path7"></span>
-                                            <span class="path8"></span>
-                                            <span class="path9"></span>
-                                            <span class="path10"></span>
-                                        </i>
-                                        <i class="ki-duotone ki-moon theme-dark-show fs-1">
-                                            <span class="path1"></span>
-                                            <span class="path2"></span>
-                                        </i>
-                                    </a>
-                                    <!--begin::Menu toggle-->
-                                    <!--begin::Menu-->
-                                    <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-title-gray-700 menu-icon-gray-500 menu-active-bg menu-state-color fw-semibold py-4 fs-base w-150px" data-kt-menu="true" data-kt-element="theme-mode-menu">
-                                        <!--begin::Menu item-->
-                                        <div class="menu-item px-3 my-0">
-                                            <a href="#" class="menu-link px-3 py-2" data-kt-element="mode" data-kt-value="light">
-                                                <span class="menu-icon" data-kt-element="icon">
-                                                    <i class="ki-duotone ki-night-day fs-2">
-                                                        <span class="path1"></span>
-                                                        <span class="path2"></span>
-                                                        <span class="path3"></span>
-                                                        <span class="path4"></span>
-                                                        <span class="path5"></span>
-                                                        <span class="path6"></span>
-                                                        <span class="path7"></span>
-                                                        <span class="path8"></span>
-                                                        <span class="path9"></span>
-                                                        <span class="path10"></span>
-                                                    </i>
-                                                </span>
-                                                <span class="menu-title">Light</span>
-                                            </a>
-                                        </div>
-                                        <!--end::Menu item-->
-                                        <!--begin::Menu item-->
-                                        <div class="menu-item px-3 my-0">
-                                            <a href="#" class="menu-link px-3 py-2" data-kt-element="mode" data-kt-value="dark">
-                                                <span class="menu-icon" data-kt-element="icon">
-                                                    <i class="ki-duotone ki-moon fs-2">
-                                                        <span class="path1"></span>
-                                                        <span class="path2"></span>
-                                                    </i>
-                                                </span>
-                                                <span class="menu-title">Dark</span>
-                                            </a>
-                                        </div>
-                                        <!--end::Menu item-->
-                                        <!--begin::Menu item-->
-                                        <div class="menu-item px-3 my-0">
-                                            <a href="#" class="menu-link px-3 py-2" data-kt-element="mode" data-kt-value="system">
-                                                <span class="menu-icon" data-kt-element="icon">
-                                                    <i class="ki-duotone ki-screen fs-2">
-                                                        <span class="path1"></span>
-                                                        <span class="path2"></span>
-                                                        <span class="path3"></span>
-                                                        <span class="path4"></span>
-                                                    </i>
-                                                </span>
-                                                <span class="menu-title">System</span>
-                                            </a>
-                                        </div>
-                                        <!--end::Menu item-->
-                                    </div>
-                                    <!--end::Menu-->
-                                </div>
-                                <!--end::Theme mode-->
                                 <!--begin::User menu-->
                                 <div class="app-navbar-item ms-1 ms-md-4" id="kt_header_user_menu_toggle">
                                     <!--begin::Menu wrapper-->
@@ -4040,83 +3967,13 @@
                                         <!--end::Menu separator-->
                                         <!--begin::Menu item-->
                                         <div class="menu-item px-5">
-                                            <a href="account/overview.html" class="menu-link px-5">My Profile</a>
-                                        </div>
-                                        <!--end::Menu item-->
-                                        <!--begin::Menu item-->
-                                        <div class="menu-item px-5">
-                                            <a href="apps/projects/list.html" class="menu-link px-5">
-                                                <span class="menu-text">My Projects</span>
-                                                <span class="menu-badge">
-                                                    <span class="badge badge-light-danger badge-circle fw-bold fs-7">3</span>
-                                                </span>
-                                            </a>
+                                            <a href="account/overview.html" class="menu-link px-5">{{ __('My Profile') }}</a>
                                         </div>
                                         <!--end::Menu item-->
                                         <!--begin::Menu item-->
                                         <div class="menu-item px-5" data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-placement="left-start" data-kt-menu-offset="-15px, 0">
                                             <a href="#" class="menu-link px-5">
-                                                <span class="menu-title">My Subscription</span>
-                                                <span class="menu-arrow"></span>
-                                            </a>
-                                            <!--begin::Menu sub-->
-                                            <div class="menu-sub menu-sub-dropdown w-175px py-4">
-                                                <!--begin::Menu item-->
-                                                <div class="menu-item px-3">
-                                                    <a href="account/referrals.html" class="menu-link px-5">Referrals</a>
-                                                </div>
-                                                <!--end::Menu item-->
-                                                <!--begin::Menu item-->
-                                                <div class="menu-item px-3">
-                                                    <a href="account/billing.html" class="menu-link px-5">Billing</a>
-                                                </div>
-                                                <!--end::Menu item-->
-                                                <!--begin::Menu item-->
-                                                <div class="menu-item px-3">
-                                                    <a href="account/statements.html" class="menu-link px-5">Payments</a>
-                                                </div>
-                                                <!--end::Menu item-->
-                                                <!--begin::Menu item-->
-                                                <div class="menu-item px-3">
-                                                    <a href="account/statements.html" class="menu-link d-flex flex-stack px-5">Statements 
-                                                    <span class="ms-2 lh-0" data-bs-toggle="tooltip" title="View your statements">
-                                                        <i class="ki-duotone ki-information-5 fs-5">
-                                                            <span class="path1"></span>
-                                                            <span class="path2"></span>
-                                                            <span class="path3"></span>
-                                                        </i>
-                                                    </span></a>
-                                                </div>
-                                                <!--end::Menu item-->
-                                                <!--begin::Menu separator-->
-                                                <div class="separator my-2"></div>
-                                                <!--end::Menu separator-->
-                                                <!--begin::Menu item-->
-                                                <div class="menu-item px-3">
-                                                    <div class="menu-content px-3">
-                                                        <label class="form-check form-switch form-check-custom form-check-solid">
-                                                            <input class="form-check-input w-30px h-20px" type="checkbox" value="1" checked="checked" name="notifications" />
-                                                            <span class="form-check-label text-muted fs-7">Notifications</span>
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                                <!--end::Menu item-->
-                                            </div>
-                                            <!--end::Menu sub-->
-                                        </div>
-                                        <!--end::Menu item-->
-                                        <!--begin::Menu item-->
-                                        <div class="menu-item px-5">
-                                            <a href="account/statements.html" class="menu-link px-5">My Statements</a>
-                                        </div>
-                                        <!--end::Menu item-->
-                                        <!--begin::Menu separator-->
-                                        <div class="separator my-2"></div>
-                                        <!--end::Menu separator-->
-                                        <!--begin::Menu item-->
-                                        <div class="menu-item px-5" data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-placement="left-start" data-kt-menu-offset="-15px, 0">
-                                            <a href="#" class="menu-link px-5">
-                                                <span class="menu-title position-relative">Mode 
+                                                <span class="menu-title position-relative">{{ __("Mode") }}
                                                 <span class="ms-5 position-absolute translate-middle-y top-50 end-0">
                                                     <i class="ki-duotone ki-night-day theme-light-show fs-2">
                                                         <span class="path1"></span>
@@ -4136,9 +3993,7 @@
                                                     </i>
                                                 </span></span>
                                             </a>
-                                            <!--begin::Menu-->
                                             <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-title-gray-700 menu-icon-gray-500 menu-active-bg menu-state-color fw-semibold py-4 fs-base w-150px" data-kt-menu="true" data-kt-element="theme-mode-menu">
-                                                <!--begin::Menu item-->
                                                 <div class="menu-item px-3 my-0">
                                                     <a href="#" class="menu-link px-3 py-2" data-kt-element="mode" data-kt-value="light">
                                                         <span class="menu-icon" data-kt-element="icon">
@@ -4155,11 +4010,9 @@
                                                                 <span class="path10"></span>
                                                             </i>
                                                         </span>
-                                                        <span class="menu-title">Light</span>
+                                                        <span class="menu-title">{{ __("Light") }}</span>
                                                     </a>
                                                 </div>
-                                                <!--end::Menu item-->
-                                                <!--begin::Menu item-->
                                                 <div class="menu-item px-3 my-0">
                                                     <a href="#" class="menu-link px-3 py-2" data-kt-element="mode" data-kt-value="dark">
                                                         <span class="menu-icon" data-kt-element="icon">
@@ -4168,11 +4021,9 @@
                                                                 <span class="path2"></span>
                                                             </i>
                                                         </span>
-                                                        <span class="menu-title">Dark</span>
+                                                        <span class="menu-title">{{ __( "Dark") }}</span>
                                                     </a>
                                                 </div>
-                                                <!--end::Menu item-->
-                                                <!--begin::Menu item-->
                                                 <div class="menu-item px-3 my-0">
                                                     <a href="#" class="menu-link px-3 py-2" data-kt-element="mode" data-kt-value="system">
                                                         <span class="menu-icon" data-kt-element="icon">
@@ -4183,61 +4034,43 @@
                                                                 <span class="path4"></span>
                                                             </i>
                                                         </span>
-                                                        <span class="menu-title">System</span>
+                                                        <span class="menu-title">{{ __( "System") }}</span>
                                                     </a>
                                                 </div>
-                                                <!--end::Menu item-->
                                             </div>
-                                            <!--end::Menu-->
                                         </div>
                                         <!--end::Menu item-->
                                         <!--begin::Menu item-->
                                         <div class="menu-item px-5" data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-placement="left-start" data-kt-menu-offset="-15px, 0">
                                             <a href="#" class="menu-link px-5">
-                                                <span class="menu-title position-relative">Language 
-                                                <span class="fs-8 rounded bg-light px-3 py-2 position-absolute translate-middle-y top-50 end-0">English 
-                                                <img class="w-15px h-15px rounded-1 ms-2" src="{{asset('assets/v8.2.1/media/flags/united-states.svg')}}" alt="" /></span></span>
+                                                <span class="menu-title position-relative">{{ __("Language") }}
+                                                <?php
+                                                    $locale_lang = "English";
+                                                    $locale_flag = "united-states.svg";
+                                                    if($locale_base=="es"){
+                                                        $locale_lang = "Spanish";
+                                                        $locale_flag = "spain.svg";
+                                                    }
+                                                ?>
+                                                <span class="fs-8 rounded bg-light px-3 py-2 position-absolute translate-middle-y top-50 end-0">{{ __($locale_lang) }}
+                                                <img class="w-15px h-15px rounded-1 ms-2" src="{{asset('assets/v8.2.1/media/flags/'.$locale_flag)}}" alt="" /></span></span>
                                             </a>
                                             <!--begin::Menu sub-->
                                             <div class="menu-sub menu-sub-dropdown w-175px py-4">
                                                 <!--begin::Menu item-->
                                                 <div class="menu-item px-3">
-                                                    <a href="account/settings.html" class="menu-link d-flex px-5 active">
+                                                    <a href="{{ url('locale/en') }}" class="menu-link d-flex px-5 {{ $locale_base=="en" ? 'active' : '' }}">
                                                     <span class="symbol symbol-20px me-4">
                                                         <img class="rounded-1" src="{{asset('assets/v8.2.1/media/flags/united-states.svg')}}" alt="" />
-                                                    </span>English</a>
+                                                    </span>{{ __("English") }}</a>
                                                 </div>
                                                 <!--end::Menu item-->
                                                 <!--begin::Menu item-->
                                                 <div class="menu-item px-3">
-                                                    <a href="account/settings.html" class="menu-link d-flex px-5">
+                                                    <a href="{{ url('locale/es') }}" class="menu-link d-flex px-5 {{ $locale_base=="es" ? 'active' : '' }}">
                                                     <span class="symbol symbol-20px me-4">
                                                         <img class="rounded-1" src="{{asset('assets/v8.2.1/media/flags/spain.svg')}}" alt="" />
-                                                    </span>Spanish</a>
-                                                </div>
-                                                <!--end::Menu item-->
-                                                <!--begin::Menu item-->
-                                                <div class="menu-item px-3">
-                                                    <a href="account/settings.html" class="menu-link d-flex px-5">
-                                                    <span class="symbol symbol-20px me-4">
-                                                        <img class="rounded-1" src="{{asset('assets/v8.2.1/media/flags/germany.svg')}}" alt="" />
-                                                    </span>German</a>
-                                                </div>
-                                                <!--end::Menu item-->
-                                                <!--begin::Menu item-->
-                                                <div class="menu-item px-3">
-                                                    <a href="account/settings.html" class="menu-link d-flex px-5">
-                                                    <span class="symbol symbol-20px me-4">
-                                                        <img class="rounded-1" src="{{asset('assets/v8.2.1/media/flags/japan.svg')}}" alt="" />
-                                                    </span>Japanese</a>
-                                                </div>
-                                                <!--end::Menu item-->
-                                                <!--begin::Menu item-->
-                                                <div class="menu-item px-3">
-                                                    <a href="account/settings.html" class="menu-link d-flex px-5">
-                                                    <span class="symbol symbol-20px me-4">
-                                                        <img class="rounded-1" src="{{asset('assets/v8.2.1/media/flags/france.svg')}}" alt="" />
-                                                    </span>French</a>
+                                                    </span>{{ __("Spanish") }}</a>
                                                 </div>
                                                 <!--end::Menu item-->
                                             </div>
@@ -4246,12 +4079,12 @@
                                         <!--end::Menu item-->
                                         <!--begin::Menu item-->
                                         <div class="menu-item px-5 my-1">
-                                            <a href="{{ url('account/settings') }}" class="menu-link px-5">Account Settings</a>
+                                            <a href="{{ url('account/settings') }}" class="menu-link px-5">{{ __("Account Settings") }}</a>
                                         </div>
                                         <!--end::Menu item-->
                                         <!--begin::Menu item-->
                                         <div class="menu-item px-5">
-                                            <a href="{{ url('sign-out') }}" class="menu-link px-5">Sign Out</a>
+                                            <a href="{{ url('sign-out') }}" class="menu-link px-5">{{ __("Sign Out") }}</a>
                                         </div>
                                         <!--end::Menu item-->
                                     </div>

@@ -40,90 +40,39 @@
 	<div class="card module-list">
 		<!--begin::Card header-->
 		<div class="card-header border-0 pt-6">
-          <!--begin::Card title-->
-          <div class="card-title">
-            <!--begin::Search-->
-            <div class="d-flex align-items-center position-relative my-1">
-              <i class="ki-duotone ki-magnifier fs-3 position-absolute ms-5">
-                <span class="path1"></span>
-                <span class="path2"></span>
-              </i>
-              <input type="text" id="datatable_search" data-kt-user-table-filter="search" class="form-control form-control-solid w-250px ps-13" placeholder="{{ __('Search') }}" />
-            </div>
-            <!--end::Search-->
-          </div>
-          <!--begin::Card title-->
-          <!--begin::Card toolbar-->
-          <div class="card-toolbar">
-            <!--begin::Toolbar-->
-            <div class="d-flex justify-content-end" data-kt-user-table-toolbar="base">
-              <!--begin::Filter-->
-              <button type="button" class="btn btn-light-primary me-3" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end" style="display: none;">
-              <i class="ki-duotone ki-filter fs-2">
-                <span class="path1"></span>
-                <span class="path2"></span>
-              </i>Filter</button>
-              <!--begin::Menu 1-->
-              <div class="menu menu-sub menu-sub-dropdown w-300px w-md-325px" data-kt-menu="true">
-                <!--begin::Header-->
-                <div class="px-7 py-5">
-                  <div class="fs-5 text-gray-900 fw-bold">Filter Options</div>
-                </div>
-                <!--end::Header-->
-                <!--begin::Separator-->
-                <div class="separator border-gray-200"></div>
-                <!--end::Separator-->
-                <!--begin::Content-->
-                <div class="px-7 py-5" data-kt-user-table-filter="form">
-                  <!--begin::Input group-->
-                  <div class="mb-10">
-                    <label class="form-label fs-6 fw-semibold">Role:</label>
-                    <select class="form-select form-select-solid fw-bold" data-kt-select2="true" data-placeholder="Select option" data-allow-clear="true" data-kt-user-table-filter="role" data-hide-search="true">
-                      <option></option>
-                      <option value="Administrator">Administrator</option>
-                      <option value="Analyst">Analyst</option>
-                      <option value="Developer">Developer</option>
-                      <option value="Support">Support</option>
-                      <option value="Trial">Trial</option>
-                    </select>
-                  </div>
-                  <!--end::Input group-->
-                  <!--begin::Input group-->
-                  <div class="mb-10">
-                    <label class="form-label fs-6 fw-semibold">Two Step Verification:</label>
-                    <select class="form-select form-select-solid fw-bold" data-kt-select2="true" data-placeholder="Select option" data-allow-clear="true" data-kt-user-table-filter="two-step" data-hide-search="true">
-                      <option></option>
-                      <option value="Enabled">Enabled</option>
-                    </select>
-                  </div>
-                  <!--end::Input group-->
-                  <!--begin::Actions-->
-                  <div class="d-flex justify-content-end">
-                    <button type="reset" class="btn btn-light btn-active-light-primary fw-semibold me-2 px-6" data-kt-menu-dismiss="true" data-kt-user-table-filter="reset">Reset</button>
-                    <button type="submit" class="btn btn-primary fw-semibold px-6" data-kt-menu-dismiss="true" data-kt-user-table-filter="filter">Apply</button>
-                  </div>
-                  <!--end::Actions-->
-                </div>
-                <!--end::Content-->
-              </div>
-              <!--end::Menu 1-->
-              <!--end::Filter-->
-              <!--begin::Add user-->
-              <button type="button" class="btn btn-primary" onclick="Users.add()">
-              <i class="ki-duotone ki-plus fs-2"></i>Add User</button>
-              <!--end::Add user-->
-            </div>
-            <!--end::Toolbar-->
-            <!--begin::Group actions-->
-            <div class="d-flex justify-content-end align-items-center d-none" data-kt-user-table-toolbar="selected">
-              <div class="fw-bold me-5">
-              <span class="me-2" data-kt-user-table-select="selected_count"></span>Selected</div>
-              <button type="button" class="btn btn-danger" data-kt-user-table-select="delete_selected">Delete Selected</button>
-            </div>
-            <!--end::Group actions-->
-          </div>
-          <!--end::Card toolbar-->
+      <!--begin::Card title-->
+      <div class="card-title">
+        <!--begin::Search-->
+        <div class="d-flex align-items-center position-relative my-1">
+          <i class="ki-duotone ki-magnifier fs-3 position-absolute ms-5">
+            <span class="path1"></span>
+            <span class="path2"></span>
+          </i>
+          <input type="text" id="datatable_search" data-kt-user-table-filter="search" class="form-control form-control-solid w-250px ps-13" placeholder="{{ __('Search') }}" />
         </div>
+        <!--end::Search-->
+      </div>
+      <!--begin::Card title-->
+      <!--begin::Card toolbar-->
+      <div class="card-toolbar">
+        <!--begin::Toolbar-->
+        <div class="d-flex justify-content-end" data-kt-user-table-toolbar="base">
+          <!--begin::Add user-->
+          <button type="button" class="btn btn-primary" onclick="Users.add()">
+          <i class="ki-duotone ki-plus fs-2"></i>{{ __('Add') }}</button>
+          <!--end::Add user-->
+        </div>
+        <!--end::Toolbar-->
+        <!--begin::Group actions-->
+        <div class="d-flex justify-content-end align-items-center d-none" data-kt-user-table-toolbar="selected">
+          <div class="fw-bold me-5">
+          <span class="me-2" data-kt-user-table-select="selected_count"></span>Selected</div>
+          <button type="button" class="btn btn-danger" data-kt-user-table-select="delete_selected">Delete Selected</button>
+        </div>
+        <!--end::Group actions-->
+      </div>
+      <!--end::Card toolbar-->
+    </div>
 		<!--end::Card header-->
 		<!--begin::Card body-->
 		<div class="card-body py-4">
@@ -138,12 +87,12 @@
 								<input class="form-check-input" type="checkbox" data-kt-check="true" data-kt-check-target="#datatable_users .form-check-input" value="1" />
 							</div>
 						</th>
-						<th class="min-w-125px">User</th>
-                        <th class="min-w-125px">Phone</th>
-						<th class="min-w-125px">Roles</th>
-						<th class="min-w-125px">Last login</th>
-						<th class="min-w-125px">Joined Date</th>
-						<th class="text-end min-w-100px">Actions</th>
+						<th class="min-w-125px">{{ __('User') }}</th>
+                        <th class="min-w-125px">{{ __('Phone') }}</th>
+						<th class="min-w-125px">{{ __('Roles') }}</th>
+						<th class="min-w-125px">{{ __('Last login') }}</th>
+						<th class="min-w-125px">{{ __('Joined Date') }}</th>
+						<th class="text-end min-w-100px">{{ __('Actions') }}</th>
 					</tr>
 					<!--end::Table row-->
 				</thead>
@@ -190,7 +139,7 @@
                                     <i class="bi bi-x fs-2"></i>
                                 </span>
                             </div>
-                            <div class="form-text">{{ __("Allowed file types: png, jpg, jpeg.") }}</div>
+                            <div class="form-text">{{ __("Allowed file types: :types", ['types'=>"png, jpg, jpeg."]) }}</div>
                         </div>
                     </div>
 
@@ -241,10 +190,10 @@
                     <div class="row mb-6">
                         <label class="col-lg-3 col-form-label fw-bold fs-6 text-lg-end">{{ __("Language") }}</label>
                         <div class="col-lg-9 fv-row">
-                            <select name="language" aria-label="Select a Language" data-control="select2" data-placeholder="{{ __('Select a language...') }}" class="form-select form-select-solid form-select-lg">
-                                <option value="">{{ __('Select a language...') }}</option>
-                                <option data-kt-flag="/assets/v8.1.5/flags/united-kingdom.svg" value="en">English</option>
-                                <option data-kt-flag="/assets/v8.1.5/flags/spain.svg" value="es">Español - Spanish</option>
+                            <select name="language" aria-label="{{ __('Select a language') }}" data-control="select2" data-placeholder="{{ __('Select a language') }}..." class="form-select form-select-solid form-select-lg">
+                                <option value="">{{ __('Select a language') }}...</option>
+                                <option data-kt-flag="{{ asset('assets/v8.2.1/media/flags/united-states.svg') }}" value="en">{{ __("English") }}</option>
+                                <option data-kt-flag="{{ asset('assets/v8.2.1/media/flags/spain.svg') }}" value="es">{{ __("Spanish") }}</option>
                             </select>
                         </div>
                     </div>
@@ -252,8 +201,8 @@
                     <div class="row mb-6">
                         <label class="col-lg-3 col-form-label fw-bold fs-6 text-lg-end">{{ __("Time Zone") }}</label>
                         <div class="col-lg-9 fv-row">
-                            <select name="timezone" aria-label="Select a Timezone" data-control="select2" data-placeholder="{{ __('Select a timezone...') }}" class="form-select form-select-solid form-select-lg">
-                                <option value="">{{ __('Select a Timezone...') }}</option>
+                            <select name="timezone" aria-label="{{ __('Select a timezone') }}" data-control="select2" data-placeholder="{{ __('Select a timezone') }}..." class="form-select form-select-solid form-select-lg">
+                                <option value="">{{ __('Select a Timezone') }}...</option>
                                 <?php foreach($timezones as $key => $value): ?>
                                     <option value="{{ $key }}">{{ $value }}</option>
                                 <?php endforeach;?>
@@ -264,7 +213,7 @@
                     <div class="row mb-6">
                         <label class="col-lg-3 col-form-label fw-bold fs-6 text-lg-end">{{ __("Roles") }}</label>
                         <div class="col-lg-9 fv-row">
-                            <select multiple name="roles" aria-label="Select Roles" data-control="select2" data-placeholder="{{ __('Select Roles...') }}" class="form-select form-select-solid form-select-lg">
+                            <select multiple name="roles" aria-label="{{ __('Select roles') }}" data-control="select2" data-placeholder="{{ __('Select roles') }}..." class="form-select form-select-solid form-select-lg">
                                 @php
                                     $roles = App\Models\Role::where('status',1)->orderBy('order')->get();
                                 @endphp
@@ -297,12 +246,12 @@
                 </div>
 
                 <div class="card-footer d-flex justify-content-end py-6 px-9">
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_permissions" onClick="Users.showPermissions()">{{ _("Permissions") }}</button>
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_permissions" onClick="Users.showPermissions()">{{ __("Permissions") }}</button>
                     <div style="flex: 1;"></div>
                     <a class="btn btn-danger btn-active-light-primary me-2" href="#" onclick="Users.list()">{{ __("Cancel") }}</a>
                     <button type="button" class="btn btn-success" onclick="Users.save()" id="save_users">
                         <span class="indicator-label">{{ __("Save") }}</span>
-                        <span class="indicator-progress">Please wait...
+                        <span class="indicator-progress">{{ __('Please wait...') }}
                         <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
                     </button>
                 </div>
@@ -323,7 +272,7 @@
             <!--begin::Modal header-->
             <div class="modal-header">
                 <!--begin::Modal title-->
-                <h2 class="fw-bold m-0">{{ _("Permissions") }}</h2>
+                <h2 class="fw-bold m-0">{{ __("Permissions") }}</h2>
                 <!--end::Modal title-->
                 <!--begin::Close-->
                 <div class="btn btn-icon btn-active-danger" data-bs-dismiss="modal">
@@ -348,8 +297,8 @@
                                     <tbody class="text-gray-600 fw-semibold">
                                         <!--begin::Table row-->
                                         <tr>
-                                            <td class="row-app">Full Access
-                                            <span class="ms-1" data-bs-toggle="tooltip" title="Allows a full access to the applications">
+                                            <td class="row-app">{{ __('Full Access') }}
+                                            <span class="ms-1" data-bs-toggle="tooltip" title="{{ __('Allows a full access to the applications') }}">
                                                 <i class="ki-duotone ki-information-5 text-gray-500 fs-6">
                                                     <span class="path1"></span>
                                                     <span class="path2"></span>
@@ -360,7 +309,7 @@
                                                 <!--begin::Checkbox-->
                                                 <label class="form-check form-check-sm form-check-custom form-check-solid me-9">
                                                     <input class="form-check-input check-all-permissions" type="checkbox" value="" id="check_all_permissions" onchange="Users.checkAllPermissions()" />
-                                                    <span class="form-check-label" for="check_all_permissions">Select all</span>
+                                                    <span class="form-check-label" for="check_all_permissions">{{ __('Select all') }}</span>
                                                 </label>
                                                 <!--end::Checkbox-->
                                             </td>
@@ -383,13 +332,13 @@
                                                 @endphp
                                                 @if ($parent)
                                                     <tr>
-                                                        <td class="pb-0 pt-5"><label class="row-app hstack text-primary fw-bold mb-2">{!! ($parent_icon ? $parent_icon : $parent_icon_default) !!} <span class="ps-3 pe-10">{{ $parent }}</span></label></td>
+                                                        <td class="pb-0 pt-5"><label class="row-app hstack text-primary fw-bold mb-2">{!! ($parent_icon ? $parent_icon : $parent_icon_default) !!} <span class="ps-3 pe-10">{{ __($parent) }}</span></label></td>
                                                     </tr>
                                                 @endif
                                             @endif
 
                                             <tr>
-                                                <td class="row-app hstack text-primary fw-bold {{ $parent ? 'ps-8' : '' }}">{!! ($item->icon ? $item->icon : ($parent ? $icon_default : $parent_icon_default)) !!} <span class="ps-3 pe-10">{{ $item->name }}</span></td>
+                                                <td class="row-app hstack text-primary fw-bold {{ $parent ? 'ps-8' : '' }}">{!! ($item->icon ? $item->icon : ($parent ? $icon_default : $parent_icon_default)) !!} <span class="ps-3 pe-10">{{ __($item->name) }}</span></td>
                                                 <td>
                                                     <div class="d-flex">
                                                         @foreach ($actions as $action)
@@ -398,7 +347,7 @@
                                                             @endphp
                                                             <label class="form-check form-check-sm form-check-custom form-check-solid me-5 {{ $disabled ? 'invisible opacity-0' : '' }}">
                                                                 <input class="form-check-input check-permissions" data-item-id="{{ $item->id }}" data-action="{{ $action->action }}" type="checkbox" value="" name="permission[{{ $item->id }}][{{ $action->action }}]" {{ $disabled ? 'disabled' : '' }} />
-                                                                <span class="form-check-label">{{ $action->name }}</span>
+                                                                <span class="form-check-label">{{ __($action->name) }}</span>
                                                             </label>
                                                         @endforeach
                                                     </div>
@@ -418,10 +367,10 @@
                     <!--end::Scroll-->
                     <!--begin::Actions-->
                     <div class="text-center pt-15">
-                        <button type="button" class="btn btn-light me-3" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-light me-3" data-bs-dismiss="modal">{{ __('Close') }}</button>
                         <button type="button" class="btn btn-primary" onclick="Users.savePermissions()" id="save_permissions">
-                            <span class="indicator-label">Apply</span>
-                            <span class="indicator-progress">Please wait... 
+                            <span class="indicator-label">{{ __('Apply') }}</span>
+                            <span class="indicator-progress">{{ __('Please wait...') }}
                             <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
                         </button>
                     </div>
@@ -457,7 +406,7 @@
 <script type="text/javascript">
     var Users={
       token: $("[name='_token']").val(),
-      default_image: '/assets/v8.1.5/media/avatars/blank.png',
+      default_image: "{{ asset('assets/v8.2.1/media/avatars/blank.png') }}",
       default_timezome: '{{ $timezone }}',
       default_language: '{{ $language }}',
       path_image: "{{ asset('storage/user') }}",
@@ -479,10 +428,16 @@
           }
         });
 
+
         me.form=$("#form_users");
         me.modal_permissions=$("#kt_modal_permissions");
         me.btn_save=$("#save_users");
         me.btn_save_permissions=$("#save_permissions");
+
+        me.form.find("[name='language']").select2({
+          templateSelection: selectOptionFlag,
+          templateResult: selectOptionFlag
+        });
 
         me.validator = FormValidation.formValidation(
           me.form.get(0),
@@ -491,33 +446,31 @@
               'first_name': {
                 validators: {
                   notEmpty: {
-                    message: "{{ _('First Name is required') }}"
+                    message: "{{ __('First Name is required') }}"
                   }
                 }
               },
               'email': {
                 validators: {
                   notEmpty: {
-                    message: "{{ _('Email address is required') }}"
+                    message: "{{ __('Email address is required') }}"
                   },
                   emailAddress: {
-                    message: "{{ _('The value is not a valid email address') }}"
+                    message: "{{ __('The value is not a valid email address') }}"
                   },
                   remote: {
-                    message: "{{ _('The username is not available') }}",
+                    message: "{{ __('The username is not available') }}",
                     method: 'POST',
                     data: function(){
                       var tmp={
-                        _token: me.token
+                        _token: me.token,
+                        email: me.form.find('[name="email"]').val().trim()
                       };
                       if(me.current_id)
                         tmp.id=me.current_id;
                       return tmp;
                     },
-                    url: function(){
-                      var email=$('[name="email"]').val().trim();
-                      return "/users/valid/"+email;
-                    }
+                    url: "{{ url('api/users/valid') }}",
                   },
                 }
               },
@@ -526,7 +479,7 @@
                   callback: {
                     callback: function(input) {
                                           if(!me.current_id && !me.form.find("[name='password']").val()) //if (is new) password is required
-                                            return {valid: false, message: "{{ __('The password is required') }}" };
+                                            return {valid: false, message: "{{ __('Password is required') }}" };
                                           return true;
                                         }
                                       }
@@ -537,11 +490,11 @@
                                       callback: {
                                         callback: function(input) {
                                           if(!me.current_id && !me.form.find("[name='password_confirmation']").val())
-                                            return {valid: false, message: "{{ __('The password confirmation is required') }}" };
+                                            return {valid: false, message: "{{ __('Password confirmation is required') }}" };
                                           if(me.form.find("[name='password']").val() && !me.form.find("[name='password_confirmation']").val())
-                                            return {valid: false, message: "{{ __('The password confirmation is required') }}" };
+                                            return {valid: false, message: "{{ __('Password confirmation is required') }}" };
                                           if(me.form.find("[name='password']").val() != me.form.find("[name='password_confirmation']").val())
-                                            return {valid: false, message: "{{ __('The password and its confirm are not the same') }}" };
+                                            return {valid: false, message: "{{ __('Password and its confirm are not the same') }}" };
                                           return true;
                                         }
                                       }
@@ -796,7 +749,7 @@
 
       $(".module-list").css("display","none");
       $(".module-form").css("display","");
-      $(".module-title").html("{{ __('Add User') }}");
+      $(".module-title").html("{{ __('Add') }}");
     },
 
     edit: function(id, index) {
@@ -842,7 +795,7 @@
 
       me.permissions(me.current_permissions);
 
-      $(".module-title").html("{{ __('Edit User') }}");
+      $(".module-title").html("{{ __('Edit') }}");
 
       $(".module-list").css("display","none");
       $(".module-form").css("display","");
@@ -947,7 +900,7 @@
             }
 
 
-            toastr.error(data["message"], "Users");
+            toastr.error(data["message"], "{{ __('Users') }}");
 
           }).fail(function(data){
             // Hide loading indication
@@ -981,15 +934,34 @@
         icon: "question",
         buttonsStyling: false,
         showCancelButton: true,
-        confirmButtonText: "Yes, delete!",
-        cancelButtonText: 'No, cancel',
+        confirmButtonText: "{{ __('Yes, delete!') }}",
+        cancelButtonText: "{{ __('No, cancel') }}",
         customClass: {
             confirmButton: "btn fw-bold btn-danger",
             cancelButton: 'btn fw-bold btn-active-light-primary',
         }
       }).then(function(t) {
         if(t.isConfirmed){
+          $.ajax({
+            method: "DELETE",
+            url: "{{ url('api/users') }}",
+            data: {
+                _token: me.token,
+                id: [id]
+            },
+            dataType: "json",
+            cache: false,
+          }).done(function(data){
+            if(data["success"]){
+                toastr.success(data["message"], "{{ __('Users - Delete') }}");
+                me.search();
+                return;
+            }
+            toastr.error(data["message"], "{{ __('Users - Delete') }}");
 
+          }).fail(function(data){
+            toastr.error("{{ __('Fail Request') }}", "{{ __('Users - Delete') }}" );
+          });
         }
       });
 
@@ -1063,12 +1035,12 @@
 
         if(data["success"]){
             me.current_permissions = data["data"]["access_permissions"];
-            toastr.success(data["message"], "{{ __('User Permissions') }}");
+            toastr.success(data["message"], "{{ __('Users - Permissions') }}");
             $("#kt_modal_permissions").modal("hide");
             return;
         }
 
-        toastr.error(data["message"], "{{ __('Users Permissions') }}");
+        toastr.error(data["message"], "{{ __('Users - Permissions') }}");
 
       }).fail(function(data){
         // Hide loading indication
@@ -1076,14 +1048,6 @@
         // Enable button
         me.btn_save_permissions.prop('disabled',false);
 
-        /*
-
-        if(data && data.responseJSON && data.responseJSON.message){
-          toastr.error(data.responseJSON.message, "Users - Save");
-        }
-        else{
-          toastr.error("Fail Request", "Users - Save");
-        }*/
       });
     },
 

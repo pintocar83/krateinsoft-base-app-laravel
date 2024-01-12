@@ -19,7 +19,7 @@ use App\Http\Controllers\Views\Products\ProductsControllerView;
 use App\Http\Controllers\Views\DashboardControllerView;
 
 //CONSTRUVIAS
-use App\Http\Controllers\Construvias\Views\WorkgroupMainBoxesControllerView;
+use App\Http\Controllers\Construvias\WorkgroupMainBoxesController;
 
 
 /*
@@ -46,6 +46,7 @@ Route::get('/sign-out', function () {
 Route::post('/users/valid/{email}',                   [UserController::class,                     'valid']);
 
 Route::put('/locale/{id}',                            [LocaleController::class, 'select']);
+Route::get('/locale/{id}',                            [LocaleController::class, 'select']);
 
 
 Route::group(['middleware' => ['initialization','guest']], function() {
@@ -94,7 +95,7 @@ Route::group(['middleware' => ['initialization','auth']], function() {
     Route::get('/admin/users',                         [UserControllerView::class,               'index']);
 
     //CONSTRUVIAS ROUTES
-    Route::get('/admin/workgroups',                    [WorkgroupMainBoxesControllerView::class, 'index']);
+    Route::get('/admin/workgroups',                    [WorkgroupMainBoxesController::class,     'view_admin']);
 
 });
 
@@ -113,10 +114,12 @@ Route::get('/organization-select', function () {
 */
 
 Route::get('/auth-user', function () {
-    //dd(Auth()->user());
+    //App::setLocale("es");
+    dd(App::getLocale());
+    dd(Auth()->user());
     //dd(Auth()->user()->organization);
     //dd(session('Auth::organization'));
-    dd(Auth()->user()->organization());
+    //dd(Auth()->user()->organization());
 });
 
 

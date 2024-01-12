@@ -10,7 +10,7 @@ $route_path = Route::current()->uri;
 
   <div class="menu-item {{ $loop->first ? 'pt-0' : 'pt-5' }}">
     <div class="menu-content">
-      <span class="menu-heading fw-bold text-uppercase fs-7">{{ $section->name }}</span>
+      <span class="menu-heading fw-bold text-uppercase fs-7">{{ __($section->name) }}</span>
     </div>
   </div>
 
@@ -23,7 +23,7 @@ $route_path = Route::current()->uri;
           <span class="menu-icon">
             {!! $item->icon !!}
           </span>
-          <span class="menu-title">{{ $item->name }}</span>
+          <span class="menu-title">{{ __($item->name) }}</span>
         </a>
       </div>
     @else
@@ -44,7 +44,7 @@ $route_path = Route::current()->uri;
           <span class="menu-icon">
             {!! $item->icon !!}
           </span>
-          <span class="menu-title">{{ $item->name }}</span>
+          <span class="menu-title">{{ __($item->name) }}</span>
           <span class="menu-arrow"></span>
         </span>
         <div class="menu-sub menu-sub-accordion">
