@@ -95,7 +95,7 @@
   "Description": "Descripción",
   "Connection Type": "Tipo de Conexión",
   "Ip Address": "Dirección Ip",
-  "Create": "Creado",
+  "Created": "Creado",
   "Add Workgroup": "Agregar Grupo de Trabajo",
   "Select a connection type": "Seleccione el tipo de conexión",
   "Address": "Dirección",
@@ -116,5 +116,11 @@
   "Order is required": "Se requiere orden",
   "Order must be numeric": "Order debe ser numérico",
   "Code is required": "Se requiere código",
-  "Name is required": "Se requiere nombre"
+  "Name is required": "Se requiere nombre",
+  "Workgroup created successfully": "Grupo de trabajo creado con éxito",
+  "Workgroup modified successfully": "Grupo de trabajo modificado con éxito",
+  "Workgroup deleted successfully": "Grupo de trabajo eliminado exitosamente",
+  "Workgroups deleted successfully": "Grupos de trabajo eliminados exitosamente",
+  "Workgroups - Save": "Grupos de Trabajo - Guardar",
+  "Workgroups - Delete": "Grupos de Trabajo - Eliminar"
 }

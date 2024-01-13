@@ -9,12 +9,15 @@ class WorkgroupMainBox extends Model
 {
     use HasFactory;
 
+    protected $connection = 'organization';
+
     protected $casts = [
         'command_status' => 'array',
     ];
 
     protected $fillable = [
         'id',
+        'image',
         'code',
         'name',
         'description',

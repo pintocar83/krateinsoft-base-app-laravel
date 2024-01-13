@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\LocaleController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\OrganizationsController;
 use App\Http\Controllers\Views\Account\AccountSettingsControllerView;
 use App\Http\Controllers\Views\Auth\SignUpControllerView;
 use App\Http\Controllers\Views\Auth\SignInControllerView;
@@ -93,6 +94,7 @@ Route::group(['middleware' => ['initialization','auth']], function() {
     //ADMIN ROUTES
     Route::get('/admin',                               [DashboardAdminControllerView::class,     'index']);
     Route::get('/admin/users',                         [UserControllerView::class,               'index']);
+    Route::get('/admin/organizations',                 [OrganizationsController::class,          'view_admin']);
 
     //CONSTRUVIAS ROUTES
     Route::get('/admin/workgroups',                    [WorkgroupMainBoxesController::class,     'view_admin']);

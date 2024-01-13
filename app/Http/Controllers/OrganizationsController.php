@@ -1,28 +1,19 @@
 <?php
-namespace App\Http\Controllers\Construvias;
+namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-//use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Intervention\Image\ImageManager;
 use Intervention\Image\Drivers\Gd\Driver;
 
-use App\Http\Controllers\Controller;
-use App\Models\Construvias\WorkgroupMainBox;
+use App\Models\Organization;
 
-class WorkgroupMainBoxesController extends Controller
+class OrganizationsController extends Controller
 {
 
     public function view_admin(){
-        //dd(config("database.connections.organization"));
-        //session_start();
-        //dd($_SESSION);
-        return view('construvias.workgroup_main_boxes_admin',[
-        ]);
-    }
-
-    public function view(){
-        return view('construvias.workgroup_main_boxes',[
+        return view('admin.organizations',[
         ]);
     }
 
@@ -30,7 +21,7 @@ class WorkgroupMainBoxesController extends Controller
         $text = isset($request['search']['value']) ? $request['search']['value'] : "";
 
         return datatables()->of(
-            WorkgroupMainBox::query()
+            Organization::query()
             ->whereNull('delete_at')
             ->where(function($query) use($text) {
                 $query->where('code', 'like', "%$text%")
@@ -48,7 +39,7 @@ class WorkgroupMainBoxesController extends Controller
             $image_name=$image_uid.".".$image->extension();
 
             //Original Image max: 800x800
-            $destinationPath = public_path('/storage/construvias/workgroups');
+            $destinationPath = public_path('/storage/organizations');
             if(!file_exists($destinationPath)){
                 mkdir($destinationPath,0777,TRUE);
             }
@@ -59,7 +50,7 @@ class WorkgroupMainBoxesController extends Controller
             $image->save($destinationPath.'/'.$image_name);
 
             //Thumbnail image max: 100x100
-            $destinationPath = public_path('/storage/construvias/workgroups/thumbnail');
+            $destinationPath = public_path('/storage/organizations/thumbnail');
             if(!file_exists($destinationPath)){
                 mkdir($destinationPath,0777,TRUE);
             }
@@ -99,11 +90,11 @@ class WorkgroupMainBoxesController extends Controller
         }
 
         //Create
-        $workgroup = WorkgroupMainBox::create($data);
+        $workgroup = Organization::create($data);
 
         $response = [
             'success'=> true,
-            'message'=> __("Workgroup created successfully"),
+            'message'=> __("Organization created successfully"),
             'data' => $workgroup
         ];
 
@@ -122,7 +113,7 @@ class WorkgroupMainBoxesController extends Controller
             return ["success"=>false];
         }
 
-        $workgroup = WorkgroupMainBox::find($id);
+        $workgroup = Organization::find($id);
         $image_name=$this->saveImage($request);
 
         $data=[
@@ -145,7 +136,7 @@ class WorkgroupMainBoxesController extends Controller
             $data["image"] = $image_name;
 
             if($workgroup->image){
-                $destinationPath = public_path('/storage/construvias/workgroups');
+                $destinationPath = public_path('/storage/organizations');
                 $image_old = "{$destinationPath}/{$workgroup->image}";
                 if(file_exists($image_old)){
                     unlink($image_old);
@@ -163,7 +154,7 @@ class WorkgroupMainBoxesController extends Controller
 
         return [
             'success' => true,
-            'message' => __("Workgroup modified successfully"),
+            'message' => __("Organization modified successfully"),
             'data'    => $workgroup
         ];
     }
@@ -173,35 +164,25 @@ class WorkgroupMainBoxesController extends Controller
         if(!is_array($id)){
             return ["success"=>false];
         }
-        WorkgroupMainBox::whereIn('id', $id)->update(['delete_at'=>date('Y-m-d H:i:s')]);
+        Organization::whereIn('id', $id)->update(['delete_at'=>date('Y-m-d H:i:s')]);
 
         return [
             'success' => true,
-            'message' => count($id) === 1 ? __("Workgroup deleted successfully") : __("Workgroups deleted successfully"),
+            'message' => count($id) === 1 ? __("Organization deleted successfully") : __("Organizations deleted successfully"),
         ];
     }
 
     public function new(){
-        $last_code = WorkgroupMainBox::whereNull('delete_at')->latest()->limit(1)->pluck('code');
-        if(isset($last_code[0])){
-            $code = $last_code[0];
-            if(is_numeric($code)){
-                $len = strlen("$code");
-                $n = $code*1+1;
-                $code = str_pad("$n", $len, "0", STR_PAD_LEFT);
-            }
-        }
-        else{
-            $code = "001";
+        $last_code = Organization::whereNull('delete_at')->latest()->limit(1)->pluck('code');
+        $code = $last_code[0];
+        if(is_numeric($code)){
+            $len = strlen("$code");
+            $n = $code*1+1;
+            $code = str_pad("$n", $len, "0", STR_PAD_LEFT);
         }
 
-        $last_order = WorkgroupMainBox::whereNull('delete_at')->orderBy('order', 'desc')->limit(1)->pluck('order');
-        if(isset($last_order[0])){
-            $order = $last_order[0]*1+1;
-        }
-        else{
-            $order = 1;
-        }
+        $last_order = Organization::whereNull('delete_at')->orderBy('order', 'desc')->limit(1)->pluck('order');
+        $order = $last_order[0]*1+1;
 
         return [
             "code" => $code,

@@ -62,6 +62,8 @@
 [data-kt-app-layout=dark-sidebar] .app-sidebar .app-sidebar-toggle.btn.btn-active-color-primary.active i,
 [data-kt-app-layout=dark-sidebar] .app-sidebar .app-sidebar-toggle.btn.btn-active-color-primary:hover:not(.btn-active) i {
     color:var(--main-app-color-focus);
-	}
 }
 
+.bg-sidebar {
+    background-color: var(--main-app-color) !important;
+}

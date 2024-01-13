@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\OrganizationsController;
 use App\Http\Controllers\Construvias\WorkgroupMainBoxesController;
 /*
 |--------------------------------------------------------------------------
@@ -30,10 +31,18 @@ Route::group(['middleware' => ['initialization', 'auth']], function() {
     Route::delete('/users',                      [UserController::class,'delete']);
 
 
-
+    Route::get('/organizations/new',             [OrganizationsController::class,'new']);
+    Route::get('/organizations',                 [OrganizationsController::class,'index']);
+    Route::post('/organizations',                [OrganizationsController::class,'store']);
+    Route::patch('/organizations/{id}',          [OrganizationsController::class,'update']);
+    Route::delete('/organizations',              [OrganizationsController::class,'delete']);
 
 
 
     //Construvias
+    Route::get('/workgroups/new',                [WorkgroupMainBoxesController::class,'new']);
     Route::get('/workgroups',                    [WorkgroupMainBoxesController::class,'index']);
+    Route::post('/workgroups',                   [WorkgroupMainBoxesController::class,'store']);
+    Route::patch('/workgroups/{id}',             [WorkgroupMainBoxesController::class,'update']);
+    Route::delete('/workgroups',                 [WorkgroupMainBoxesController::class,'delete']);
 });

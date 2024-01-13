@@ -9,6 +9,8 @@ class SecondaryBox extends Model
 {
     use HasFactory;
 
+    protected $connection = 'organization';
+
     protected $casts = [
         'command_status' => 'array',
     ];

@@ -1,7 +1,7 @@
 @extends('layout')
 
 @section('title')
-{{ __('Workgroups') }}
+{{ __('Organizations') }}
 @endsection
 
 @section('breadcrumb')
@@ -16,7 +16,7 @@
   <li class="breadcrumb-item">
     <span class="bullet bg-gray-500 w-5px h-2px"></span>
   </li>
-  <li class="breadcrumb-item text-muted">{{ __('Workgroups') }}</li>
+  <li class="breadcrumb-item text-muted">{{ __('Organizations') }}</li>
 </ul>
 @endsection
 
@@ -39,7 +39,7 @@
       </div>
       <div class="card-toolbar">
         <div class="d-flex justify-content-end" data-kt-data-table-toolbar="base">
-          <button type="button" class="btn btn-primary" onclick="Workgroups.add()">
+          <button type="button" class="btn btn-primary" onclick="Organizations.add()">
           <i class="ki-duotone ki-plus fs-2"></i>{{ __('Add') }}</button>
         </div>
         <div class="d-flex justify-content-end align-items-center d-none" data-kt-data-table-toolbar="selected">
@@ -58,10 +58,10 @@
                 <input class="form-check-input" type="checkbox" data-kt-check="true" data-kt-check-target="#module_datatable .form-check-input" value="1" />
               </div>
             </th>
-            <th class="min-w-225px">{{ __('Workgroup') }}</th>
-            <th class="min-w-125px">{{ __('Description') }}</th>
-            <th class="min-w-125px">{{ __('Connection Type') }}</th>
-            <th class="min-w-125px">{{ __('Ip Address') }}</th>
+            <th class="min-w-125px">{{ __('Images') }}</th>
+            <th class="min-w-150px">{{ __('Organization') }}</th>
+            <th class="min-w-125px">{{ __('Database') }}</th>
+            <th class="min-w-70px">{{ __('Timezone') }}</th>
             <th class="min-w-125px">{{ __('Created') }}</th>
             <th class="text-end min-w-100px">{{ __('Actions') }}</th>
           </tr>
@@ -115,6 +115,13 @@
           </div>
 
           <div class="row mb-6">
+            <label class="col-lg-3 col-form-label fw-bold fs-6 text-lg-end">{{ __("Identification Number") }}</label>
+            <div class="col-lg-9 fv-row">
+              <input type="text" name="identification_number" class="form-control form-control-solid" placeholder="{{ __('Identification Number') }}" value="" autocomplete="one-time-code" />
+            </div>
+          </div>
+
+          <div class="row mb-6">
             <label class="col-lg-3 col-form-label fw-bold fs-6 text-lg-end">{{ __("Name") }}</label>
             <div class="col-lg-9 fv-row">
               <input type="text" name="name" class="form-control form-control-solid" placeholder="{{ __('Name') }}" value="" autocomplete="one-time-code" />
@@ -122,9 +129,26 @@
           </div>
 
           <div class="row mb-6">
-            <label class="col-lg-3 col-form-label fw-bold fs-6 text-lg-end">{{ __("Description") }}</label>
+            <label class="col-lg-3 col-form-label fw-bold fs-6 text-lg-end">{{ __("Database Connection") }}</label>
             <div class="col-lg-9 fv-row">
-              <textarea type="text" name="description" class="form-control form-control-solid" placeholder="{{ __('Description') }}" value="" /></textarea>
+              <div class="row">
+                <div class="col-lg-4 fv-row">
+                  <input type="text" name="db_driver" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-custom-class="tooltip-inverse" title="{{ __('Driver') }}" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="{{ __('Driver') }}" value="" />
+                </div>
+                <div class="col-lg-4 fv-row">
+                  <input type="text" name="address_state" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-custom-class="tooltip-inverse" title="{{ __('State') }}" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="{{ __('State') }}" value="" />
+                </div>
+                <div class="col-lg-4 fv-row">
+                  <input type="text" name="address_city" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-custom-class="tooltip-inverse" title="{{ __('City') }}" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="{{ __('City') }}" value="" />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row mb-6">
+            <label class="col-lg-3 col-form-label fw-bold fs-6 text-lg-end">{{ __("Database Connection") }}</label>
+            <div class="col-lg-9 fv-row">
+              <textarea type="text" name="db_driver" class="form-control form-control-solid" placeholder="{{ __('Driver') }}" value="" /></textarea>
             </div>
           </div>
 
@@ -191,7 +215,7 @@
             <label class="col-lg-3 col-form-label fw-bold fs-6 text-lg-end">{{ __("Main") }}</label>
             <div class="col-lg-9 fv-row d-flex align-items-center">
               <div class="form-check form-switch form-check-custom form-check-success form-check-solid">
-                <input class="form-check-input " type="checkbox" value="" id="sw_main" onchange="Workgroups.changeMain()"/>
+                <input class="form-check-input " type="checkbox" value="" id="sw_main" onchange="Organizations.changeMain()"/>
                 <label class="form-check-label fw-bold fs-4" for="sw_status" id="sw_main_label">
                   &nbsp;
                 </label>
@@ -203,7 +227,7 @@
             <label class="col-lg-3 col-form-label fw-bold fs-6 text-lg-end">{{ __("Status") }}</label>
             <div class="col-lg-9 fv-row d-flex align-items-center">
               <div class="form-check form-switch form-check-custom form-check-success form-check-solid">
-                <input class="form-check-input " type="checkbox" value="" checked id="sw_status" onchange="Workgroups.changeStatus()"/>
+                <input class="form-check-input " type="checkbox" value="" checked id="sw_status" onchange="Organizations.changeStatus()"/>
                 <label class="form-check-label fw-bold fs-4" for="sw_status" id="sw_status_label">
                   &nbsp;
                 </label>
@@ -214,8 +238,8 @@
         </div>
 
         <div class="card-footer d-flex justify-content-end py-6 px-9">
-          <a class="btn btn-danger btn-active-light-primary me-2" href="#" onclick="Workgroups.list()">{{ __("Cancel") }}</a>
-          <button type="button" class="btn btn-success" onclick="Workgroups.save()" id="module_save">
+          <a class="btn btn-danger btn-active-light-primary me-2" href="#" onclick="Organizations.list()">{{ __("Cancel") }}</a>
+          <button type="button" class="btn btn-success" onclick="Organizations.save()" id="module_save">
               <span class="indicator-label">{{ __("Save") }}</span>
               <span class="indicator-progress">{{ __('Please wait...') }}
               <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
@@ -236,12 +260,12 @@
 
 @section('scripts')
 <script type="text/javascript">
-var Workgroups={
+var Organizations={
   token: $("[name='_token']").val(),
   default_image: "{{ asset('image/image-input-not-found.png') }}",
   default_timezome: '',
   default_language: '',
-  path_image: "{{ asset('storage/construvias/workgroups') }}",
+  path_image: "{{ asset('storage/organizations') }}",
   current_id: null,
   current_organization_id: '{{ session('Auth::organization')?->id }}',
   validator: null,
@@ -335,14 +359,14 @@ var Workgroups={
       },
       ajax: {
         _token: me.token,
-        url: "{{ url('api/workgroups') }}"
+        url: "{{ url('api/organizations') }}"
       },
       columns: [
         {data: 'id'},
         {data: 'code'},
-        {data: 'description'},
-        {data: 'conection_type'},
-        {data: 'ip_address'},
+        {data: 'identification_number'},
+        {data: 'name'},
+        {data: 'timezone'},
         {data: 'created_at'},
         {data: null}
         ],
@@ -366,38 +390,48 @@ var Workgroups={
         searchable: false,
         className: 'd-flex align-items-center',
         render: function (data, type, row, meta) {
-          var letters="";
-          var code=row['code'];
-          var name=row['name'];
-          var name_array=name.split(" ");
-          if(row['name']){
-            letters+=String(row['name']).charAt(0);
-          }
-          if(name_array[1]){
-            letters+=String(name_array[1]).charAt(0);
-          }
-
-          var avatar=`
-            <div class="symbol-label fs-3 bg-light-danger text-danger">`+letters+`</div>
-          `;
+          var image_interfaz="";
+          var image_interfaz_secondary="";
+          var image="";
 
           if(row['image']){
-            var avatar=`
-              <div class="symbol-label">
-                <img src="`+me.path_image+"/thumbnail/"+row['image']+`" alt="`+name+`" class="w-100" />
+            if(row['image'].substr(0,6)=="image/"){
+              image = "{{ url('/') }}/" + row['image'];
+            }
+            else{
+              image = me.path_image+"/thumbnail/"+row['image'];
+            }
+            var image_interfaz=`
+              <div class="symbol-label w-150px h-70px p-2 bg-sidebar">
+                <img src="`+image+`" alt="`+name+`" class="w-100" />
+              </div>
+            `;
+          }
+
+          if(row['image_secondary']){
+            if(row['image_secondary'].substr(0,6)=="image/"){
+              image = "{{ url('/') }}/" + row['image_secondary'];
+            }
+            else{
+              image = me.path_image+"/thumbnail/"+row['image_secondary'];
+            }
+            var image_interfaz_secondary=`
+              <div class="symbol-label w-70px h-70px p-2 bg-sidebar">
+                <img src="`+image+`" alt="`+name+`" class="w-100" />
               </div>
             `;
           }
 
           return `
-            <div class="symbol symbol-circle symbol-50px overflow-hidden me-3">
+            <div class="symbol w-150px h-70px overflow-hidden me-3">
               <a href="#">
-                `+avatar+`
+                `+image_interfaz+`
               </a>
             </div>
-            <div class="d-flex flex-column">
-             <a href="#" class="text-gray-600 text-hover-primary mb-1 fs-6">`+code+`</a>
-             <span>`+name+`</span>
+            <div class="symbol w-70px h-70px overflow-hidden me-3">
+              <a href="#">
+                `+image_interfaz_secondary+`
+              </a>
             </div>
           `;
         }
@@ -407,10 +441,14 @@ var Workgroups={
         orderable: false,
         searchable: false,
         render: function (data, type, row) {
-          var description='';
-          if(row['description'])
-            description=row['description'];
-          return description;
+          var str="";
+          if(row['code'])
+            str+="<span class='badge badge-lg badge-dark fw-bolder cursor-pointer me-1 mb-1'>"+row['code']+"</span>";
+          if(row['identification_number'])
+            str+="<span class='badge badge-lg badge-dark fw-bolder cursor-pointer me-1 mb-1'>"+row['identification_number']+"</span>";
+          if(row['name'])
+            str+="<div class='fs-1'>"+row['name']+"</div>";
+          return str;
         }
       },
       {
@@ -418,10 +456,30 @@ var Workgroups={
         orderable: false,
         searchable: false,
         render: function (data, type, row) {
-          var connection_type='';
-          if(row['connection_type'])
-            connection_type=row['connection_type'];
-          return connection_type;
+          var str="";
+
+          if(row['db_driver']=="sqlite"){
+            str+="<div class='badge badge-success fw-bolder cursor-pointer me-1 mb-1'>"+row['db_driver']+"</div>";
+            str+="<div>"+row['db_name']+"</div>";
+            return str;
+          }
+
+
+          if(row['db_driver'])
+            str+="<div class='badge badge-success fw-bolder cursor-pointer me-1 mb-1'>"+row['db_driver']+"</div>";
+          if(row['db_url'] && row['db_url']!="0")
+            str+="<div>"+row['db_url']+"</div>";
+          if(row['db_host']){
+            var database="";
+            if(row['db_name'])
+              database=row['db_name']+"@";
+            var port="";
+            if(row['db_port'])
+              port=":"+row['db_port'];
+            str+="<div class='fs-2  '>"+database+row['db_host']+port+"</div>";
+          }
+
+          return str;
         }
       },
       {
@@ -453,13 +511,13 @@ var Workgroups={
         width: '1%',
         render: function (data, type, row, meta) {
           return `
-            <a href="#" class="btn btn-icon btn-bg-light btn-active-color-primary me-1" onclick="Workgroups.edit('`+row["id"]+`','`+meta["row"]+`')">
+            <a href="#" class="btn btn-icon btn-bg-light btn-active-color-primary me-1" onclick="Organizations.edit('`+row["id"]+`','`+meta["row"]+`')">
               <i class="ki-duotone ki-pencil fs-1">
                <span class="path1"></span>
                <span class="path2"></span>
               </i>
             </a>
-            <a href="#" class="btn btn-icon btn-bg-light btn-active-color-danger" onclick="Workgroups.delete('`+row["id"]+`','`+meta["row"]+`')">
+            <a href="#" class="btn btn-icon btn-bg-light btn-active-color-danger" onclick="Organizations.delete('`+row["id"]+`','`+meta["row"]+`')">
               <i class="ki-duotone ki-trash fs-1">
                <span class="path1"></span>
                <span class="path2"></span>
@@ -529,7 +587,7 @@ var Workgroups={
 
     $.ajax({
       method: "GET",
-      url: "{{ url('api/workgroups/new') }}",
+      url: "{{ url('api/organizations/new') }}",
       dataType: "json",
       cache: false,
     }).done(function(data){
@@ -611,7 +669,7 @@ var Workgroups={
         var status                  = me.form.find("#sw_status").is(":checked") ? "1" : "0";
 
         var _method="POST";
-        var url="{{ url('api/workgroups') }}";
+        var url="{{ url('api/organizations') }}";
         if(me.current_id){
           _method="PATCH";
           url+="/"+me.current_id;
@@ -655,13 +713,13 @@ var Workgroups={
 
           if(data["success"]){
             if(data["message"]){
-              toastr.success(data["message"], "{{ __('Workgroups - Save') }}");
+              toastr.success(data["message"], "{{ __('Organizations - Save') }}");
             }
             me.search();
             me.list();
             return;
           }
-          toastr.error(data["message"], "Workgroups");
+          toastr.error(data["message"], "Organizations");
         }).fail(function(data){
           // Hide loading indication
           me.btn_save.removeAttr('data-kt-indicator');
@@ -669,15 +727,15 @@ var Workgroups={
           me.btn_save.prop('disabled',false);
 
           if(data && data.responseJSON && data.responseJSON.message){
-            toastr.error(data.responseJSON.message, "{{ __('Workgroups - Save') }}");
+            toastr.error(data.responseJSON.message, "{{ __('Organizations - Save') }}");
           }
           else{
-            toastr.error("{{ __('Fail Request') }}", "{{ __('Workgroups - Save') }}" );
+            toastr.error("{{ __('Fail Request') }}", "{{ __('Organizations - Save') }}" );
           }
         });
 
       } else {
-        toastr.error("{{ __('Sorry, looks like there are some errors detected, please try again.') }}", "{{ __('Workgroups - Save') }}");
+        toastr.error("{{ __('Sorry, looks like there are some errors detected, please try again.') }}", "{{ __('Organizations - Save') }}");
       }
     });
 
@@ -704,7 +762,7 @@ var Workgroups={
       if(t.isConfirmed){
         $.ajax({
           method: "DELETE",
-          url: "{{ url('api/workgroups') }}",
+          url: "{{ url('api/organizations') }}",
           data: {
             _token: me.token,
             id: [id]
@@ -713,14 +771,14 @@ var Workgroups={
           cache: false,
         }).done(function(data){
           if(data["success"]){
-            toastr.success(data["message"], "{{ __('Workgroups - Delete') }}");
+            toastr.success(data["message"], "{{ __('Organizations - Delete') }}");
             me.search();
             return;
           }
-          toastr.error(data["message"], "{{ __('Workgroups - Delete') }}");
+          toastr.error(data["message"], "{{ __('Organizations - Delete') }}");
 
         }).fail(function(data){
-          toastr.error("{{ __('Fail Request') }}", "{{ __('Workgroups - Delete') }}" );
+          toastr.error("{{ __('Fail Request') }}", "{{ __('Organizations - Delete') }}" );
         });
       }
     });
@@ -758,7 +816,7 @@ var Workgroups={
 };
 
 $(function() {
-  Workgroups.init();
+  Organizations.init();
 });
 </script>
 @endsection

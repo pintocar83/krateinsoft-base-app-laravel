@@ -107,4 +107,10 @@ var selectOptionFlag = function(item) {
 
 $(()=>{
     document.querySelectorAll(".modal").forEach((el) => dragElement(el));
+
+    var locale = document.documentElement.lang.substr(0,2);
+    if(locale){
+        moment.locale(locale);
+    }
+
 });

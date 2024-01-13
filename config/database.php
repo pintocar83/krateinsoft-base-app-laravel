@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Str;
+@session_start();
 
 return [
 
@@ -41,6 +42,28 @@ return [
             'database' => env('DB_DATABASE', database_path('database.sqlite')),
             'prefix' => '',
             'foreign_key_constraints' => env('DB_FOREIGN_KEYS', true),
+        ],
+
+        'organization' => [
+            //'driver' => env('ORGANIZATION_DB_DRIVER',$_SESSION['organization->db_driver']),
+            //'url' => env('ORGANIZATION_DB_URL',''),
+            //'host' => env('ORGANIZATION_DB_HOST',''),
+            //'port' => env('ORGANIZATION_DB_PORT',''),
+            //'database' => env('ORGANIZATION_DB_NAME', ''),
+            //'username' => env('ORGANIZATION_DB_USER', ''),
+            //'password' => env('ORGANIZATION_DB_PASSWORD', ''),
+            //'unix_socket' => env('ORGANIZATION_DB_SOCKET', ''),
+
+            //'driver' => Auth::user()->id,
+
+            'driver' => isset($_SESSION['ORGANIZATION_DB_DRIVER']) ? $_SESSION['ORGANIZATION_DB_DRIVER'] : env('DB_CONNECTION'),
+            'url' => isset($_SESSION['ORGANIZATION_DB_URL']) ? $_SESSION['ORGANIZATION_DB_URL'] : env('DATABASE_URL'),
+            'host' => isset($_SESSION['ORGANIZATION_DB_HOST']) ? $_SESSION['ORGANIZATION_DB_HOST'] : env('DB_HOST'),
+            'port' => isset($_SESSION['ORGANIZATION_DB_PORT']) ? $_SESSION['ORGANIZATION_DB_PORT'] : env('DB_PORT'),
+            'database' => isset($_SESSION['ORGANIZATION_DB_NAME']) ? $_SESSION['ORGANIZATION_DB_NAME'] : env('DB_DATABASE'),
+            'username' => isset($_SESSION['ORGANIZATION_DB_USER']) ? $_SESSION['ORGANIZATION_DB_USER'] : env('DB_USERNAME'),
+            'password' => isset($_SESSION['ORGANIZATION_DB_PASSWORD']) ? $_SESSION['ORGANIZATION_DB_PASSWORD'] : env('DB_PASSWORD'),
+            'unix_socket' => isset($_SESSION['ORGANIZATION_DB_SOCKET']) ? $_SESSION['ORGANIZATION_DB_SOCKET'] : env('DB_SOCKET'),
         ],
 
         'mysql' => [
