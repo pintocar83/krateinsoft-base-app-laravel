@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('id',15)->primary();
             $table->string('name',50);
             $table->string('description',200)->nullable();
-            $table->json('config',200)->nullable();
+            $table->json('config')->nullable();
             $table->tinyInteger('status')->default('1');
             $table->tinyInteger("order")->default(999);
         });

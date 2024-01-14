@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\OrganizationsController;
 use App\Http\Controllers\Construvias\WorkgroupMainBoxesController;
+use App\Http\Controllers\Construvias\SecondaryBoxesController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -45,4 +46,10 @@ Route::group(['middleware' => ['initialization', 'auth']], function() {
     Route::post('/workgroups',                   [WorkgroupMainBoxesController::class,'store']);
     Route::patch('/workgroups/{id}',             [WorkgroupMainBoxesController::class,'update']);
     Route::delete('/workgroups',                 [WorkgroupMainBoxesController::class,'delete']);
+
+    Route::get('/boxes/new',                     [SecondaryBoxesController::class,'new']);
+    Route::get('/boxes',                         [SecondaryBoxesController::class,'index']);
+    Route::post('/boxes',                        [SecondaryBoxesController::class,'store']);
+    Route::patch('/boxes/{id}',                  [SecondaryBoxesController::class,'update']);
+    Route::delete('/boxes',                      [SecondaryBoxesController::class,'delete']);
 });

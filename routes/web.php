@@ -21,6 +21,7 @@ use App\Http\Controllers\Views\DashboardControllerView;
 
 //CONSTRUVIAS
 use App\Http\Controllers\Construvias\WorkgroupMainBoxesController;
+use App\Http\Controllers\Construvias\SecondaryBoxesController;
 
 
 /*
@@ -98,6 +99,7 @@ Route::group(['middleware' => ['initialization','auth']], function() {
 
     //CONSTRUVIAS ROUTES
     Route::get('/admin/workgroups',                    [WorkgroupMainBoxesController::class,     'view_admin']);
+    Route::get('/admin/boxes',                         [SecondaryBoxesController::class,     'view_admin']);
 
 });
 
