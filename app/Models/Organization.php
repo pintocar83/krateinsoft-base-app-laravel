@@ -19,6 +19,7 @@ class Organization extends Model
         'address_city',
         'address_line1',
         'address_line2',
+        'email',
         'phone',
         'timezone',
         'language',

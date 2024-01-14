@@ -28,6 +28,7 @@ return new class extends Migration
             $table->string('address_city',100)->nullable();
             $table->text('address_line1')->nullable();
             $table->text('address_line2')->nullable();
+            $table->string('email',50)->nullable();
             $table->string('phone',20)->nullable();
             $table->string("timezone",20)->default("$timezone");
             $table->string("language",2)->default("$locale");

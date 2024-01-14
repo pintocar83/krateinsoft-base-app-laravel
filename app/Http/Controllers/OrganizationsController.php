@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Intervention\Image\ImageManager;
 use Intervention\Image\Drivers\Gd\Driver;
+use App\Helpers\Timezones;
 
 use App\Models\Organization;
 
@@ -13,7 +14,14 @@ class OrganizationsController extends Controller
 {
 
     public function view_admin(){
+        $timezones=Timezones::all();
+        $timezone = config('app.timezone');
+        $language = config('app.locale');
+
         return view('admin.organizations',[
+            'timezones'     => $timezones,
+            'timezone'      => $timezone,
+            'language'      => $language,
         ]);
     }
 
@@ -65,24 +73,30 @@ class OrganizationsController extends Controller
         $request->validate([
             'code'=> 'required|string',
             'name'=> 'required|string',
-            'order'=> 'required|integer',
         ]);
 
         $image_name=$this->saveImage($request);
         $data=[
-            'code'            => $request['code'],
-            'name'            => $request['name'],
-            'description'     => $request['description'],
-            'connection_type' => $request['connection_type'],
-            'ip_address'      => $request['ip_address'],
-            'address_country' => $request['address_country'],
-            'address_state'   => $request['address_state'],
-            'address_city'    => $request['address_city'],
-            'address_line1'   => $request['address_line1'],
-            'address_line2'   => $request['address_line2'],
-            'main'            => $request['main'],
-            'status'          => $request['status'],
-            'order'           => $request['order'],
+            'code'                  => $request['code'],
+            'identification_number' => $request['identification_number'],
+            'name'                  => $request['name'],
+            'address_country'       => $request['address_country'],
+            'address_state'         => $request['address_state'],
+            'address_city'          => $request['address_city'],
+            'address_line1'         => $request['address_line1'],
+            'address_line2'         => $request['address_line2'],
+            'phone'                 => $request['phone'],
+            'timezone'              => $request['timezone'],
+            'language'              => $request['language'],
+            'db_driver'             => $request['db_driver'],
+            'db_url'                => $request['db_url'],
+            'db_host'               => $request['db_host'],
+            'db_port'               => $request['db_port'],
+            'db_socket'             => $request['db_socket'],
+            'db_name'               => $request['db_name'],
+            'db_user'               => $request['db_user'],
+            'db_password'           => $request['db_password'],
+            'status'                => $request['status'],
         ];
 
         if($image_name){
@@ -106,7 +120,6 @@ class OrganizationsController extends Controller
         $validate=[
             'code'=> 'required|string',
             'name'=> 'required|string',
-            'order'=> 'required|integer',
         ];
 
         if(!$request->validate($validate)){
@@ -117,19 +130,26 @@ class OrganizationsController extends Controller
         $image_name=$this->saveImage($request);
 
         $data=[
-            'code'            => $request['code'],
-            'name'            => $request['name'],
-            'description'     => $request['description'],
-            'connection_type' => $request['connection_type'],
-            'ip_address'      => $request['ip_address'],
-            'address_country' => $request['address_country'],
-            'address_state'   => $request['address_state'],
-            'address_city'    => $request['address_city'],
-            'address_line1'   => $request['address_line1'],
-            'address_line2'   => $request['address_line2'],
-            'main'            => $request['main'],
-            'status'          => $request['status'],
-            'order'           => $request['order'],
+            'code'                  => $request['code'],
+            'identification_number' => $request['identification_number'],
+            'name'                  => $request['name'],
+            'address_country'       => $request['address_country'],
+            'address_state'         => $request['address_state'],
+            'address_city'          => $request['address_city'],
+            'address_line1'         => $request['address_line1'],
+            'address_line2'         => $request['address_line2'],
+            'phone'                 => $request['phone'],
+            'timezone'              => $request['timezone'],
+            'language'              => $request['language'],
+            'db_driver'             => $request['db_driver'],
+            'db_url'                => $request['db_url'],
+            'db_host'               => $request['db_host'],
+            'db_port'               => $request['db_port'],
+            'db_socket'             => $request['db_socket'],
+            'db_name'               => $request['db_name'],
+            'db_user'               => $request['db_user'],
+            'db_password'           => $request['db_password'],
+            'status'                => $request['status'],
         ];
 
         if($image_name){
@@ -174,19 +194,20 @@ class OrganizationsController extends Controller
 
     public function new(){
         $last_code = Organization::whereNull('delete_at')->latest()->limit(1)->pluck('code');
-        $code = $last_code[0];
-        if(is_numeric($code)){
-            $len = strlen("$code");
-            $n = $code*1+1;
-            $code = str_pad("$n", $len, "0", STR_PAD_LEFT);
+        if(isset($last_code[0])){
+            $code = $last_code[0];
+            if(is_numeric($code)){
+                $len = strlen("$code");
+                $n = $code*1+1;
+                $code = str_pad("$n", $len, "0", STR_PAD_LEFT);
+            }
+        }
+        else{
+            $code = "001";
         }
 
-        $last_order = Organization::whereNull('delete_at')->orderBy('order', 'desc')->limit(1)->pluck('order');
-        $order = $last_order[0]*1+1;
-
         return [
-            "code" => $code,
-            "order" => $order
+            "code" => $code
         ];
     }
 }

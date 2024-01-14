@@ -132,40 +132,79 @@
             <label class="col-lg-3 col-form-label fw-bold fs-6 text-lg-end">{{ __("Database Connection") }}</label>
             <div class="col-lg-9 fv-row">
               <div class="row">
-                <div class="col-lg-4 fv-row">
+                <div class="col-lg-6 fv-row">
                   <input type="text" name="db_driver" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-custom-class="tooltip-inverse" title="{{ __('Driver') }}" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="{{ __('Driver') }}" value="" />
                 </div>
                 <div class="col-lg-4 fv-row">
-                  <input type="text" name="address_state" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-custom-class="tooltip-inverse" title="{{ __('State') }}" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="{{ __('State') }}" value="" />
+                  <input type="text" name="db_host" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-custom-class="tooltip-inverse" title="{{ __('Host') }}" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="{{ __('Host') }}" value="" />
                 </div>
-                <div class="col-lg-4 fv-row">
-                  <input type="text" name="address_city" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-custom-class="tooltip-inverse" title="{{ __('City') }}" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="{{ __('City') }}" value="" />
+                <div class="col-lg-2 fv-row">
+                  <input type="text" name="db_port" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-custom-class="tooltip-inverse" title="{{ __('Port') }}" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="{{ __('Port') }}" value="" />
                 </div>
               </div>
             </div>
           </div>
 
           <div class="row mb-6">
-            <label class="col-lg-3 col-form-label fw-bold fs-6 text-lg-end">{{ __("Database Connection") }}</label>
+            <label class="col-lg-3 col-form-label fw-bold fs-6 text-lg-end"></label>
             <div class="col-lg-9 fv-row">
-              <textarea type="text" name="db_driver" class="form-control form-control-solid" placeholder="{{ __('Driver') }}" value="" /></textarea>
+              <div class="row">
+                <div class="col-lg-6 fv-row">
+                  <input type="text" name="db_name" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-custom-class="tooltip-inverse" title="{{ __('Database Name') }}" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="{{ __('Database Name') }}" value="" />
+                </div>
+                <div class="col-lg-4 fv-row">
+                  <input type="text" name="db_password" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-custom-class="tooltip-inverse" title="{{ __('Password') }}" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="{{ __('Password') }}" value="" />
+                </div>
+                <div class="col-lg-2 fv-row">
+                  <input type="text" name="db_socket" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-custom-class="tooltip-inverse" title="{{ __('Socket') }}" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="{{ __('Socket') }}" value="" />
+                </div>
+              </div>
             </div>
           </div>
 
           <div class="row mb-6">
-            <label class="col-lg-3 col-form-label fw-bold fs-6 text-lg-end">{{ __("Connection Type") }}</label>
+            <label class="col-lg-3 col-form-label fw-bold fs-6 text-lg-end"></label>
             <div class="col-lg-9 fv-row">
-              <select name="connection_type" aria-label="{{ __('Select a connection type') }}" data-control="select2" data-placeholder="{{ __('Select a connection type') }}..." class="form-select form-select-solid form-select-lg">
-                <option value="">{{ __('Select a connection type') }}...</option>
-                <option value="tcp/ip">TCP/IP</option>
+              <input type="text" name="db_url" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-custom-class="tooltip-inverse" title="{{ __('Url') }}" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="{{ __('Url') }}" value="" />
+            </div>
+          </div>
+
+          <div class="row mb-6">
+            <label class="col-lg-3 col-form-label fw-bold fs-6 text-lg-end">{{ __("Language") }}</label>
+            <div class="col-lg-9 fv-row">
+              <select name="language" aria-label="{{ __('Select a language') }}" data-control="select2" data-placeholder="{{ __('Select a language') }}..." class="form-select form-select-solid form-select-lg">
+                <option value="">{{ __('Select a language') }}...</option>
+                <option data-kt-flag="{{ asset('assets/v8.2.1/media/flags/united-states.svg') }}" value="en">{{ __("English") }}</option>
+                <option data-kt-flag="{{ asset('assets/v8.2.1/media/flags/spain.svg') }}" value="es">{{ __("Spanish") }}</option>
               </select>
             </div>
           </div>
 
           <div class="row mb-6">
-            <label class="col-lg-3 col-form-label fw-bold fs-6 text-lg-end">{{ __("Ip Address") }}</label>
+            <label class="col-lg-3 col-form-label fw-bold fs-6 text-lg-end">{{ __("Time Zone") }}</label>
             <div class="col-lg-9 fv-row">
-              <input type="text" name="ip_address" class="form-control form-control-solid" placeholder="{{ __('Ip Address') }}" value="" autocomplete="one-time-code" />
+              <select name="timezone" aria-label="{{ __('Select a timezone') }}" data-control="select2" data-placeholder="{{ __('Select a timezone') }}..." class="form-select form-select-solid form-select-lg">
+                <option value="">{{ __('Select a Timezone') }}...</option>
+                <?php foreach($timezones as $key => $value): ?>
+                    <option value="{{ $key }}">{{ $value }}</option>
+                <?php endforeach;?>
+              </select>
+            </div>
+          </div>
+
+          <div class="row mb-6">
+            <label class="col-lg-3 col-form-label fw-bold fs-6 text-lg-end">{{ __("Email") }}</label>
+            <div class="col-lg-9 fv-row">
+              <input type="text" name="email" class="form-control form-control-solid" placeholder="{{ __('Email') }}" value="" autocomplete="one-time-code" />
+            </div>
+          </div>
+
+          <div class="row mb-6">
+            <label class="col-lg-3 col-form-label fw-bold fs-6 text-lg-end">
+                {{ __("Phone") }}
+            </label>
+            <div class="col-lg-9 fv-row">
+              <input type="tel" name="phone" class="form-control form-control-solid" placeholder="{{ __('Phone Number') }}" value="" />
             </div>
           </div>
 
@@ -189,37 +228,14 @@
           <div class="row mb-6">
             <label class="col-lg-3 col-form-label fw-bold fs-6 text-lg-end"></label>
             <div class="col-lg-9 fv-row">
-              <input type="text" name="address_line1" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-custom-class="tooltip-inverse" title="{{ __('Main address') }}" class="form-control form-control-solid" placeholder="{{ __('Main address') }}" value="" autocomplete="one-time-code" />
+              <input type="text" name="address_line1" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-custom-class="tooltip-inverse" title="{{ __('Address Line 1') }}" class="form-control form-control-solid" placeholder="{{ __('Address Line 1') }}" value="" autocomplete="one-time-code" />
             </div>
           </div>
 
           <div class="row mb-6">
             <label class="col-lg-3 col-form-label fw-bold fs-6 text-lg-end"></label>
             <div class="col-lg-9 fv-row">
-              <input type="text" name="address_line2" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-custom-class="tooltip-inverse" title="{{ __('Optional address') }}" class="form-control form-control-solid" placeholder="{{ __('Optional address') }}" value="" autocomplete="one-time-code" />
-            </div>
-          </div>
-
-          <div class="row mb-6">
-            <label class="col-lg-3 col-form-label fw-bold fs-6 text-lg-end">{{ __("Order") }}</label>
-            <div class="col-lg-9 fv-row">
-              <div class="row">
-                <div class="col-lg-4 fv-row">
-                  <input type="number" name="order" min="1" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="{{ __('Order') }}" value="" />
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="row mb-6">
-            <label class="col-lg-3 col-form-label fw-bold fs-6 text-lg-end">{{ __("Main") }}</label>
-            <div class="col-lg-9 fv-row d-flex align-items-center">
-              <div class="form-check form-switch form-check-custom form-check-success form-check-solid">
-                <input class="form-check-input " type="checkbox" value="" id="sw_main" onchange="Organizations.changeMain()"/>
-                <label class="form-check-label fw-bold fs-4" for="sw_status" id="sw_main_label">
-                  &nbsp;
-                </label>
-              </div>
+              <input type="text" name="address_line2" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-custom-class="tooltip-inverse" title="{{ __('Address Line 2') }}" class="form-control form-control-solid" placeholder="{{ __('Address Line 2') }}" value="" autocomplete="one-time-code" />
             </div>
           </div>
 
@@ -287,6 +303,11 @@ var Organizations={
     me.form=$("#module_form");
     me.btn_save=$("#module_save");
 
+    me.form.find("[name='language']").select2({
+      templateSelection: selectOptionFlag,
+      templateResult: selectOptionFlag
+    });
+
     me.validator = FormValidation.formValidation(
       me.form.get(0),
       {
@@ -302,19 +323,6 @@ var Organizations={
             validators: {
               notEmpty: {
                 message: "{{ __('Name is required') }}"
-              }
-            }
-          },
-          'order': {
-            validators: {
-              callback: {
-                callback: function(input) {
-                  if(!input.value)
-                    return {valid: false, message: "{{ __('Order is required') }}" };
-                  if(!(input.value>0))
-                    return {valid: false, message: "{{ __('Order must be numeric') }}" };
-                  return true;
-                }
               }
             }
           },
@@ -554,23 +562,40 @@ var Organizations={
     me.current_id=null;
 
     me.form.find("[name='image']").val("");
+
     me.form.find("[name='code']").val("");
+    me.form.find("[name='identification_number']").val("");
     me.form.find("[name='name']").val("");
-    me.form.find("[name='description']").val("");
-    me.form.find("[name='connection_type']").val("tcp/ip");
-    me.form.find("[name='connection_type']").trigger('change.select2');
-    me.form.find("[name='ip_address']").val("");
+
+    me.form.find("[name='db_driver']").val("");
+    me.form.find("[name='db_host']").val("");
+    me.form.find("[name='db_port']").val("");
+    me.form.find("[name='db_socket']").val("");
+    me.form.find("[name='db_name']").val("");
+    me.form.find("[name='db_user']").val("");
+    me.form.find("[name='db_password']").val("");
+    me.form.find("[name='db_url']").val("");
+
+    me.form.find("[name='language']").val(me.default_language);
+    me.form.find("[name='language']").trigger('change.select2');
+    me.form.find("[name='timezone']").val(me.default_timezome);
+    me.form.find("[name='timezone']").trigger('change.select2');
+
+    me.form.find("[name='email']").val("");
+    me.form.find("[name='phone']").val("");
+
     me.form.find("[name='address_country']").val("");
     me.form.find("[name='address_state']").val("");
     me.form.find("[name='address_city']").val("");
     me.form.find("[name='address_line1']").val("");
     me.form.find("[name='address_line2']").val("");
+
+
+
     me.form.find("[name='order']").val("");
 
-    me.form.find("#sw_main").prop("checked",false);
     me.form.find("#sw_status").prop("checked",true);
 
-    me.changeMain();
     me.changeStatus();
 
     me.validator.resetForm();
@@ -593,7 +618,6 @@ var Organizations={
     }).done(function(data){
       //console.log(data);
       me.form.find("[name='code']").val(data['code']);
-      me.form.find("[name='order']").val(data["order"]);
 
     }).fail(function(data){
 
@@ -612,29 +636,37 @@ var Organizations={
     }
 
     me.form.find("[name='code']").val(data['code']);
+    me.form.find("[name='identification_number']").val(data['identification_number']);
     me.form.find("[name='name']").val(data['name']);
-    me.form.find("[name='description']").val(data['description']);
-    me.form.find("[name='connection_type']").val(data['connection_type']);
-    me.form.find("[name='connection_type']").trigger('change.select2');
-    me.form.find("[name='ip_address']").val(data['ip_address']);
+
+    me.form.find("[name='db_driver']").val(data['db_driver']);
+    me.form.find("[name='db_host']").val(data['db_host']);
+    me.form.find("[name='db_port']").val(data['db_port']);
+    me.form.find("[name='db_socket']").val(data['db_socket']);
+    me.form.find("[name='db_name']").val(data['db_name']);
+    me.form.find("[name='db_user']").val(data['db_user']);
+    me.form.find("[name='db_password']").val(data['db_password']);
+    me.form.find("[name='db_url']").val(data['db_url']);
+
+    me.form.find("[name='language']").val(data['language']);
+    me.form.find("[name='language']").trigger('change.select2');
+    me.form.find("[name='timezone']").val(data['timezone']);
+    me.form.find("[name='timezone']").trigger('change.select2');
+
+    me.form.find("[name='email']").val(data['email']);
+    me.form.find("[name='phone']").val(data['phone']);
+
     me.form.find("[name='address_country']").val(data["address_country"]);
     me.form.find("[name='address_state']").val(data["address_state"]);
     me.form.find("[name='address_city']").val(data["address_city"]);
     me.form.find("[name='address_line1']").val(data["address_line1"]);
     me.form.find("[name='address_line2']").val(data["address_line2"]);
-    me.form.find("[name='order']").val(data["order"]);
-
-    me.form.find("#sw_main").prop("checked",false);
-    if(data["main"]=="1"){
-      me.form.find("#sw_main").prop("checked",true);
-    }
 
     me.form.find("#sw_status").prop("checked",false);
     if(data["status"]=="1"){
       me.form.find("#sw_status").prop("checked",true);
     }
 
-    me.changeMain();
     me.changeStatus();
 
     $(".module-title").html("{{ __('Edit') }}");
@@ -655,17 +687,25 @@ var Organizations={
 
         var image                   = me.form.find("[name='image']").val() ? me.form.find("[name='image']")[0].files[0] : null;
         var code                    = me.form.find("[name='code']").val();
+        var identification_number   = me.form.find("[name='identification_number']").val();
         var name                    = me.form.find("[name='name']").val();
-        var description             = me.form.find("[name='description']").val();
-        var connection_type         = me.form.find("[name='connection_type']").val();
-        var ip_address              = me.form.find("[name='ip_address']").val();
+        var email                   = me.form.find("[name='email']").val();
+        var phone                   = me.form.find("[name='phone']").val();
+        var language                = me.form.find("[name='language']").val();
+        var timezone                = me.form.find("[name='timezone']").val();
+        var db_driver               = me.form.find("[name='db_driver']").val();
+        var db_host                 = me.form.find("[name='db_host']").val();
+        var db_port                 = me.form.find("[name='db_port']").val();
+        var db_socket               = me.form.find("[name='db_socket']").val();
+        var db_name                 = me.form.find("[name='db_name']").val();
+        var db_user                 = me.form.find("[name='db_user']").val();
+        var db_password             = me.form.find("[name='db_password']").val();
+        var db_url                  = me.form.find("[name='db_url']").val();
         var address_country         = me.form.find("[name='address_country']").val();
         var address_state           = me.form.find("[name='address_state']").val();
         var address_city            = me.form.find("[name='address_city']").val();
         var address_line1           = me.form.find("[name='address_line1']").val();
         var address_line2           = me.form.find("[name='address_line2']").val();
-        var order                   = me.form.find("[name='order']").val();
-        var main                    = me.form.find("#sw_main").is(":checked")   ? "1" : "0";
         var status                  = me.form.find("#sw_status").is(":checked") ? "1" : "0";
 
         var _method="POST";
@@ -676,21 +716,29 @@ var Organizations={
         }
 
         var data = new FormData();
-        data.append('_token',           me.token);
-        data.append('_method',          _method);
-        data.append('code',             code);
-        data.append('name',             name);
-        data.append('description',      description);
-        data.append('connection_type',  connection_type);
-        data.append('ip_address',       ip_address);
-        data.append('address_country',  address_country);
-        data.append('address_state',    address_state);
-        data.append('address_city',     address_city);
-        data.append('address_line1',    address_line1);
-        data.append('address_line2',    address_line2);
-        data.append('order',            order);
-        data.append('main',             main);
-        data.append('status',           status);
+        data.append('_token',                me.token);
+        data.append('_method',               _method);
+        data.append('code',                  code);
+        data.append('identification_number', identification_number);
+        data.append('name',                  name);
+        data.append('email',                 email);
+        data.append('phone',                 phone);
+        data.append('language',              language);
+        data.append('timezone',              timezone);
+        data.append('db_driver',             db_driver);
+        data.append('db_host',               db_host);
+        data.append('db_port',               db_port);
+        data.append('db_socket',             db_socket);
+        data.append('db_name',               db_name);
+        data.append('db_user',               db_user);
+        data.append('db_password',           db_password);
+        data.append('db_url',                db_url);
+        data.append('address_country',       address_country);
+        data.append('address_state',         address_state);
+        data.append('address_city',          address_city);
+        data.append('address_line1',         address_line1);
+        data.append('address_line2',         address_line2);
+        data.append('status',                status);
 
         if(image){
           data.append('image',         image);
