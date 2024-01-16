@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('name',50);
             $table->string('description',200)->nullable();
             $table->json('config')->nullable();
-            $table->tinyInteger('status')->default('1');
+            $table->boolean('enabled')->default(true);
             $table->tinyInteger("order")->default(999);
         });
 
@@ -29,11 +29,11 @@ return new class extends Migration
             'name' => "Authenticate with google",
             'config' => [
                 'client_id' => '598017192049-il5tuctl3hlsq3596pq2i8nfsegcgrjd.apps.googleusercontent.com',
-                'cliente_secret' => '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',
-                'redirect_uri' => 'http://localhost:8000/sign-in/google/callback'
+                'client_secret' => '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',
+                'redirect' => 'http://localhost:8000/sign-in/google/callback'
             ],
             'order' => 1,
-            'status' => 1
+            'enabled' => false
         ]);
 
         FeatureFlag::create([
@@ -41,11 +41,11 @@ return new class extends Migration
             'name' => "Authenticate with facebook",
             'config' => [
                 'client_id' => '',
-                'cliente_secret' => '',
-                'redirect_uri' => 'http://localhost:8000/sign-in/facebook/callback'
+                'client_secret' => '',
+                'redirect' => 'http://localhost:8000/sign-in/facebook/callback'
             ],
             'order' => 1,
-            'status' => 0
+            'enabled' => false
         ]);
 
         FeatureFlag::create([
@@ -53,11 +53,11 @@ return new class extends Migration
             'name' => "Authenticate with twitter",
             'config' => [
                 'client_id' => '',
-                'cliente_secret' => '',
-                'redirect_uri' => 'http://localhost:8000/sign-in/twitter/callback'
+                'client_secret' => '',
+                'redirect' => 'http://localhost:8000/sign-in/twitter/callback'
             ],
             'order' => 1,
-            'status' => 0
+            'enabled' => false
         ]);
 
         FeatureFlag::create([
@@ -65,11 +65,11 @@ return new class extends Migration
             'name' => "Authenticate with linkedin",
             'config' => [
                 'client_id' => '78x0lseukbesf7',
-                'cliente_secret' => '1owoQ8oTUR0DdW06',
-                'redirect_uri' => 'http://localhost:8000/sign-in/linkedin/callback'
+                'client_secret' => '1owoQ8oTUR0DdW06',
+                'redirect' => 'http://localhost:8000/sign-in/linkedin/callback'
             ],
             'order' => 1,
-            'status' => 1
+            'enabled' => false
         ]);
 
         FeatureFlag::create([
@@ -77,11 +77,11 @@ return new class extends Migration
             'name' => "Authenticate with github",
             'config' => [
                 'client_id' => 'Iv1.b74ace8eeea60669',
-                'cliente_secret' => 'b682bd29bc518fb3ea0909caa0dd1d7db8953097',
-                'redirect_uri' => 'http://localhost:8000/sign-in/github/callback'
+                'client_secret' => 'b682bd29bc518fb3ea0909caa0dd1d7db8953097',
+                'redirect' => 'http://localhost:8000/sign-in/github/callback'
             ],
             'order' => 1,
-            'status' => 1
+            'enabled' => false
         ]);
 
         FeatureFlag::create([
@@ -89,11 +89,11 @@ return new class extends Migration
             'name' => "Authenticate with bitbucket",
             'config' => [
                 'client_id' => '',
-                'cliente_secret' => '',
-                'redirect_uri' => 'http://localhost:8000/sign-in/bitbucket/callback'
+                'client_secret' => '',
+                'redirect' => 'http://localhost:8000/sign-in/bitbucket/callback'
             ],
             'order' => 1,
-            'status' => 0
+            'enabled' => false
         ]);
 
         FeatureFlag::create([
@@ -101,11 +101,11 @@ return new class extends Migration
             'name' => "Authenticate with gitlab",
             'config' => [
                 'client_id' => '',
-                'cliente_secret' => '',
-                'redirect_uri' => 'http://localhost:8000/sign-in/gitlab/callback'
+                'client_secret' => '',
+                'redirect' => 'http://localhost:8000/sign-in/gitlab/callback'
             ],
             'order' => 1,
-            'status' => 0
+            'enabled' => false
         ]);
     }
 

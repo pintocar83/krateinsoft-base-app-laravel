@@ -21,7 +21,6 @@ class SignInSocialiteControllerView extends Controller {
         if (!is_null($validated)) {
             return $validated;
         }
-
         return Socialite::driver($provider)->stateless()->redirect();
     }
 
@@ -78,10 +77,10 @@ class SignInSocialiteControllerView extends Controller {
                 'avatar' => $user->getAvatar()
             ]
         );
-        
+
         Auth::login($userCreated);
         $userCreated->update(['last_login'=>now()]);
-        
+
         return redirect()->to("/");
 
         //Case authentication to API
@@ -95,20 +94,20 @@ class SignInSocialiteControllerView extends Controller {
      */
     protected function validateProvider($provider) {
         $provider_configured = [];
-        
-        if(env('GOOGLE_ENABLED') and env('GOOGLE_CLIENT_ID'))
+
+        if(feature_flag('auth-google')?->config['client_id'])
             $provider_configured[]='google';
-        if(env('FACEBOOK_ENABLED') and env('FACEBOOK_CLIENT_ID'))
+        if(feature_flag('auth-facebook')?->config['client_id'])
             $provider_configured[]='facebook';
-        if(env('TWITTER_ENABLED') and env('TWITTER_CLIENT_ID'))
+        if(feature_flag('auth-twitter')?->config['client_id'])
             $provider_configured[]='twitter';
-        if(env('LINKEDIN_ENABLED') and env('LINKEDIN_CLIENT_ID'))
+        if(feature_flag('auth-linkedin')?->config['client_id'])
             $provider_configured[]='linkedin';
-        if(env('GITHUB_ENABLED') and env('GITHUB_CLIENT_ID'))
+        if(feature_flag('auth-github')?->config['client_id'])
             $provider_configured[]='github';
-        if(env('BITBUCKET_ENABLED') and env('BITBUCKET_CLIENT_ID'))
+        if(feature_flag('auth-bitbucket')?->config['client_id'])
             $provider_configured[]='bitbucket';
-        if(env('GITLAB_ENABLED') and env('GITLAB_CLIENT_ID'))
+        if(feature_flag('auth-gitlab')?->config['client_id'])
             $provider_configured[]='gitlab';
 
         if (!in_array($provider, $provider_configured)) {

@@ -16,6 +16,7 @@ class FeatureFlag extends Model
 
     protected $casts = [
         'config' => 'array',
+        'enabled' => 'boolean',
     ];
 
     protected $fillable = [
@@ -23,7 +24,7 @@ class FeatureFlag extends Model
         'name',
         'description',
         'config',
-        'status',
+        'enabled',
         'order',
     ];
 

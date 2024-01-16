@@ -124,53 +124,61 @@ $locale=app()->getLocale();
 								</button>
 								<!--end::Submit button-->
 
+  							@if (	feature_flag('auth-google') ||
+  										feature_flag('auth-facebook') ||
+  										feature_flag('auth-twitter') ||
+  										feature_flag('auth-linkedin') ||
+  										feature_flag('auth-github') ||
+  										feature_flag('auth-bitbucket') ||
+  										feature_flag('auth-gitlab'))
 								<!--begin::Separator-->
 								<div class="text-center text-muted text-uppercase fw-bolder">or</div>
 								<!--end::Separator-->
+								@endif
 
-								@if (env('GOOGLE_ENABLED'))
+								@if (feature_flag('auth-google'))
 								<!--begin::Google link-->
 								<a href="/sign-in/google" class="btn btn-flex flex-center btn-light btn-lg w-100 mt-5">
 								<img alt="Logo" src="{{asset('assets/v8.2.1/media/svg/brand-logos/google-icon.svg')}}" class="h-20px me-3" />Continue with Google</a>
 								<!--end::Google link-->
 								@endif
 
-								@if (env('FACEBOOK_ENABLED'))
+								@if (feature_flag('auth-facebook'))
 								<!--begin::Google link-->
 								<a href="/sign-in/facebook" class="btn btn-flex flex-center btn-light btn-lg w-100 mt-5">
 								<img alt="Logo" src="{{asset('assets/v8.2.1/media/svg/brand-logos/facebook-4.svg')}}" class="h-20px me-3" />Continue with Facebook</a>
 								<!--end::Google link-->
 								@endif
 
-								@if (env('TWITTER_ENABLED'))
+								@if (feature_flag('auth-twitter'))
 								<!--begin::Google link-->
 								<a href="/sign-in/twitter" class="btn btn-flex flex-center btn-light btn-lg w-100 mt-5">
 								<img alt="Logo" src="{{asset('assets/v8.2.1/media/svg/brand-logos/twitter.svg')}}" class="h-20px me-3" />Continue with Twitter</a>
 								<!--end::Google link-->
 								@endif
 
-								@if (env('LINKEDIN_ENABLED'))
+								@if (feature_flag('auth-linkedin'))
 								<!--begin::GitHub link-->
 								<a href="/sign-in/linkedin" class="btn btn-flex flex-center btn-light btn-lg w-100 mt-5">
 								<img alt="Logo" src="{{asset('assets/v8.2.1/media/svg/brand-logos/linkedin-2.svg')}}" class="h-20px me-3" />Continue with LinkedIn</a>
 								<!--end::GitHub link-->
 								@endif
 
-								@if (env('GITHUB_ENABLED'))
+								@if (feature_flag('auth-github'))
 								<!--begin::GitHub link-->
 								<a href="/sign-in/github" class="btn btn-flex flex-center btn-light btn-lg w-100 mt-5">
 								<img alt="Logo" src="{{asset('assets/v8.2.1/media/svg/brand-logos/github.svg')}}" class="h-20px me-3" />Continue with GitHub</a>
 								<!--end::GitHub link-->
 								@endif
 
-								@if (env('BITBUCKET_ENABLED'))
+								@if (feature_flag('auth-bitbucket'))
 								<!--begin::BitBucket link-->
 								<a href="/sign-in/bitbucket" class="btn btn-flex flex-center btn-light btn-lg w-100 mt-5">
 								<img alt="Logo" src="{{asset('assets/v8.2.1/media/svg/brand-logos/bitbucket.svg')}}" class="h-20px me-3" />Continue with BitBucket</a>
 								<!--end::BitBucket link-->
 								@endif
 
-								@if (env('GITLAB_ENABLED'))
+								@if (feature_flag('auth-gitlab'))
 								<!--begin::GitLab link-->
 								<a href="/sign-in/gitlab" class="btn btn-flex flex-center btn-light btn-lg w-100 mt-5">
 								<img alt="Logo" src="{{asset('assets/v8.2.1/media/svg/brand-logos/gitlab.svg')}}" class="h-20px me-3" />Continue with GitLab</a>
