@@ -39,9 +39,9 @@ class OrganizationsController extends Controller
         )->escapeColumns([])->toJson();
     }
 
-    public function saveImage($request){
+    public function saveImage($request, $field="image"){
         $image_name = "";
-        $image = $request->file('image');
+        $image = $request->file($field);
         if($image){
             $image_uid=(String)Str::uuid();
             $image_name=$image_uid.".".$image->extension();
@@ -69,13 +69,37 @@ class OrganizationsController extends Controller
         return $image_name;
     }
 
+    public function deleteImage($image_name){
+        if($image_name){
+            if(substr($image_name, 0, 6) === "image/"){
+                return;
+            }
+
+            $destinationPath = public_path('/storage/organizations');
+            $image = "{$destinationPath}/{$image_name}";
+            if(file_exists($image)){
+                unlink($image);
+            }
+
+            $image = "{$destinationPath}/thumbnail/{$image_name}";
+            if(file_exists($image)){
+                unlink($image);
+            }
+        }
+    }
+
     public function store(Request $request){
         $request->validate([
             'code'=> 'required|string',
             'name'=> 'required|string',
         ]);
 
-        $image_name=$this->saveImage($request);
+        $image=$this->saveImage($request,"image");
+        $image_secondary=$this->saveImage($request,"image_secondary");
+        $image_inline=$this->saveImage($request,"image_inline");
+        $image_report_vertical=$this->saveImage($request,"image_report_vertical");
+        $image_report_horizontal=$this->saveImage($request,"image_report_horizontal");
+
         $data=[
             'code'                  => $request['code'],
             'identification_number' => $request['identification_number'],
@@ -85,6 +109,7 @@ class OrganizationsController extends Controller
             'address_city'          => $request['address_city'],
             'address_line1'         => $request['address_line1'],
             'address_line2'         => $request['address_line2'],
+            'email'                 => $request['email'],
             'phone'                 => $request['phone'],
             'timezone'              => $request['timezone'],
             'language'              => $request['language'],
@@ -99,17 +124,33 @@ class OrganizationsController extends Controller
             'status'                => $request['status'],
         ];
 
-        if($image_name){
-            $data["image"] = $image_name;
+        if($image){
+            $data["image"] = $image;
+        }
+
+        if($image_secondary){
+            $data["image_secondary"] = $image_secondary;
+        }
+
+        if($image_inline){
+            $data["image_inline"] = $image_inline;
+        }
+
+        if($image_report_vertical){
+            $data["image_report_vertical"] = $image_report_vertical;
+        }
+
+        if($image_report_horizontal){
+            $data["image_report_horizontal"] = $image_report_horizontal;
         }
 
         //Create
-        $workgroup = Organization::create($data);
+        $organization = Organization::create($data);
 
         $response = [
             'success'=> true,
             'message'=> __("Organization created successfully"),
-            'data' => $workgroup
+            'data' => $organization
         ];
 
         return $response;
@@ -126,8 +167,13 @@ class OrganizationsController extends Controller
             return ["success"=>false];
         }
 
-        $workgroup = Organization::find($id);
-        $image_name=$this->saveImage($request);
+        $organization = Organization::find($id);
+
+        $image=$this->saveImage($request,"image");
+        $image_secondary=$this->saveImage($request,"image_secondary");
+        $image_inline=$this->saveImage($request,"image_inline");
+        $image_report_vertical=$this->saveImage($request,"image_report_vertical");
+        $image_report_horizontal=$this->saveImage($request,"image_report_horizontal");
 
         $data=[
             'code'                  => $request['code'],
@@ -139,6 +185,7 @@ class OrganizationsController extends Controller
             'address_line1'         => $request['address_line1'],
             'address_line2'         => $request['address_line2'],
             'phone'                 => $request['phone'],
+            'email'                 => $request['email'],
             'timezone'              => $request['timezone'],
             'language'              => $request['language'],
             'db_driver'             => $request['db_driver'],
@@ -152,30 +199,38 @@ class OrganizationsController extends Controller
             'status'                => $request['status'],
         ];
 
-        if($image_name){
-            $data["image"] = $image_name;
+        if($image){
+            $data["image"] = $image;
+            $this->deleteImage($organization->image);
+        }
 
-            if($workgroup->image){
-                $destinationPath = public_path('/storage/organizations');
-                $image_old = "{$destinationPath}/{$workgroup->image}";
-                if(file_exists($image_old)){
-                    unlink($image_old);
-                }
+        if($image_secondary){
+            $data["image_secondary"] = $image_secondary;
+            $this->deleteImage($organization->image_secondary);
+        }
 
-                $image_old = "{$destinationPath}/thumbnail/{$workgroup->image}";
-                if(file_exists($image_old)){
-                    unlink($image_old);
-                }
-            }
+        if($image_inline){
+            $data["image_inline"] = $image_inline;
+            $this->deleteImage($organization->image_inline);
+        }
+
+        if($image_report_vertical){
+            $data["image_report_vertical"] = $image_report_vertical;
+            $this->deleteImage($organization->image_report_vertical);
+        }
+
+        if($image_report_horizontal){
+            $data["image_report_horizontal"] = $image_report_horizontal;
+            $this->deleteImage($organization->image_report_horizontal);
         }
 
 
-        $workgroup->update($data);
+        $organization->update($data);
 
         return [
             'success' => true,
             'message' => __("Organization modified successfully"),
-            'data'    => $workgroup
+            'data'    => $organization
         ];
     }
 

@@ -26,7 +26,8 @@
 	color: white;
 }
 
-.modal.modal-c1 .modal-header > [data-bs-dismiss="modal"] {
+.modal.modal-c1 .modal-header > [data-bs-dismiss="modal"],
+.card .card-header > .btn {
 	position: absolute;
     right: 0;
     width: 70px;
@@ -92,4 +93,30 @@
 .form-select.form-select-solid:active,
 .form-select.form-select-solid:focus {
     border-color: var(--bs-gray-400)!important;
+}
+
+.image-input,
+.image-input .image-input-wrapper {
+    background-position: center;
+}
+
+.image-input.module-image-interface {
+    background-size: contain;
+    background-position: center;
+    background-color: var(--main-app-color);
+    border: 10px solid transparent;
+}
+
+.image-input.module-image-interface .image-input-wrapper {
+    background-size: contain;
+    background-position: center;
+}
+
+.image-input.module-image-interface .module-image-label {
+    text-align: center;
+}
+
+.flex-0,
+.no-flex {
+    flex: 0;
 }

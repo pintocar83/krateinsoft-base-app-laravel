@@ -78,64 +78,266 @@
           &nbsp;
         </h2>
       </div>
+      <button type="button" class="btn btn-icon btn-danger" onclick="Organizations.list()">
+        <i class="mdi mdi-close-thick fs-2x"></i>
+      </button type="button">
     </div>
     <div id="kt_account_profile_details" class="show">
       <form id="module_form" class="form" action="" method="POST" enctype="multipart/form-data" autocomplete="off">
         <div class="card-body border-top p-9">
           <div class="row mb-6">
-            <label class="col-lg-3 col-form-label fw-bold fs-6 text-lg-end">{{ __("Picture") }}</label>
-            <div class="col-lg-9">
-              <div class="image-input image-input-empty module-image" data-kt-image-input="true">
-                <div class="image-input-wrapper w-125px h-125px"></div>
-                <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="{{ __('Change') }}">
-                  <i class="bi bi-pencil-fill fs-7"></i>
-                  <input type="file" name="image" accept=".png, .jpg, .jpeg" />
-                  <input type="hidden" name="image_remove" />
+
+            <label class="col-lg-2 col-form-label fw-bold fs-6 text-lg-end mt-5">{{ __("Interface Pictures") }}</label>
+            <div class="col-lg-10 d-flex flex-wrap gap-10">
+              <div class="flex-0">
+                <label class="form-label fw-bold fs-6 text-center w-100">
+                  {{ __("Expanded") }}
+                  <span class="ms-1" data-bs-toggle="tooltip" title="{{ __('Rectangular picture shown in expanded sidebar') }}">
+                    <i class="ki-duotone ki-information-5 text-warning fs-5">
+                      <span class="path1"></span>
+                      <span class="path2"></span>
+                      <span class="path3"></span>
+                    </i>
+                  </span>
                 </label>
-                <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="{{ __('Cancel') }}">
-                  <i class="bi bi-x fs-2"></i>
-                </span>
-                <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="remove" data-bs-toggle="tooltip" title="{{ __('Remove') }}">
-                  <i class="bi bi-x fs-2"></i>
-                </span>
+                <div class="image-input module-image-interface" data-kt-image-input="true">
+                  <div class="image-input-wrapper image-primary w-200px h-75px">
+                  </div>
+                  <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="{{ __('Change') }}">
+                    <i class="bi bi-pencil-fill fs-7"></i>
+                    <input type="file" name="image" accept=".png, .jpg, .jpeg" />
+                    <input type="hidden" name="image_remove" />
+                  </label>
+                  <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="{{ __('Cancel') }}">
+                    <i class="bi bi-x fs-2"></i>
+                  </span>
+                  <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="remove" data-bs-toggle="tooltip" title="{{ __('Remove') }}">
+                    <i class="bi bi-x fs-2"></i>
+                  </span>
+                </div>
+                <div class="form-text">{{ __("Allowed file types: :types", ['types'=>"png, jpg, jpeg."]) }}</div>
               </div>
-              <div class="form-text">{{ __("Allowed file types: :types", ['types'=>"png, jpg, jpeg."]) }}</div>
+
+              <div class="flex-0">
+                <label class="form-label fw-bold fs-6 text-center w-100">
+                  {{ __("Collapsed") }}
+                  <span class="ms-1" data-bs-toggle="tooltip" title="{{ __('Square picture shown in collapsed sidebar') }}">
+                    <i class="ki-duotone ki-information-5 text-warning fs-5">
+                      <span class="path1"></span>
+                      <span class="path2"></span>
+                      <span class="path3"></span>
+                    </i>
+                  </span>
+                </label>
+                <div class="image-input module-image-interface" data-kt-image-input="true">
+                  <div class="image-input-wrapper image-secondary w-75px h-75px"></div>
+                  <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="{{ __('Change') }}">
+                    <i class="bi bi-pencil-fill fs-7"></i>
+                    <input type="file" name="image_secondary" accept=".png, .jpg, .jpeg" />
+                    <input type="hidden" name="image_secondary_remove" />
+                  </label>
+                  <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="{{ __('Cancel') }}">
+                    <i class="bi bi-x fs-2"></i>
+                  </span>
+                  <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="remove" data-bs-toggle="tooltip" title="{{ __('Remove') }}">
+                    <i class="bi bi-x fs-2"></i>
+                  </span>
+                </div>
+                <div class="form-text">{{ __("Allowed file types: :types", ['types'=>"png, jpg, jpeg."]) }}</div>
+              </div>
+
+              <div class="flex-0">
+                <label class="form-label fw-bold fs-6 text-center w-100">
+                  {{ __("Inline") }}
+                  <span class="ms-1" data-bs-toggle="tooltip" title="{{ __('Alternative picture inline') }}">
+                    <i class="ki-duotone ki-information-5 text-warning fs-5">
+                      <span class="path1"></span>
+                      <span class="path2"></span>
+                      <span class="path3"></span>
+                    </i>
+                  </span>
+                </label>
+                <div class="image-input module-image-interface" data-kt-image-input="true">
+                  <div class="image-input-wrapper image-inline w-150px h-40px"></div>
+                  <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="{{ __('Change') }}">
+                    <i class="bi bi-pencil-fill fs-7"></i>
+                    <input type="file" name="image_inline" accept=".png, .jpg, .jpeg" />
+                    <input type="hidden" name="image_inline_remove" />
+                  </label>
+                  <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="{{ __('Cancel') }}">
+                    <i class="bi bi-x fs-2"></i>
+                  </span>
+                  <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="remove" data-bs-toggle="tooltip" title="{{ __('Remove') }}">
+                    <i class="bi bi-x fs-2"></i>
+                  </span>
+                </div>
+                <div class="form-text">{{ __("Allowed file types: :types", ['types'=>"png, jpg, jpeg."]) }}</div>
+              </div>
+
+              <div class="flex-0">
+
+                <div class="d-flex gap-10">
+
+                  <div class="flex-0">
+                    <label class="form-label fw-bold fs-6 text-center w-100">
+                      {{ __("Report Vertical") }}
+                      <span class="ms-1" data-bs-toggle="tooltip" title="{{ __('Report - Template Vertical') }}">
+                        <i class="ki-duotone ki-information-5 text-warning fs-5">
+                          <span class="path1"></span>
+                          <span class="path2"></span>
+                          <span class="path3"></span>
+                        </i>
+                      </span>
+                    </label>
+                    <div class="image-input module-image report" data-kt-image-input="true">
+                      <div class="image-input-wrapper image-report-vertical w-125px h-175px"></div>
+                      <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="{{ __('Change') }}">
+                        <i class="bi bi-pencil-fill fs-7"></i>
+                        <input type="file" name="image_report_vertical" accept=".png, .jpg, .jpeg" />
+                        <input type="hidden" name="image_report_vertical_remove" />
+                      </label>
+                      <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="{{ __('Cancel') }}">
+                        <i class="bi bi-x fs-2"></i>
+                      </span>
+                      <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="remove" data-bs-toggle="tooltip" title="{{ __('Remove') }}">
+                        <i class="bi bi-x fs-2"></i>
+                      </span>
+                    </div>
+                    <div class="form-text">{{ __("Allowed file types: :types", ['types'=>"png, jpg, jpeg."]) }}</div>
+                  </div>
+
+                  <div class="flex-0">
+                    <label class="form-label fw-bold fs-6 text-center w-100">
+                      {{ __("Report Horizontal") }}
+                      <span class="ms-1" data-bs-toggle="tooltip" title="{{ __('Report - Template Horizontal') }}">
+                        <i class="ki-duotone ki-information-5 text-warning fs-5">
+                          <span class="path1"></span>
+                          <span class="path2"></span>
+                          <span class="path3"></span>
+                        </i>
+                      </span>
+                    </label>
+                    <div class="image-input module-image report" data-kt-image-input="true">
+                      <div class="image-input-wrapper image-report-horizontal w-175px h-125px"></div>
+                      <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="{{ __('Change') }}">
+                        <i class="bi bi-pencil-fill fs-7"></i>
+                        <input type="file" name="image_report_horizontal" accept=".png, .jpg, .jpeg" />
+                        <input type="hidden" name="image_report_horizontal_remove" />
+                      </label>
+                      <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="{{ __('Cancel') }}">
+                        <i class="bi bi-x fs-2"></i>
+                      </span>
+                      <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="remove" data-bs-toggle="tooltip" title="{{ __('Remove') }}">
+                        <i class="bi bi-x fs-2"></i>
+                      </span>
+                    </div>
+                    <div class="form-text">{{ __("Allowed file types: :types", ['types'=>"png, jpg, jpeg."]) }}</div>
+                  </div>
+
+                </div>
+
+              </div>
+
+
             </div>
+
           </div>
 
+
           <div class="row mb-6">
-            <label class="col-lg-3 col-form-label fw-bold fs-6 text-lg-end">{{ __("Code") }}</label>
-            <div class="col-lg-9 fv-row">
+            <label class="col-lg-2 col-form-label fw-bold fs-6 text-lg-end">{{ __("Organization") }}</label>
+            <div class="col-lg-10 fv-row">
+
+              <div class="row mb-6">
+                <div class="col-lg-7 fv-row">
+                  <input type="text" name="name" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-custom-class="tooltip-inverse" title="{{ __('Organization Name') }}" class="form-control form-control-solid" placeholder="{{ __('Name') }}" value="" autocomplete="one-time-code" />
+                </div>
+                <div class="col-lg-3 fv-row">
+                  <input type="text" name="identification_number" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-custom-class="tooltip-inverse" title="{{ __('Identification Number') }}" class="form-control form-control-solid" placeholder="{{ __('Identification Number') }}" value="" autocomplete="one-time-code" />
+                </div>
+                <div class="col-lg-2 fv-row">
+                  <input type="text" name="code" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-custom-class="tooltip-inverse" title="{{ __('Code') }}" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="{{ __('Code') }}" value="" />
+                </div>
+              </div>
+
               <div class="row">
-                <div class="col-lg-4 fv-row">
-                  <input type="text" name="code" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="{{ __('Code') }}" value="" />
+                <div class="col-lg-7 fv-row">
+                  <input type="text" name="email" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-custom-class="tooltip-inverse" title="{{ __('Email') }}" class="form-control form-control-solid" placeholder="{{ __('Email') }}" value="" autocomplete="one-time-code" />
+                </div>
+                <div class="col-lg-5 fv-row">
+                  <input type="tel" name="phone" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-custom-class="tooltip-inverse" title="{{ __('Phone Number') }}" class="form-control form-control-solid" placeholder="{{ __('Phone Number') }}" value="" />
                 </div>
               </div>
             </div>
           </div>
 
           <div class="row mb-6">
-            <label class="col-lg-3 col-form-label fw-bold fs-6 text-lg-end">{{ __("Identification Number") }}</label>
-            <div class="col-lg-9 fv-row">
-              <input type="text" name="identification_number" class="form-control form-control-solid" placeholder="{{ __('Identification Number') }}" value="" autocomplete="one-time-code" />
-            </div>
-          </div>
-
-          <div class="row mb-6">
-            <label class="col-lg-3 col-form-label fw-bold fs-6 text-lg-end">{{ __("Name") }}</label>
-            <div class="col-lg-9 fv-row">
-              <input type="text" name="name" class="form-control form-control-solid" placeholder="{{ __('Name') }}" value="" autocomplete="one-time-code" />
-            </div>
-          </div>
-
-          <div class="row mb-6">
-            <label class="col-lg-3 col-form-label fw-bold fs-6 text-lg-end">{{ __("Database Connection") }}</label>
-            <div class="col-lg-9 fv-row">
+            <label class="col-lg-2 col-form-label fw-bold fs-6 text-lg-end">{{ __("Address") }}</label>
+            <div class="col-lg-10 fv-row">
               <div class="row">
-                <div class="col-lg-6 fv-row">
+                <div class="col-lg-4 fv-row">
+                  <input type="text" name="address_country" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-custom-class="tooltip-inverse" title="{{ __('Country') }}" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="{{ __('Country') }}" value="" />
+                </div>
+                <div class="col-lg-3 fv-row">
+                  <input type="text" name="address_state" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-custom-class="tooltip-inverse" title="{{ __('State') }}" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="{{ __('State') }}" value="" />
+                </div>
+                <div class="col-lg-5 fv-row">
+                  <input type="text" name="address_city" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-custom-class="tooltip-inverse" title="{{ __('City') }}" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="{{ __('City') }}" value="" />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row mb-6">
+            <label class="col-lg-2 col-form-label fw-bold fs-6 text-lg-end"></label>
+            <div class="col-lg-10 fv-row">
+              <input type="text" name="address_line1" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-custom-class="tooltip-inverse" title="{{ __('Address Line 1') }}" class="form-control form-control-solid" placeholder="{{ __('Address Line 1') }}" value="" autocomplete="one-time-code" />
+            </div>
+          </div>
+
+          <div class="row mb-6">
+            <label class="col-lg-2 col-form-label fw-bold fs-6 text-lg-end"></label>
+            <div class="col-lg-10 fv-row">
+              <input type="text" name="address_line2" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-custom-class="tooltip-inverse" title="{{ __('Address Line 2') }}" class="form-control form-control-solid" placeholder="{{ __('Address Line 2') }}" value="" autocomplete="one-time-code" />
+            </div>
+          </div>
+
+          <div class="row mb-6">
+            <label class="col-lg-2 col-form-label fw-bold fs-6 text-lg-end">{{ __("Locale") }}</label>
+            <div class="col-lg-10 fv-row">
+              <div class="row">
+                <div class="col-lg-7 fv-row" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-custom-class="tooltip-inverse" title="{{ __('Timezone') }}">
+                  <select name="timezone" data-control="select2" data-placeholder="{{ __('Select a timezone') }}..." class="form-select form-select-solid form-select-lg">
+                    <option value="">{{ __('Select a Timezone') }}...</option>
+                    <?php foreach($timezones as $key => $value): ?>
+                        <option value="{{ $key }}">{{ $value }}</option>
+                    <?php endforeach;?>
+                  </select>
+                </div>
+
+                <div class="col-lg-5 fv-row" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-custom-class="tooltip-inverse" title="{{ __('Language') }}">
+                  <select name="language" data-control="select2" data-placeholder="{{ __('Select a language') }}..." class="form-select form-select-solid form-select-lg">
+                    <option value="">{{ __('Select a language') }}...</option>
+                    <option data-kt-flag="{{ asset('assets/v8.2.1/media/flags/united-states.svg') }}" value="en">{{ __("English") }}</option>
+                    <option data-kt-flag="{{ asset('assets/v8.2.1/media/flags/spain.svg') }}" value="es">{{ __("Spanish") }}</option>
+                  </select>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <div class="row mb-6">
+            <label class="col-lg-2 col-form-label fw-bold fs-6 text-lg-end">{{ __("Database Connection") }}</label>
+            <div class="col-lg-10 fv-row">
+              <div class="row">
+                <div class="col-lg-4 fv-row">
                   <input type="text" name="db_driver" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-custom-class="tooltip-inverse" title="{{ __('Driver') }}" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="{{ __('Driver') }}" value="" />
                 </div>
-                <div class="col-lg-4 fv-row">
+                <div class="col-lg-3 fv-row">
+                  <input type="text" name="db_url" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-custom-class="tooltip-inverse" title="{{ __('Url') }}" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="{{ __('Url') }}" value="" />
+                </div>
+                <div class="col-lg-3 fv-row">
                   <input type="text" name="db_host" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-custom-class="tooltip-inverse" title="{{ __('Host') }}" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="{{ __('Host') }}" value="" />
                 </div>
                 <div class="col-lg-2 fv-row">
@@ -146,13 +348,16 @@
           </div>
 
           <div class="row mb-6">
-            <label class="col-lg-3 col-form-label fw-bold fs-6 text-lg-end"></label>
-            <div class="col-lg-9 fv-row">
+            <label class="col-lg-2 col-form-label fw-bold fs-6 text-lg-end"></label>
+            <div class="col-lg-10 fv-row">
               <div class="row">
-                <div class="col-lg-6 fv-row">
+                <div class="col-lg-4 fv-row">
                   <input type="text" name="db_name" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-custom-class="tooltip-inverse" title="{{ __('Database Name') }}" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="{{ __('Database Name') }}" value="" />
                 </div>
-                <div class="col-lg-4 fv-row">
+                <div class="col-lg-3 fv-row">
+                  <input type="text" name="db_user" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-custom-class="tooltip-inverse" title="{{ __('User') }}" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="{{ __('User') }}" value="" />
+                </div>
+                <div class="col-lg-3 fv-row">
                   <input type="text" name="db_password" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-custom-class="tooltip-inverse" title="{{ __('Password') }}" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="{{ __('Password') }}" value="" />
                 </div>
                 <div class="col-lg-2 fv-row">
@@ -162,86 +367,15 @@
             </div>
           </div>
 
-          <div class="row mb-6">
-            <label class="col-lg-3 col-form-label fw-bold fs-6 text-lg-end"></label>
-            <div class="col-lg-9 fv-row">
-              <input type="text" name="db_url" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-custom-class="tooltip-inverse" title="{{ __('Url') }}" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="{{ __('Url') }}" value="" />
-            </div>
-          </div>
+          
+
+          
+
+          
 
           <div class="row mb-6">
-            <label class="col-lg-3 col-form-label fw-bold fs-6 text-lg-end">{{ __("Language") }}</label>
-            <div class="col-lg-9 fv-row">
-              <select name="language" aria-label="{{ __('Select a language') }}" data-control="select2" data-placeholder="{{ __('Select a language') }}..." class="form-select form-select-solid form-select-lg">
-                <option value="">{{ __('Select a language') }}...</option>
-                <option data-kt-flag="{{ asset('assets/v8.2.1/media/flags/united-states.svg') }}" value="en">{{ __("English") }}</option>
-                <option data-kt-flag="{{ asset('assets/v8.2.1/media/flags/spain.svg') }}" value="es">{{ __("Spanish") }}</option>
-              </select>
-            </div>
-          </div>
-
-          <div class="row mb-6">
-            <label class="col-lg-3 col-form-label fw-bold fs-6 text-lg-end">{{ __("Time Zone") }}</label>
-            <div class="col-lg-9 fv-row">
-              <select name="timezone" aria-label="{{ __('Select a timezone') }}" data-control="select2" data-placeholder="{{ __('Select a timezone') }}..." class="form-select form-select-solid form-select-lg">
-                <option value="">{{ __('Select a Timezone') }}...</option>
-                <?php foreach($timezones as $key => $value): ?>
-                    <option value="{{ $key }}">{{ $value }}</option>
-                <?php endforeach;?>
-              </select>
-            </div>
-          </div>
-
-          <div class="row mb-6">
-            <label class="col-lg-3 col-form-label fw-bold fs-6 text-lg-end">{{ __("Email") }}</label>
-            <div class="col-lg-9 fv-row">
-              <input type="text" name="email" class="form-control form-control-solid" placeholder="{{ __('Email') }}" value="" autocomplete="one-time-code" />
-            </div>
-          </div>
-
-          <div class="row mb-6">
-            <label class="col-lg-3 col-form-label fw-bold fs-6 text-lg-end">
-                {{ __("Phone") }}
-            </label>
-            <div class="col-lg-9 fv-row">
-              <input type="tel" name="phone" class="form-control form-control-solid" placeholder="{{ __('Phone Number') }}" value="" />
-            </div>
-          </div>
-
-          <div class="row mb-6">
-            <label class="col-lg-3 col-form-label fw-bold fs-6 text-lg-end">{{ __("Address") }}</label>
-            <div class="col-lg-9 fv-row">
-              <div class="row">
-                <div class="col-lg-4 fv-row">
-                  <input type="text" name="address_country" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-custom-class="tooltip-inverse" title="{{ __('Country') }}" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="{{ __('Country') }}" value="" />
-                </div>
-                <div class="col-lg-4 fv-row">
-                  <input type="text" name="address_state" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-custom-class="tooltip-inverse" title="{{ __('State') }}" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="{{ __('State') }}" value="" />
-                </div>
-                <div class="col-lg-4 fv-row">
-                  <input type="text" name="address_city" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-custom-class="tooltip-inverse" title="{{ __('City') }}" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="{{ __('City') }}" value="" />
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="row mb-6">
-            <label class="col-lg-3 col-form-label fw-bold fs-6 text-lg-end"></label>
-            <div class="col-lg-9 fv-row">
-              <input type="text" name="address_line1" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-custom-class="tooltip-inverse" title="{{ __('Address Line 1') }}" class="form-control form-control-solid" placeholder="{{ __('Address Line 1') }}" value="" autocomplete="one-time-code" />
-            </div>
-          </div>
-
-          <div class="row mb-6">
-            <label class="col-lg-3 col-form-label fw-bold fs-6 text-lg-end"></label>
-            <div class="col-lg-9 fv-row">
-              <input type="text" name="address_line2" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-custom-class="tooltip-inverse" title="{{ __('Address Line 2') }}" class="form-control form-control-solid" placeholder="{{ __('Address Line 2') }}" value="" autocomplete="one-time-code" />
-            </div>
-          </div>
-
-          <div class="row mb-6">
-            <label class="col-lg-3 col-form-label fw-bold fs-6 text-lg-end">{{ __("Status") }}</label>
-            <div class="col-lg-9 fv-row d-flex align-items-center">
+            <label class="col-lg-2 col-form-label fw-bold fs-6 text-lg-end">{{ __("Status") }}</label>
+            <div class="col-lg-10 fv-row d-flex align-items-center">
               <div class="form-check form-switch form-check-custom form-check-success form-check-solid">
                 <input class="form-check-input " type="checkbox" value="" checked id="sw_status" onchange="Organizations.changeStatus()"/>
                 <label class="form-check-label fw-bold fs-4" for="sw_status" id="sw_status_label">
@@ -278,7 +412,8 @@
 <script type="text/javascript">
 var Organizations={
   token: $("[name='_token']").val(),
-  default_image: "{{ asset('image/image-input-not-found.png') }}",
+  default_image: "{{ asset('image/image-input-not-found-bg-dark.png') }}",
+  default_image_report: "{{ asset('image/image-input-not-found.png') }}",
   default_timezome: '',
   default_language: '',
   path_image: "{{ asset('storage/organizations') }}",
@@ -291,8 +426,11 @@ var Organizations={
     var me=this;
     //return;
 
-    $(".module-image").css('background-image',"url('"+me.default_image+"')");
-    $(".module-image .image-input-wrapper").css('background-image',"url('"+me.default_image+"')");
+    $(".module-image-interface").css('background-image',"url('"+me.default_image+"')");
+    $(".module-image-interface .image-input-wrapper").css('background-image',"url('"+me.default_image+"')");
+
+    $(".module-image.report").css('background-image',"url('"+me.default_image_report+"')");
+    $(".module-image.report .image-input-wrapper").css('background-image',"url('"+me.default_image_report+"')");
 
     $("#datatable_search").on("keyup", function(event){
       if(event.keyCode==13){
@@ -557,11 +695,16 @@ var Organizations={
   reset: function(){
     var me=this;
 
-    $(".module-image .image-input-wrapper").css('background-image',"url('"+me.default_image+"')");
+    $(".module-image-interface .image-input-wrapper").css('background-image',"url('"+me.default_image+"')");
+    $(".module-image.report .image-input-wrapper").css('background-image',"url('"+me.default_image_report+"')");
 
     me.current_id=null;
 
     me.form.find("[name='image']").val("");
+    me.form.find("[name='image_secondary']").val("");
+    me.form.find("[name='image_inline']").val("");
+    me.form.find("[name='image_report_vertical']").val("");
+    me.form.find("[name='image_report_horizontal']").val("");
 
     me.form.find("[name='code']").val("");
     me.form.find("[name='identification_number']").val("");
@@ -632,7 +775,23 @@ var Organizations={
     const data = $("#module_datatable").dataTable().api().data()[index];
 
     if(data['image']){
-      $(".module-image .image-input-wrapper").css('background-image',"url("+me.path_image+"/"+data['image']+")");
+      $(".module-image-interface .image-primary").css('background-image',"url("+me.path_image+"/"+data['image']+")");
+    }
+
+    if(data['image_secondary']){
+      $(".module-image-interface .image-secondary").css('background-image',"url("+me.path_image+"/"+data['image_secondary']+")");
+    }
+
+    if(data['image_inline']){
+      $(".module-image-interface .image-inline").css('background-image',"url("+me.path_image+"/"+data['image_inline']+")");
+    }
+
+    if(data['image_report_vertical']){
+      $(".module-image .image-report-vertical").css('background-image',"url("+me.path_image+"/"+data['image_report_vertical']+")");
+    }
+
+    if(data['image_report_horizontal']){
+      $(".module-image .image-report-horizontal").css('background-image',"url("+me.path_image+"/"+data['image_report_horizontal']+")");
     }
 
     me.form.find("[name='code']").val(data['code']);
@@ -686,6 +845,10 @@ var Organizations={
         me.btn_save.prop('disabled',true);
 
         var image                   = me.form.find("[name='image']").val() ? me.form.find("[name='image']")[0].files[0] : null;
+        var image_secondary         = me.form.find("[name='image_secondary']").val() ? me.form.find("[name='image_secondary']")[0].files[0] : null;
+        var image_inline            = me.form.find("[name='image_inline']").val() ? me.form.find("[name='image_inline']")[0].files[0] : null;
+        var image_report_vertical   = me.form.find("[name='image_report_vertical']").val() ? me.form.find("[name='image_report_vertical']")[0].files[0] : null;
+        var image_report_horizontal = me.form.find("[name='image_report_horizontal']").val() ? me.form.find("[name='image_report_horizontal']")[0].files[0] : null;
         var code                    = me.form.find("[name='code']").val();
         var identification_number   = me.form.find("[name='identification_number']").val();
         var name                    = me.form.find("[name='name']").val();
@@ -741,7 +904,23 @@ var Organizations={
         data.append('status',                status);
 
         if(image){
-          data.append('image',         image);
+          data.append('image',               image);
+        }
+
+        if(image_secondary){
+          data.append('image_secondary',     image_secondary);
+        }
+
+        if(image_inline){
+          data.append('image_inline',     image_inline);
+        }
+
+        if(image_report_vertical){
+          data.append('image_report_vertical',     image_report_vertical);
+        }
+
+        if(image_report_horizontal){
+          data.append('image_report_horizontal',     image_report_horizontal);
         }
 
         $.ajax({

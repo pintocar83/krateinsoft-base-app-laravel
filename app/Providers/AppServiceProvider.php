@@ -59,6 +59,5 @@ class AppServiceProvider extends ServiceProvider
                 }
             }
         }
-        //dd(config("feature_flag.auth-google"));
     }
 }

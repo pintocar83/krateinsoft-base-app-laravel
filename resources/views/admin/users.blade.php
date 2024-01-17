@@ -627,7 +627,7 @@
             searchable: false,
             render: function (data, type, row) {
               var tmp="";
-              for(var i=0; i<row["roles"].length; i++){
+              for(var i=0; i<row["roles"]?.length; i++){
                 tmp+=`<div class="badge badge-danger fw-bolder cursor-pointer me-1 mb-1">`+row["roles"][i]+`</div>`;
               }
 
