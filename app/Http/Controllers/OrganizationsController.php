@@ -265,4 +265,15 @@ class OrganizationsController extends Controller
             "code" => $code
         ];
     }
+
+    public function migrate(Request $request, $id){
+        $organization = Organization::find($id);
+
+        $organization->migrate();
+
+        return [
+            'success' => true,
+            'message' => __("Updated organization database"),
+        ];
+    }
 }

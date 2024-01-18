@@ -120,3 +120,40 @@
 .no-flex {
     flex: 0;
 }
+
+.input-group-text {
+    padding-top: 0;
+    padding-bottom: 0;
+    background-color: #f3f4f6;
+    background-color: #f9fcff;
+    background-image: linear-gradient(147deg, #f9fcff 0%, #dfdfdf 74%);
+    /*background-color: var(--bs-gray-300);*/
+    /*border: none;*/
+
+}
+
+.input-group-text i.mdi {
+    /*color: var(--bs-text-muted);*/
+    color: var(--bs-text-gray-700);
+    font-size: 1.75rem!important;
+}
+
+.input-group .select2.select2-container {
+    position: relative;
+    flex: 1 1 auto;
+    width: auto !important;
+    min-width: 0;
+}
+
+.input-group .form-select {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.form-switch.form-check-solid.form-check-success-danger .form-check-input:checked {
+    background-color: var(--bs-success);
+}
+
+.form-switch.form-check-solid.form-check-success-danger .form-check-input:not(:checked) {
+    background-color: var(--bs-danger);
+}

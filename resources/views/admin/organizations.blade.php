@@ -250,22 +250,47 @@
 
               <div class="row mb-6">
                 <div class="col-lg-7 fv-row">
-                  <input type="text" name="name" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-custom-class="tooltip-inverse" title="{{ __('Organization Name') }}" class="form-control form-control-solid" placeholder="{{ __('Name') }}" value="" autocomplete="one-time-code" />
+                  <div class="input-group">
+                    <span class="input-group-text">
+                      <i class="mdi mdi-card-text"></i>
+                    </span>
+                    <input type="text" name="name" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-custom-class="tooltip-inverse" title="{{ __('Organization Name') }}" class="form-control form-control-solid" placeholder="{{ __('Name') }}" value="" autocomplete="one-time-code" />
+                  </div>
                 </div>
                 <div class="col-lg-3 fv-row">
-                  <input type="text" name="identification_number" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-custom-class="tooltip-inverse" title="{{ __('Identification Number') }}" class="form-control form-control-solid" placeholder="{{ __('Identification Number') }}" value="" autocomplete="one-time-code" />
+                    <div class="input-group">
+                      <span class="input-group-text">
+                        <i class="mdi mdi-identifier"></i>
+                      </span>
+                      <input type="text" name="identification_number" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-custom-class="tooltip-inverse" title="{{ __('Identification Number') }}" class="form-control form-control-solid" placeholder="{{ __('Identification Number') }}" value="" autocomplete="one-time-code" />
+                    </div>
                 </div>
                 <div class="col-lg-2 fv-row">
-                  <input type="text" name="code" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-custom-class="tooltip-inverse" title="{{ __('Code') }}" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="{{ __('Code') }}" value="" />
+                  <div class="input-group">
+                    <span class="input-group-text">
+                      <i class="mdi mdi-pound"></i>
+                    </span>
+                    <input type="text" name="code" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-custom-class="tooltip-inverse" title="{{ __('Code') }}" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="{{ __('Code') }}" value="" />
+                  </div>
                 </div>
               </div>
 
               <div class="row">
                 <div class="col-lg-7 fv-row">
-                  <input type="text" name="email" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-custom-class="tooltip-inverse" title="{{ __('Email') }}" class="form-control form-control-solid" placeholder="{{ __('Email') }}" value="" autocomplete="one-time-code" />
+                  <div class="input-group">
+                    <span class="input-group-text">
+                      <i class="mdi mdi-email"></i>
+                    </span>
+                    <input type="text" name="email" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-custom-class="tooltip-inverse" title="{{ __('Email') }}" class="form-control form-control-solid" placeholder="{{ __('Email') }}" value="" autocomplete="one-time-code" />
+                  </div>
                 </div>
                 <div class="col-lg-5 fv-row">
-                  <input type="tel" name="phone" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-custom-class="tooltip-inverse" title="{{ __('Phone Number') }}" class="form-control form-control-solid" placeholder="{{ __('Phone Number') }}" value="" />
+                  <div class="input-group">
+                    <span class="input-group-text">
+                      <i class="mdi mdi-phone"></i>
+                    </span>
+                    <input type="tel" name="phone" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-custom-class="tooltip-inverse" title="{{ __('Phone Number') }}" class="form-control form-control-solid" placeholder="{{ __('Phone Number') }}" value="" />
+                  </div>
                 </div>
               </div>
             </div>
@@ -276,13 +301,28 @@
             <div class="col-lg-10 fv-row">
               <div class="row">
                 <div class="col-lg-4 fv-row">
-                  <input type="text" name="address_country" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-custom-class="tooltip-inverse" title="{{ __('Country') }}" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="{{ __('Country') }}" value="" />
+                  <div class="input-group">
+                    <span class="input-group-text">
+                      <i class="mdi mdi-earth"></i>
+                    </span>
+                    <input type="text" name="address_country" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-custom-class="tooltip-inverse" title="{{ __('Country') }}" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="{{ __('Country') }}" value="" />
+                  </div>
                 </div>
                 <div class="col-lg-3 fv-row">
-                  <input type="text" name="address_state" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-custom-class="tooltip-inverse" title="{{ __('State') }}" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="{{ __('State') }}" value="" />
+                  <div class="input-group">
+                    <span class="input-group-text">
+                      <i class="mdi mdi-map"></i>
+                    </span>
+                    <input type="text" name="address_state" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-custom-class="tooltip-inverse" title="{{ __('State') }}" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="{{ __('State') }}" value="" />
+                  </div>
                 </div>
                 <div class="col-lg-5 fv-row">
-                  <input type="text" name="address_city" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-custom-class="tooltip-inverse" title="{{ __('City') }}" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="{{ __('City') }}" value="" />
+                  <div class="input-group">
+                    <span class="input-group-text">
+                      <i class="mdi mdi-city"></i>
+                    </span>
+                    <input type="text" name="address_city" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-custom-class="tooltip-inverse" title="{{ __('City') }}" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="{{ __('City') }}" value="" />
+                  </div>
                 </div>
               </div>
             </div>
@@ -291,14 +331,24 @@
           <div class="row mb-6">
             <label class="col-lg-2 col-form-label fw-bold fs-6 text-lg-end"></label>
             <div class="col-lg-10 fv-row">
-              <input type="text" name="address_line1" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-custom-class="tooltip-inverse" title="{{ __('Address Line 1') }}" class="form-control form-control-solid" placeholder="{{ __('Address Line 1') }}" value="" autocomplete="one-time-code" />
+              <div class="input-group">
+                <span class="input-group-text">
+                  <i class="mdi mdi-map-marker-radius"></i>
+                </span>
+                <input type="text" name="address_line1" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-custom-class="tooltip-inverse" title="{{ __('Address Line 1') }}" class="form-control form-control-solid" placeholder="{{ __('Address Line 1') }}" value="" autocomplete="one-time-code" />
+              </div>
             </div>
           </div>
 
           <div class="row mb-6">
             <label class="col-lg-2 col-form-label fw-bold fs-6 text-lg-end"></label>
             <div class="col-lg-10 fv-row">
-              <input type="text" name="address_line2" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-custom-class="tooltip-inverse" title="{{ __('Address Line 2') }}" class="form-control form-control-solid" placeholder="{{ __('Address Line 2') }}" value="" autocomplete="one-time-code" />
+              <div class="input-group">
+                <span class="input-group-text">
+                  <i class="mdi mdi-map-marker-radius"></i>
+                </span>
+                <input type="text" name="address_line2" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-custom-class="tooltip-inverse" title="{{ __('Address Line 2') }}" class="form-control form-control-solid" placeholder="{{ __('Address Line 2') }}" value="" autocomplete="one-time-code" />
+              </div>
             </div>
           </div>
 
@@ -307,20 +357,30 @@
             <div class="col-lg-10 fv-row">
               <div class="row">
                 <div class="col-lg-7 fv-row" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-custom-class="tooltip-inverse" title="{{ __('Timezone') }}">
-                  <select name="timezone" data-control="select2" data-placeholder="{{ __('Select a timezone') }}..." class="form-select form-select-solid form-select-lg">
-                    <option value="">{{ __('Select a Timezone') }}...</option>
-                    <?php foreach($timezones as $key => $value): ?>
+                  <div class="input-group">
+                    <span class="input-group-text">
+                      <i class="mdi mdi-clock-outline"></i>
+                    </span>
+                    <select name="timezone" data-control="select2" data-placeholder="{{ __('Select a timezone') }}..." class="form-select form-select-solid form-select-lg">
+                      <option value="">{{ __('Select a Timezone') }}...</option>
+                      <?php foreach($timezones as $key => $value): ?>
                         <option value="{{ $key }}">{{ $value }}</option>
-                    <?php endforeach;?>
-                  </select>
+                      <?php endforeach;?>
+                    </select>
+                  </div>
                 </div>
 
                 <div class="col-lg-5 fv-row" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-custom-class="tooltip-inverse" title="{{ __('Language') }}">
-                  <select name="language" data-control="select2" data-placeholder="{{ __('Select a language') }}..." class="form-select form-select-solid form-select-lg">
-                    <option value="">{{ __('Select a language') }}...</option>
-                    <option data-kt-flag="{{ asset('assets/v8.2.1/media/flags/united-states.svg') }}" value="en">{{ __("English") }}</option>
-                    <option data-kt-flag="{{ asset('assets/v8.2.1/media/flags/spain.svg') }}" value="es">{{ __("Spanish") }}</option>
-                  </select>
+                  <div class="input-group">
+                    <span class="input-group-text">
+                      <i class="mdi mdi-flag"></i>
+                    </span>
+                    <select name="language" data-control="select2" data-placeholder="{{ __('Select a language') }}..." class="form-select form-select-solid form-select-lg">
+                      <option value="">{{ __('Select a language') }}...</option>
+                      <option data-kt-flag="{{ asset('assets/v8.2.1/media/flags/united-states.svg') }}" value="en">{{ __("English") }}</option>
+                      <option data-kt-flag="{{ asset('assets/v8.2.1/media/flags/spain.svg') }}" value="es">{{ __("Spanish") }}</option>
+                    </select>
+                  </div>
                 </div>
               </div>
 
@@ -332,16 +392,36 @@
             <div class="col-lg-10 fv-row">
               <div class="row">
                 <div class="col-lg-4 fv-row">
-                  <input type="text" name="db_driver" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-custom-class="tooltip-inverse" title="{{ __('Driver') }}" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="{{ __('Driver') }}" value="" />
+                  <div class="input-group">
+                    <span class="input-group-text">
+                      <i class="mdi mdi-connection"></i>
+                    </span>
+                    <input type="text" name="db_driver" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-custom-class="tooltip-inverse" title="{{ __('Driver') }}" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="{{ __('Driver') }}" value="" />
+                  </div>
                 </div>
                 <div class="col-lg-3 fv-row">
-                  <input type="text" name="db_url" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-custom-class="tooltip-inverse" title="{{ __('Url') }}" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="{{ __('Url') }}" value="" />
+                  <div class="input-group">
+                    <span class="input-group-text">
+                      <i class="mdi mdi-search-web"></i>
+                    </span>
+                    <input type="text" name="db_url" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-custom-class="tooltip-inverse" title="{{ __('Url') }}" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="{{ __('Url') }}" value="" />
+                  </div>
                 </div>
                 <div class="col-lg-3 fv-row">
-                  <input type="text" name="db_host" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-custom-class="tooltip-inverse" title="{{ __('Host') }}" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="{{ __('Host') }}" value="" />
+                  <div class="input-group">
+                    <span class="input-group-text">
+                      <i class="mdi mdi-server"></i>
+                    </span>
+                    <input type="text" name="db_host" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-custom-class="tooltip-inverse" title="{{ __('Host') }}" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="{{ __('Host') }}" value="" />
+                  </div>
                 </div>
                 <div class="col-lg-2 fv-row">
-                  <input type="text" name="db_port" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-custom-class="tooltip-inverse" title="{{ __('Port') }}" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="{{ __('Port') }}" value="" />
+                  <div class="input-group">
+                    <span class="input-group-text">
+                      <i class="mdi mdi-serial-port"></i>
+                    </span>
+                    <input type="text" name="db_port" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-custom-class="tooltip-inverse" title="{{ __('Port') }}" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="{{ __('Port') }}" value="" />
+                  </div>
                 </div>
               </div>
             </div>
@@ -352,31 +432,45 @@
             <div class="col-lg-10 fv-row">
               <div class="row">
                 <div class="col-lg-4 fv-row">
-                  <input type="text" name="db_name" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-custom-class="tooltip-inverse" title="{{ __('Database Name') }}" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="{{ __('Database Name') }}" value="" />
+                  <div class="input-group">
+                    <span class="input-group-text">
+                      <i class="mdi mdi-database"></i>
+                    </span>
+                    <input type="text" name="db_name" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-custom-class="tooltip-inverse" title="{{ __('Database Name') }}" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="{{ __('Database Name') }}" value="" />
+                  </div>
                 </div>
                 <div class="col-lg-3 fv-row">
-                  <input type="text" name="db_user" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-custom-class="tooltip-inverse" title="{{ __('User') }}" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="{{ __('User') }}" value="" />
+                  <div class="input-group">
+                    <span class="input-group-text">
+                      <i class="mdi mdi-account-key"></i>
+                    </span>
+                    <input type="text" name="db_user" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-custom-class="tooltip-inverse" title="{{ __('User') }}" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="{{ __('User') }}" value="" />
+                  </div>
                 </div>
                 <div class="col-lg-3 fv-row">
-                  <input type="text" name="db_password" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-custom-class="tooltip-inverse" title="{{ __('Password') }}" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="{{ __('Password') }}" value="" />
+                  <div class="input-group">
+                    <span class="input-group-text">
+                      <i class="mdi mdi-key-variant"></i>
+                    </span>
+                    <input type="text" name="db_password" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-custom-class="tooltip-inverse" title="{{ __('Password') }}" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="{{ __('Password') }}" value="" />
+                  </div>
                 </div>
                 <div class="col-lg-2 fv-row">
-                  <input type="text" name="db_socket" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-custom-class="tooltip-inverse" title="{{ __('Socket') }}" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="{{ __('Socket') }}" value="" />
+                  <div class="input-group">
+                    <span class="input-group-text">
+                      <i class="mdi mdi-power-socket"></i>
+                    </span>
+                    <input type="text" name="db_socket" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-custom-class="tooltip-inverse" title="{{ __('Socket') }}" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="{{ __('Socket') }}" value="" />
+                  </div>
                 </div>
               </div>
             </div>
           </div>
 
-          
-
-          
-
-          
-
           <div class="row mb-6">
             <label class="col-lg-2 col-form-label fw-bold fs-6 text-lg-end">{{ __("Status") }}</label>
             <div class="col-lg-10 fv-row d-flex align-items-center">
-              <div class="form-check form-switch form-check-custom form-check-success form-check-solid">
+              <div class="form-check form-switch form-check-custom form-check-success-danger form-check-solid">
                 <input class="form-check-input " type="checkbox" value="" checked id="sw_status" onchange="Organizations.changeStatus()"/>
                 <label class="form-check-label fw-bold fs-4" for="sw_status" id="sw_status_label">
                   &nbsp;
@@ -388,6 +482,8 @@
         </div>
 
         <div class="card-footer d-flex justify-content-end py-6 px-9">
+          <button type="button" class="btn btn-primary btn-update-database" onClick="Organizations.updateDatabase()">{{ __("Update Database") }}</button>
+          <div style="flex: 1;"></div>
           <a class="btn btn-danger btn-active-light-primary me-2" href="#" onclick="Organizations.list()">{{ __("Cancel") }}</a>
           <button type="button" class="btn btn-success" onclick="Organizations.save()" id="module_save">
               <span class="indicator-label">{{ __("Save") }}</span>
@@ -739,6 +835,8 @@ var Organizations={
 
     me.form.find("#sw_status").prop("checked",true);
 
+    $(".btn-update-database").css("display","none");
+
     me.changeStatus();
 
     me.validator.resetForm();
@@ -749,6 +847,7 @@ var Organizations={
 
     me.reset();
 
+    $(".btn-update-database").css("display","none");
     $(".module-list").css("display","none");
     $(".module-form").css("display","");
     $(".module-title").html("{{ __('Add') }}");
@@ -830,6 +929,7 @@ var Organizations={
 
     $(".module-title").html("{{ __('Edit') }}");
 
+    $(".btn-update-database").css("display","");
     $(".module-list").css("display","none");
     $(".module-form").css("display","");
   },
@@ -1012,32 +1112,62 @@ var Organizations={
 
   },
 
-  changeMain: function(){
-    var me=this;
-
-    var check = me.form.find("#sw_main").is(":checked");
-    if(check){
-      me.form.find("#sw_main_label").addClass("text-success");
-      me.form.find("#sw_main_label").html("{{ __('Yes') }}");
-    }
-    else{
-      me.form.find("#sw_main_label").removeClass("text-success");
-      me.form.find("#sw_main_label").html("{{ __('No') }}");
-    }
-  },
-
   changeStatus: function(){
     var me=this;
 
     var check = me.form.find("#sw_status").is(":checked");
     if(check){
+      me.form.find("#sw_status_label").removeClass("text-danger");
       me.form.find("#sw_status_label").addClass("text-success");
       me.form.find("#sw_status_label").html("{{ __('Enabled') }}");
     }
     else{
       me.form.find("#sw_status_label").removeClass("text-success");
+      me.form.find("#sw_status_label").addClass("text-danger");
       me.form.find("#sw_status_label").html("{{ __('Disabled') }}");
     }
+  },
+
+  updateDatabase: function(){
+    var me=this;
+
+    if(!me.current_id)
+      return;
+
+    Swal.fire({
+      html: `<h2>{{ __('Are you sure you want to update database?') }}</h2>`,
+      icon: "question",
+      buttonsStyling: false,
+      showCancelButton: true,
+      confirmButtonText: "Yes, update!",
+      cancelButtonText: 'No, cancel',
+      customClass: {
+          confirmButton: "btn fw-bold btn-success",
+          cancelButton: 'btn fw-bold btn-active-light-primary',
+      }
+    }).then(function(t) {
+      if(t.isConfirmed){
+        $.ajax({
+          method: "POST",
+          url: "{{ url('api/organizations') }}/"+me.current_id+"/migrate",
+          data: {
+            _token: me.token
+          },
+          dataType: "json",
+          cache: false,
+        }).done(function(data){
+          if(data["success"]){
+            toastr.success(data["message"], "{{ __('Organizations - Update Database') }}");
+            me.search();
+            return;
+          }
+          toastr.error(data["message"], "{{ __('Organizations - Update Database') }}");
+
+        }).fail(function(data){
+          toastr.error("{{ __('Fail Request') }}", "{{ __('Organizations - Update Database') }}" );
+        });
+      }
+    });
   },
 
 };

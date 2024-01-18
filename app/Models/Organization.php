@@ -42,17 +42,19 @@ class Organization extends Model
 
     public function migrate()
     {
+        $connection = [
+            "driver" => $this->db_driver
+        ];
 
-        config(["database.connections.tmp" => [
-            "driver" => $this->db_driver,
-            "url" => $this->db_url,
-            "host" => $this->db_host,
-            "port" => $this->db_port,
-            "database" => $this->db_name,
-            "username" => $this->db_user,
-            "password" => $this->db_password,
-            'unix_socket' => $this->db_socket,
-        ]]);
+        if($this->db_url)      $connection["url"] = $this->db_url;
+        if($this->db_host)     $connection["host"] = $this->db_host;
+        if($this->db_port)     $connection["port"] = $this->db_port;
+        if($this->db_name)     $connection["database"] = $this->db_name;
+        if($this->db_user)     $connection["username"] = $this->db_user;
+        if($this->db_password) $connection["password"] = $this->db_password;
+        if($this->db_socket)   $connection["unix_socket"] = $this->db_socket;
+
+        config(["database.connections.tmp" => $connection]);
 
         if($this->db_driver==="sqlite"){
             if(!file_exists($this->db_name)){

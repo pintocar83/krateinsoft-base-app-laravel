@@ -27,16 +27,19 @@ class Initialization
         //Set organization database
         $current_organization = Auth()->user()?->organization();
         if($current_organization){
-            Config::set(["database.connections.organization" => [
-                "driver" => $current_organization->db_driver,
-                "url" => $current_organization->db_url,
-                "host" => $current_organization->db_host,
-                "port" => $current_organization->db_port,
-                "database" => $current_organization->db_name,
-                "username" => $current_organization->db_user,
-                "password" => $current_organization->db_password,
-                'unix_socket' => $current_organization->db_socket,
-            ]]);
+            $connection = [
+                "driver" => $current_organization->db_driver
+            ];
+
+            if($current_organization->db_url)      $connection["url"] = $current_organization->db_url;
+            if($current_organization->db_host)     $connection["host"] = $current_organization->db_host;
+            if($current_organization->db_port)     $connection["port"] = $current_organization->db_port;
+            if($current_organization->db_name)     $connection["database"] = $current_organization->db_name;
+            if($current_organization->db_user)     $connection["username"] = $current_organization->db_user;
+            if($current_organization->db_password) $connection["password"] = $current_organization->db_password;
+            if($current_organization->db_socket)   $connection["unix_socket"] = $current_organization->db_socket;
+
+            Config::set(["database.connections.organization" => $connection]);
         }
 
         return $next($request);

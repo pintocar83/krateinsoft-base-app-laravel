@@ -37,6 +37,7 @@ Route::group(['middleware' => ['initialization', 'auth']], function() {
     Route::post('/organizations',                [OrganizationsController::class,'store']);
     Route::patch('/organizations/{id}',          [OrganizationsController::class,'update']);
     Route::delete('/organizations',              [OrganizationsController::class,'delete']);
+    Route::post('/organizations/{id}/migrate',   [OrganizationsController::class,'migrate']);
 
 
 

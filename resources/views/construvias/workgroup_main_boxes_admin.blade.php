@@ -82,9 +82,12 @@
     <div id="kt_account_profile_details" class="show">
       <form id="module_form" class="form" action="" method="POST" enctype="multipart/form-data" autocomplete="off">
         <div class="card-body border-top p-9">
+
+
+
           <div class="row mb-6">
-            <label class="col-lg-3 col-form-label fw-bold fs-6 text-lg-end">{{ __("Picture") }}</label>
-            <div class="col-lg-9">
+            <label class="col-lg-2 col-form-label fw-bold fs-6 text-lg-end">{{ __("Picture") }}</label>
+            <div class="col-lg-3">
               <div class="image-input image-input-empty module-image" data-kt-image-input="true">
                 <div class="image-input-wrapper w-125px h-125px"></div>
                 <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="{{ __('Change') }}">
@@ -101,115 +104,163 @@
               </div>
               <div class="form-text">{{ __("Allowed file types: :types", ['types'=>"png, jpg, jpeg."]) }}</div>
             </div>
+
+            <div class="col-lg-7">
+              <div class="row mb-6">
+                <label class="col-lg-8 col-form-label fw-bold fs-6 text-lg-end">{{ __("Main") }}</label>
+                <div class="col-lg-4 fv-row d-flex align-items-center">
+                  <div class="form-check form-switch form-check-custom form-check-success form-check-solid">
+                    <input class="form-check-input " type="checkbox" value="" id="sw_main" onchange="Workgroups.changeMain()"/>
+                    <label class="form-check-label fw-bold fs-4" for="sw_status" id="sw_main_label">
+                      &nbsp;
+                    </label>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row mb-6">
+                <label class="col-lg-8 col-form-label fw-bold fs-6 text-lg-end">{{ __("Status") }}</label>
+                <div class="col-lg-4 fv-row d-flex align-items-center">
+                  <div class="form-check form-switch form-check-custom form-check-success form-check-solid">
+                    <input class="form-check-input " type="checkbox" value="" checked id="sw_status" onchange="Workgroups.changeStatus()"/>
+                    <label class="form-check-label fw-bold fs-4" for="sw_status" id="sw_status_label">
+                      &nbsp;
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
 
           <div class="row mb-6">
-            <label class="col-lg-3 col-form-label fw-bold fs-6 text-lg-end">{{ __("Code") }}</label>
-            <div class="col-lg-9 fv-row">
+            <label class="col-lg-2 col-form-label fw-bold fs-6 text-lg-end">{{ __("Workgroup - Main Box") }}</label>
+            <div class="col-lg-10 fv-row">
+              <div class="row">
+                <div class="col-lg-7 fv-row">
+                  <div class="input-group">
+                    <span class="input-group-text">
+                      <i class="mdi mdi-layers-triple"></i>
+                    </span>
+                    <input type="text" name="name" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-custom-class="tooltip-inverse" title="{{ __('Workgroup - Main Box') }}" class="form-control form-control-solid mb-lg-0" placeholder="{{ __('Name') }}" value="" />
+                  </div>
+                </div>
+                <div class="col-lg-3 fv-row">
+                  <div class="input-group">
+                    <span class="input-group-text">
+                      <i class="mdi mdi-pound"></i>
+                    </span>
+                    <input type="text" name="code" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-custom-class="tooltip-inverse" title="{{ __('Code') }}" class="form-control form-control-solid mb-lg-0" placeholder="{{ __('Code') }}" value="" />
+                  </div>
+                </div>
+                <div class="col-lg-2 fv-row">
+                  <div class="input-group">
+                    <span class="input-group-text">
+                      <i class="mdi mdi-order-numeric-ascending"></i>
+                    </span>
+                    <input type="text" name="order" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-custom-class="tooltip-inverse" title="{{ __('Order') }}" class="form-control form-control-solid mb-lg-0" placeholder="{{ __('Order') }}" value="" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row mb-6">
+            <label class="col-lg-2 col-form-label fw-bold fs-6 text-lg-end"></label>
+            <div class="col-lg-10 fv-row">
+              <div class="input-group">
+                <span class="input-group-text">
+                  <i class="mdi mdi-card-text"></i>
+                </span>
+                <textarea type="text" name="description" class="form-control form-control-solid" placeholder="{{ __('Description') }}" value="" /></textarea>
+              </div>
+            </div>
+          </div>
+
+          <div class="row mb-6">
+            <label class="col-lg-2 col-form-label fw-bold fs-6 text-lg-end">{{ __("Connection") }}</label>
+            <div class="col-lg-10 fv-row">
+
+              <div class="row">
+                <div class="col-lg-4 fv-row" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-custom-class="tooltip-inverse" title="{{ __('Connection Type') }}">
+                  <div class="input-group">
+                    <span class="input-group-text">
+                      <i class="mdi mdi-connection"></i>
+                    </span>
+                    <select name="connection_type" aria-label="{{ __('Select a connection type') }}" data-control="select2" data-placeholder="{{ __('Select a connection type') }}..." class="form-select form-select-solid form-select-lg">
+                      <option value="">{{ __('Select a connection type') }}...</option>
+                      <option value="tcp/ip">TCP/IP</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-lg-8 fv-row">
+                  <div class="input-group">
+                    <span class="input-group-text">
+                      <i class="mdi mdi-ip-network"></i>
+                    </span>
+                    <input type="text" name="ip_address" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-custom-class="tooltip-inverse" title="{{ __('Ip Address') }}" class="form-control form-control-solid" placeholder="{{ __('Ip Address') }}" value="" autocomplete="one-time-code" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row mb-6">
+            <label class="col-lg-2 col-form-label fw-bold fs-6 text-lg-end">{{ __("Address") }}</label>
+            <div class="col-lg-10 fv-row">
               <div class="row">
                 <div class="col-lg-4 fv-row">
-                  <input type="text" name="code" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="{{ __('Code') }}" value="" />
+                  <div class="input-group">
+                    <span class="input-group-text">
+                      <i class="mdi mdi-earth"></i>
+                    </span>
+                    <input type="text" name="address_country" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-custom-class="tooltip-inverse" title="{{ __('Country') }}" class="form-control form-control-solid mb-lg-0" placeholder="{{ __('Country') }}" value="" />
+                  </div>
+                </div>
+                <div class="col-lg-3 fv-row">
+                  <div class="input-group">
+                    <span class="input-group-text">
+                      <i class="mdi mdi-map"></i>
+                    </span>
+                    <input type="text" name="address_state" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-custom-class="tooltip-inverse" title="{{ __('State') }}" class="form-control form-control-solid mb-lg-0" placeholder="{{ __('State') }}" value="" />
+                  </div>
+                </div>
+                <div class="col-lg-5 fv-row">
+                  <div class="input-group">
+                    <span class="input-group-text">
+                      <i class="mdi mdi-city"></i>
+                    </span>
+                    <input type="text" name="address_city" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-custom-class="tooltip-inverse" title="{{ __('City') }}" class="form-control form-control-solid mb-lg-0" placeholder="{{ __('City') }}" value="" />
+                  </div>
                 </div>
               </div>
             </div>
           </div>
 
           <div class="row mb-6">
-            <label class="col-lg-3 col-form-label fw-bold fs-6 text-lg-end">{{ __("Name") }}</label>
-            <div class="col-lg-9 fv-row">
-              <input type="text" name="name" class="form-control form-control-solid" placeholder="{{ __('Name') }}" value="" autocomplete="one-time-code" />
-            </div>
-          </div>
-
-          <div class="row mb-6">
-            <label class="col-lg-3 col-form-label fw-bold fs-6 text-lg-end">{{ __("Description") }}</label>
-            <div class="col-lg-9 fv-row">
-              <textarea type="text" name="description" class="form-control form-control-solid" placeholder="{{ __('Description') }}" value="" /></textarea>
-            </div>
-          </div>
-
-          <div class="row mb-6">
-            <label class="col-lg-3 col-form-label fw-bold fs-6 text-lg-end">{{ __("Connection Type") }}</label>
-            <div class="col-lg-9 fv-row">
-              <select name="connection_type" aria-label="{{ __('Select a connection type') }}" data-control="select2" data-placeholder="{{ __('Select a connection type') }}..." class="form-select form-select-solid form-select-lg">
-                <option value="">{{ __('Select a connection type') }}...</option>
-                <option value="tcp/ip">TCP/IP</option>
-              </select>
-            </div>
-          </div>
-
-          <div class="row mb-6">
-            <label class="col-lg-3 col-form-label fw-bold fs-6 text-lg-end">{{ __("Ip Address") }}</label>
-            <div class="col-lg-9 fv-row">
-              <input type="text" name="ip_address" class="form-control form-control-solid" placeholder="{{ __('Ip Address') }}" value="" autocomplete="one-time-code" />
-            </div>
-          </div>
-
-          <div class="row mb-6">
-            <label class="col-lg-3 col-form-label fw-bold fs-6 text-lg-end">{{ __("Address") }}</label>
-            <div class="col-lg-9 fv-row">
-              <div class="row">
-                <div class="col-lg-4 fv-row">
-                  <input type="text" name="address_country" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-custom-class="tooltip-inverse" title="{{ __('Country') }}" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="{{ __('Country') }}" value="" />
-                </div>
-                <div class="col-lg-4 fv-row">
-                  <input type="text" name="address_state" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-custom-class="tooltip-inverse" title="{{ __('State') }}" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="{{ __('State') }}" value="" />
-                </div>
-                <div class="col-lg-4 fv-row">
-                  <input type="text" name="address_city" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-custom-class="tooltip-inverse" title="{{ __('City') }}" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="{{ __('City') }}" value="" />
-                </div>
+            <label class="col-lg-2 col-form-label fw-bold fs-6 text-lg-end"></label>
+            <div class="col-lg-10 fv-row">
+              <div class="input-group">
+                <span class="input-group-text">
+                  <i class="mdi mdi-map-marker-radius"></i>
+                </span>
+                <input type="text" name="address_line1" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-custom-class="tooltip-inverse" title="{{ __('Address Line 1') }}" class="form-control form-control-solid" placeholder="{{ __('Address Line 1') }}" value="" autocomplete="one-time-code" />
               </div>
             </div>
           </div>
 
           <div class="row mb-6">
-            <label class="col-lg-3 col-form-label fw-bold fs-6 text-lg-end"></label>
-            <div class="col-lg-9 fv-row">
-              <input type="text" name="address_line1" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-custom-class="tooltip-inverse" title="{{ __('Main address') }}" class="form-control form-control-solid" placeholder="{{ __('Main address') }}" value="" autocomplete="one-time-code" />
-            </div>
-          </div>
-
-          <div class="row mb-6">
-            <label class="col-lg-3 col-form-label fw-bold fs-6 text-lg-end"></label>
-            <div class="col-lg-9 fv-row">
-              <input type="text" name="address_line2" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-custom-class="tooltip-inverse" title="{{ __('Optional address') }}" class="form-control form-control-solid" placeholder="{{ __('Optional address') }}" value="" autocomplete="one-time-code" />
-            </div>
-          </div>
-
-          <div class="row mb-6">
-            <label class="col-lg-3 col-form-label fw-bold fs-6 text-lg-end">{{ __("Order") }}</label>
-            <div class="col-lg-9 fv-row">
-              <div class="row">
-                <div class="col-lg-4 fv-row">
-                  <input type="number" name="order" min="1" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="{{ __('Order') }}" value="" />
-                </div>
+            <label class="col-lg-2 col-form-label fw-bold fs-6 text-lg-end"></label>
+            <div class="col-lg-10 fv-row">
+              <div class="input-group">
+                <span class="input-group-text">
+                  <i class="mdi mdi-map-marker-radius"></i>
+                </span>
+                <input type="text" name="address_line2" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-custom-class="tooltip-inverse" title="{{ __('Address Line 2') }}" class="form-control form-control-solid" placeholder="{{ __('Address Line 2') }}" value="" autocomplete="one-time-code" />
               </div>
             </div>
           </div>
 
-          <div class="row mb-6">
-            <label class="col-lg-3 col-form-label fw-bold fs-6 text-lg-end">{{ __("Main") }}</label>
-            <div class="col-lg-9 fv-row d-flex align-items-center">
-              <div class="form-check form-switch form-check-custom form-check-success form-check-solid">
-                <input class="form-check-input " type="checkbox" value="" id="sw_main" onchange="Workgroups.changeMain()"/>
-                <label class="form-check-label fw-bold fs-4" for="sw_status" id="sw_main_label">
-                  &nbsp;
-                </label>
-              </div>
-            </div>
-          </div>
-
-          <div class="row mb-6">
-            <label class="col-lg-3 col-form-label fw-bold fs-6 text-lg-end">{{ __("Status") }}</label>
-            <div class="col-lg-9 fv-row d-flex align-items-center">
-              <div class="form-check form-switch form-check-custom form-check-success form-check-solid">
-                <input class="form-check-input " type="checkbox" value="" checked id="sw_status" onchange="Workgroups.changeStatus()"/>
-                <label class="form-check-label fw-bold fs-4" for="sw_status" id="sw_status_label">
-                  &nbsp;
-                </label>
-              </div>
-            </div>
-          </div>
+          
 
         </div>
 
